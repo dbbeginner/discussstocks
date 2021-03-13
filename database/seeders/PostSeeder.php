@@ -23,7 +23,7 @@ class PostSeeder extends Seeder
 
         foreach($channels as $channel) {
             $i = 0;
-            $articles = random_int(0, 6);
+            $articles = random_int(2, 6);
             while($articles != $i) {
                 $post = new Posts;
                 $faker = Factory::create();
