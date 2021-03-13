@@ -24,6 +24,7 @@ Route::get('/p/{slug}/{hashid}', 'ViewController@PostWithReplies');
 
 Route::get('/channels', '\App\Http\Controllers\ChannelController@all');
 
-
+Route::get('login', function(){ return view('login'); })->name('login');
+Route::post('login', 'App\Http\Controllers\Accounts\LoginController@authenticate');
 
 Route::get('{hash_id', '\App\Http\Controllers\Guesser@GuessByHashId');
