@@ -23,3 +23,7 @@ Route::get('/c/{slug}/{hashid}', 'ViewController@PostsInChannel');
 Route::get('/p/{slug}/{hashid}', 'ViewController@PostWithReplies');
 
 Route::get('/channels', '\App\Http\Controllers\ChannelController@all');
+
+
+
+Route::get('{hash_id', '\App\Http\Controllers\Guesser@GuessByHashId');
