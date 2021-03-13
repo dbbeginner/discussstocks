@@ -21,7 +21,7 @@ class PostController extends Controller
             ->withCount('votes')
             ->withSum('votes', 'vote')
             ->orderByDesc('updated_at')
-            ->simplePaginate( Settings::max_posts_per_page() );
+            ->simplePaginate( setting('max_posts_per_page') );
         $data['title'] = 'Recent Posts';
 
         return view('posts', $data);
