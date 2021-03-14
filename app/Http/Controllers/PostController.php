@@ -15,13 +15,14 @@ class PostController extends Controller
     //
 
     public function recentPosts(){
-        $data['posts'] = Posts::where('type', '=', 'post')
-            ->orWhere('type', '=', 'url')
+
+        $data['posts'] = Posts::active()
             ->with('user', 'votes')
             ->withCount('votes')
             ->withSum('votes', 'vote')
             ->orderByDesc('updated_at')
-            ->simplePaginate( setting('max_posts_per_page') );
+            ->simplePaginate( setting('pagination', 10) );
+
         $data['title'] = 'Recent Posts';
 
         return view('posts', $data);
