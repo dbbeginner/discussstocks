@@ -20,7 +20,7 @@ Route::post('/register', '\App\Http\Controllers\Accounts\RegistrationController@
 Route::get('/c/{slug}', '\App\Http\Controllers\Guesser@Channel');
 Route::get('/p/{slug}', '\App\Http\Controllers\Guesser@Post');
 
-Route::get('/c/{slug}/{hashid}', 'ViewController@PostsInChannel');
+Route::get('/c/{slug}/{hashid}', '\App\Http\Controllers\PostController@ViewPostsInChannel');
 Route::get('/p/{slug}/{hashid}', 'ViewController@PostWithReplies');
 
 Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels');

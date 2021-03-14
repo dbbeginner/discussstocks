@@ -21,8 +21,6 @@ class Channels extends Content
     protected static function boot()
     {
 
-        static::addGlobalScope(new ChannelScope());
-
         parent::boot();
 
         static::saving(function($model){
@@ -30,10 +28,6 @@ class Channels extends Content
 
         static::saved(function($model){
         });
-    }
-
-    public function scopeActive($query) {
-        return $query->where('flagged_at', '=', null);
     }
 
     // Every channel is owned by a single user
@@ -45,7 +39,7 @@ class Channels extends Content
     // Every channel can have multiple posts
     public function posts()
     {
-        return $this->hasMany(Posts::class, 'parent_id');
+        return $this->hasMany(Posts::class, 'parent_id', 'id');
     }
 
 }

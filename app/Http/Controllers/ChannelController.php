@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Channels;
-use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +13,7 @@ class ChannelController extends Controller
 
     public function AllChannels() {
 
-        $data['channels'] = Channels::active()
+        $data['channels'] = Channels::where('type', '=', 'channel')
             ->withCount('posts')
             ->orderByDesc('updated_at')
             ->simplePaginate( setting('pagination'));
