@@ -14,10 +14,10 @@ class ChannelController extends Controller
 
     public function AllChannels() {
 
-        $data['channels'] = Channels::where('deleted_at', '=', null)
+        $data['channels'] = Channels::active()
             ->withCount('posts')
             ->orderByDesc('updated_at')
-            ->simplePaginate();
+            ->simplePaginate( setting('pagination'));
 
         return view('channels', $data);
 

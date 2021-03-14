@@ -32,6 +32,10 @@ class Channels extends Content
         });
     }
 
+    public function scopeActive($query) {
+        return $query->where('flagged_at', '=', null);
+    }
+
     // Every channel is owned by a single user
     public function user()
     {
