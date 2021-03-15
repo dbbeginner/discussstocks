@@ -38,6 +38,11 @@ class Posts extends Content
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
+    public function channel()
+    {
+        return $this->hasOne(Channels::class, 'id', 'parent_id');
+    }
+
 //    A post can have many votes
     public function votes()
     {
