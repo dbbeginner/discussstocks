@@ -16,6 +16,8 @@ Route::get('/register', '\App\Http\Controllers\Accounts\RegistrationController@C
 Route::post('/register', '\App\Http\Controllers\Accounts\RegistrationController@Register');
 
 
+Route::get('/c/{channel_slug}/{channel_hash_id}/{post_slug}/{post_hash_id}', '\App\Http\Controllers\PostController@viewPost');
+
 
 Route::get('/c/{slug}', '\App\Http\Controllers\Guesser@Channel');
 Route::get('/p/{slug}', '\App\Http\Controllers\Guesser@Post');

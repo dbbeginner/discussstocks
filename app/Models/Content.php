@@ -142,12 +142,14 @@ class Content extends Model
     // Outputs the full URL to a given content
     public function url(){
         $prefix = null;
+
+        $appurl = config('app.url');
         switch ($this->type) {
             case 'channel':
-                $prefix = 'c';
-                break;
+                return $appurl . '/c/' . $this->slug . '/' . $this->hashid();
             case 'post':
-                $prefix = 'p';
+                $parent = $this->parentByType('channel');
+                return $parent->url() . '/' . $this->slug . '/' . $this->hashid();
                 break;
             case 'reply':
                 $prefix = 'r';
