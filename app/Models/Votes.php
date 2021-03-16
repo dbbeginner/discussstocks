@@ -17,12 +17,7 @@ class Votes extends Model
 
     public $timestamps = true;
 
-    public function post()
-    {
-        return $this->hasOne(Posts::class, 'id', 'content_id');
-    }
-
-    public function reply()
+    public function content()
     {
         return $this->hasOne(Replies::class, 'id', 'content_id');
     }

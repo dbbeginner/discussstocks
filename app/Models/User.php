@@ -6,7 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Vinkla\Hashids\Facades\Hashids;
 
 class User extends Authenticatable
 {
@@ -94,4 +96,13 @@ class User extends Authenticatable
     public function settings() {
         return $this->hasMany(Settings::class, 'user_id');
     }
+
+    public function hash_id() {
+        return Hashids::encode( $this->id );
+    }
+
+    public function from_hash_id( $hash_id) {
+        return User::where('id','=', Hashids::decode($hash_id))->first();
+    }
+
 }
