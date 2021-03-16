@@ -40,6 +40,7 @@ function upvote($post_id, $user_id, $direction) {
         },
         success: function (data) {
             console.log(data);
+            $("span#votes-" + $post_id).html(data.new_vote_total);
         },
         failure: function (data) {
             console.log(data);

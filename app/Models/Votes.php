@@ -13,13 +13,17 @@ class Votes extends Model
 
     protected $primaryKey = 'id';
 
+    protected $touches = [
+        'content',
+    ];
+
     public $incrementing = true;
 
     public $timestamps = true;
 
     public function content()
     {
-        return $this->hasOne(Replies::class, 'id', 'content_id');
+        return $this->hasOne(Content::class, 'id', 'content_id');
     }
 
     public function user()

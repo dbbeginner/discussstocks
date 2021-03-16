@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Vinkla\Hashids\Facades\Hashids;
 use App\Models\Votes;
 use App\Models\Content;
@@ -29,17 +30,13 @@ class VoteController extends Controller
             $result['status'] = "vote recorded";
         }
 
-        // if there is a match for this vote on content_id and user_id
-        elseif($vote->vote == $vote_value) {
-            $result['status'] = "identical vote, disregard";
+        // if there is a match for this vote on content_id and user_id, just delete the existing vote.
+        // the user can then post a new vote.
+        // It should be apparent in the UI that the user has already voted, though. That is a TODO item.
+        else {
+            $vote->delete();
+            $result['status'] = "identical vote, deleting";
         }
-
-        else{
-            $vote->vote = $vote_value;
-            $vote->save();
-            $result['status'] = "reversed changed old votes value";
-        }
-
 
         $permanent_votes = Content::where('id', '=', $content_id)->first()->upvotes_total;
         $additional_votes = DB::table('votes')->where('content_id', '=', $content_id)->where('swept_at', '=', null)->sum('vote');
