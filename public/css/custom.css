@@ -219,3 +219,38 @@ p.post-replies ul li {
     font-size: 7pt;
     font-color: #000000;
 }
+
+button.vote {
+    font-size: 11pt;
+    position: relative;
+    top: -5pt;
+    color: #fff;
+    margin: 0pt;
+    margin-bottom: -12pt;
+    padding-right: -5pt;
+    margin-right: -0pt;
+    background: transparent;
+    width: 1em;
+    height: 2em;
+    border: none;
+    float: right;
+}
+button.vote-down {
+    margin-left: -2pt;
+    margin-right: 3pt;
+}
+button.vote:hover {
+    color: yellow;
+}
+button.vote:active {
+    color: red;
+}
+
+.side-col, .side-col p, .side-col a, .side-col p a {
+    color: #fff;
+}
+.footer {
+    background: #00459b;
+    padding: 15px;
+    color: #fff;
+}
