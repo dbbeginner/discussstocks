@@ -10,10 +10,12 @@ use Vinkla\Hashids\Facades\Hashids;
 
 class Guesser extends Controller
 {
+    // We make short URL's for social sharing - which are TLD / hash_id
     //
+    // This controller provides a 301 redirect to the page being referenced on the site.
 
-    public function guessByHashId($hashid) {
-        $destination = Channels::where('id', '=', Hashids::decode($hashid))->first();
+    public function guessByHashId($hash_id) {
+        $destination = Channels::where('id', '=', Hashids::decode($hash_id))->first();
 
         if(!$destination) {
             abort(404);

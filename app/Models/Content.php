@@ -146,10 +146,10 @@ class Content extends Model
         $appurl = config('app.url');
         switch ($this->type) {
             case 'channel':
-                return $appurl . '/c/' . $this->slug . '/' . $this->hashid();
+                return $appurl . '/c/' . $this->slug . '/' . $this->hash_id();
             case 'post':
                 $parent = $this->parentByType('channel');
-                return $parent->url() . '/' . $this->slug . '/' . $this->hashid();
+                return $parent->url() . '/' . $this->slug . '/' . $this->hash_id();
                 break;
             case 'reply':
                 $prefix = 'r';
@@ -164,7 +164,7 @@ class Content extends Model
     }
 
     // Outputs the hashed Id of a contents ID for display in user facing pages
-    public function hashid(){
+    public function hash_id(){
         return Hashids::encode($this->id);
     }
 

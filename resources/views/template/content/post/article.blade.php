@@ -5,7 +5,7 @@
     </div>
     <div class="post-content-container">
         <h1 class="post-title">
-            <a id="{{ $post->hashid() }}" href="{{ $post->url() }}">{{ $post->title }}</a>
+            <a id="{{ $post->hash_id() }}" href="{{ $post->url() }}">{{ $post->title }}</a>
         </h1>
 
         <p class="post-byline">
