@@ -40,6 +40,10 @@ return [
             'root' => storage_path('static'),
         ],
 
+        'resources' => [
+            'driver' => 'local',
+            'root' => storage_path('resources'),
+        ],
 
         'public' => [
             'driver' => 'local',
