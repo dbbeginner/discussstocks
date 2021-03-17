@@ -298,9 +298,14 @@ button.vote:active {
     background: #ffffff;
 }
 
-a.pseudo-link {
+.pseudo-link {
     color: #007bff;
 }
+.pseudo-link:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
 input.shared-link {
     padding: 3pt;
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;

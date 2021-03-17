@@ -18,10 +18,7 @@
         <a href="{{ $post->url() }}">{{ $post->reply_count }} replies</a>
     </li>
     <li>
-        <a id="share-{{ $post->hash_id() }}" class="pseudo-link" onclick="shareLink('{{ $post->hash_id() }}')">Share link</a>
-{{--        <div id="url-{{ $post->hash_id() }}">--}}
-{{--            <input type="text" style="display: table; padding: 3pt; font-size: 10pt; font-face: fixed;" value="{{ $post->shortUrl() }}">--}}
-{{--        </div>--}}
+        <span id="share-{{ $post->hash_id() }}" class="pseudo-link" onclick="shareLink('{{ $post->hash_id() }}')">Share link</span>
     </li>
     <li style="float:right;">
         Last activity {{ $post->updated_at->diffForHumans() }}
