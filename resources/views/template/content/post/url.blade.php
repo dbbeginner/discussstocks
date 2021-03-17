@@ -1,9 +1,8 @@
 <div class="row" style="margin-bottom: 3pt;">
-
-    <div style="display: inline-block; vertical-align: top; margin: 0px; padding:0px; width: 40px;">
-        <span class="post-type post-link">{{ $post->type }}</span>
+    <div class="post-type-container">
+        <span class="post-type post-link">{{ $post->subtype }}</span>
     </div>
-    <div style="display: inline-block; margin: 0px; padding:0px; width: calc(100% - 60px);">
+    <div class="post-content-container">
         <h1 class="post-title">
             <a href="{{$post->content}}" target="_blank">{{ $post->title }}</a> <span class="url-parsed">({{ parse_url($post->content, PHP_URL_HOST) }} )</span>
         </h1>

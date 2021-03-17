@@ -1,7 +1,6 @@
 <div class="row" style="margin-bottom: 3pt;">
-
     <div class="post-type-container">
-        <span class="post-type">{{ $post->type }}</span>
+        <span class="post-type">{{ $post->subtype }}</span>
     </div>
     <div class="post-content-container">
         <h1 class="post-title">

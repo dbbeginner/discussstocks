@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="site" content="{{ config('app.url') }}">
 
     <title>{{  config('app.name') }} - @yield('title')</title>
 
@@ -61,12 +62,14 @@
         @yield('content')
     </div>
 
-    <div class="col-3 bg-secondary side-col d-none d-sm-block">
+    <div class="col-3 side-col d-none d-sm-block" style="margin-top: 6pt;">
         @if (Auth::guest())
             @include('template.sidebar.guest')
         @endif
         @if (Auth::check())
+            @include('template.sidebar.content')
             @include('template.sidebar.user')
+            @include('template.sidebar.stats')
         @endif
         @if(isset( $type ))
             @if($type == 'post' or $type == 'reply')
