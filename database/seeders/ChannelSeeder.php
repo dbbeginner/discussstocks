@@ -20,7 +20,6 @@ class ChannelSeeder extends Seeder
 
         $userCount = User::all()->count();
 
-
         $channel_titles = [
             "dbbeginners Channel",
             "Stocks",
@@ -42,7 +41,7 @@ class ChannelSeeder extends Seeder
             }
 
             $category->title = $title;
-            $category->user_id = random_int(0, $userCount);
+            $category->user_id = random_int(1, $userCount);
             $category->content = $data;
             $category->save();
         }

@@ -111,4 +111,17 @@ class User extends Authenticatable
         return User::where('id','=', Hashids::decode($hash_id))->first();
     }
 
+
+    public function isSubscribedTo($channel_id) {
+        return Subscriptions::where('user_id', '=', $this->id)
+            ->where('content_id', '=', $channel_id)
+            ->get()
+            ->count();
+    }
+    public function subscribed()
+    {
+        return $this->hasMany(Subscriptions::class, 'user_id', 'id');
+    }
+
+
 }

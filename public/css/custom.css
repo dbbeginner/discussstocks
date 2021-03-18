@@ -278,16 +278,21 @@ button.vote:active {
     line-height: 18pt;
     margin-bottom: 15pt;
 
-    -webkit-box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.66);
-    box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.66);
+    /*-webkit-box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.66);*/
+    /*box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.66);*/
 
-    background: -moz-linear-gradient(top, rgba(221,221,221,1.0) 0%,rgba(221,221,221,1.0) 50%,rgba(250,250,250,1.0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(221,221,221,1.0) 0%,rgba(221,221,221,1.0) 50%,rgba(250,250,250,1.0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(221,221,221,1.0) 0%,rgba(221,221,221,1.0) 50%,rgba(250,250,250,1.0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: #428df5;
+    color: #fff;
 
-    border: #b3b7bb 1px solid;
+    border: #428df5 1px solid;
     border-radius: 3pt;
 }
+
+.side-col a {
+    color: #fff;
+    text-decoration: underline;
+}
+
 
 .side-col-panel .form-control {
     border: none;
@@ -323,4 +328,15 @@ input.shared-link {
 
 .form-control::placeholder {
     color: #b3b7bb;
+}
+
+.subscription-button {
+    background: #428df5;
+    color: #ffffff;
+    width: 100%;
+}
+
+.subscribed {
+    background: #00cc47;
+    color: #ffffff;
 }
