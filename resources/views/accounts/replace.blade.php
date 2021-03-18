@@ -7,7 +7,7 @@
             <label for="token">Request new activation link to your email:</label>
             <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="you@example.com">
             @error('email')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="validation-feedback alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">

@@ -12,7 +12,7 @@
             <div class="col-sm-6">
                 <input type="number" name="pagination" class="form-control" id="pagination" value="{!! setting('pagination') !!}">
                 @error('pagination')
-                <div class="alert alert-danger">{{ $message }}</div>
+                <div class="validation-feedback alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
         </div>
@@ -30,7 +30,7 @@
                     @endforeach
                 </select>
                 @error('timezone')
-                <div class="alert alert-danger">{{ $message }}</div>
+                <div class="validation-feedback alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
         </div>

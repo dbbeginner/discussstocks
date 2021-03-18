@@ -7,7 +7,7 @@
             <label for="token">Paste your activation token here:</label>
             <input type="text" class="form-control form-control-lg" id="token" name="token">
             @error('token')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="validation-feedback  alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
