@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Accounts;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ConfirmEmailAfterRegistration;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-use phpDocumentor\Reflection\Types\False_;
+use Illuminate\Support\Facades\Mail;
 
 class RegistrationController extends Controller
 {
@@ -39,11 +40,13 @@ class RegistrationController extends Controller
             return Redirect::back()->with('error', 'Passwords must match');
         }
 
-        $user = new User;
-        $user->email = $input['email'];
-        $user->name = $input['name'];
-        $user->password = Hash::make($input['password']);
-        $user->save();
+        $user = User::create([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password'])
+        ]);
+
+        Mail::to($input['email'])->send(new ConfirmEmailAfterRegistration($user));
 
         return redirect::to('/')->with('success', 'Account created. Check your email for a link to activate your account');
     }

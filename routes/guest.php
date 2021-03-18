@@ -6,7 +6,17 @@ use Illuminate\Support\Facades\Route;
 // In a separate file just to reduce clutter
 
 // Homepage
-Route::get('/', '\App\Http\Controllers\PostController@recentPosts')->name('home');
+Route::get('/', '\App\Http\Controllers\PostController@recentPosts')
+    ->name('annonymous_homepage');
+
+// User Account Activation Link
+Route::get('activate', '\App\Http\Controllers\Accounts\UserActivationController@activate')->name('activate');
+Route::post('activate', '\App\Http\Controllers\Accounts\UserActivationController@activate');
+
+// Generate and send replacement activation link
+Route::get('activate/replace', '\App\Http\Controllers\Accounts\RequestNewActivationToken@request');
+Route::post('activate/replace', '\App\Http\Controllers\Accounts\RequestNewActivationToken@store');
+
 
 // Static pages
 Route::get('/terms', '\App\Http\Controllers\StaticController@Terms');
@@ -30,8 +40,7 @@ Route::get('/c/{slug}/{hash_id}', '\App\Http\Controllers\PostController@ViewPost
 // View a single story in a channel
 Route::get('/c/{channel_slug}/{channel_hash_id}/{post_slug}/{post_hash_id}', '\App\Http\Controllers\PostController@viewPost');
 
-// ShortURL straight to channel or post (for social sharing)
-Route::get('{hash_id}', '\App\Http\Controllers\Guesser@GuessByHashId');
+
 
 
 

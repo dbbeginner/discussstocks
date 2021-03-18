@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Vinkla\Hashids\Facades\Hashids;
+use App\Models\Settings;
 
 class User extends Authenticatable
 {
@@ -61,16 +62,21 @@ class User extends Authenticatable
             $post->token = (string) Str::uuid();
         });
 
-        static::saved( function($model) {
-            $defaultSettings = \App\Models\Settings::where('user_id', '=', '1')->get();
+        static::created(function ($post) {
+            // Duplicate the guest users settings and apply to this user
+            $defaultSettings = Settings::where('user_id', '=', '1')->get();
 
             foreach($defaultSettings as $setting){
-                $save = new \App\Models\Settings;
-                $save->user_id = $model->id;
+                $save = new Settings;
+                $save->user_id = $post->id;
                 $save->setting = $setting->setting;
                 $save->value = $setting->value;
                 $save->save();
             }
+        });
+
+        static::saved( function($model) {
+
         });
     }
 
