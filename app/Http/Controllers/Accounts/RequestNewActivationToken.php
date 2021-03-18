@@ -12,7 +12,7 @@ use App\Mail\ConfirmEmailAfterRegistration;
 class RequestNewActivationToken extends Controller
 {
     //
-    public function request() {
+    public function create() {
         return view('accounts.replace');
     }
 

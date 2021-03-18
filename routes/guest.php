@@ -6,26 +6,26 @@ use Illuminate\Support\Facades\Route;
 // In a separate file just to reduce clutter
 
 // Homepage
-Route::get('/', '\App\Http\Controllers\PostController@recentPosts')
-    ->name('annonymous_homepage');
+Route::get('/', '\App\Http\Controllers\HomepageController@index');
+
 
 // User Account Activation Link
-Route::get('activate', '\App\Http\Controllers\Accounts\UserActivationController@activate')->name('activate');
-Route::post('activate', '\App\Http\Controllers\Accounts\UserActivationController@activate');
+Route::get('activate', '\App\Http\Controllers\Accounts\UserActivationController@index');
+Route::post('activate', '\App\Http\Controllers\Accounts\UserActivationController@update');
 
 // Generate and send replacement activation link
-Route::get('activate/replace', '\App\Http\Controllers\Accounts\RequestNewActivationToken@request');
+Route::get('activate/replace', '\App\Http\Controllers\Accounts\RequestNewActivationToken@create');
 Route::post('activate/replace', '\App\Http\Controllers\Accounts\RequestNewActivationToken@store');
 
 
 // Static pages
 Route::get('/terms', '\App\Http\Controllers\StaticController@Terms');
 Route::get('/about', '\App\Http\Controllers\StaticController@About');
-Route::get('/markdown', '\App\Http\Controllers\StaticController@markdown');
+Route::get('/markdown', '\App\Http\Controllers\StaticController@Markdown');
 
 // Registration pages
-Route::get('/register', '\App\Http\Controllers\Accounts\RegistrationController@Create');
-Route::post('/register', '\App\Http\Controllers\Accounts\RegistrationController@Register');
+Route::get('/register', '\App\Http\Controllers\Accounts\RegistrationController@create');
+Route::post('/register', '\App\Http\Controllers\Accounts\RegistrationController@store');
 
 // Login/Logout pages
 Route::get('login', function(){ return view('login'); })->name('login');
