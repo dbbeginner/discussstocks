@@ -28,7 +28,7 @@ Route::get('/register', '\App\Http\Controllers\Accounts\RegistrationController@c
 Route::post('/register', '\App\Http\Controllers\Accounts\RegistrationController@store');
 
 // Login/Logout pages
-Route::get('login', function(){ return view('login'); })->name('login');
+Route::get('login', function(){ return view('accounts.login'); })->name('login');
 Route::post('login', 'App\Http\Controllers\Accounts\LoginController@authenticate');
 
 // List of channels
