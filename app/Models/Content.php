@@ -59,8 +59,14 @@ class Content extends Model
 //          The DetectScripts method scans any content for the string <script>, and if it detects that,
 //          automatically flags the content as questionable.
             if($model->title != $model->detectScripts($model->title)) {
-                $model->flagged_by_user_id = 1;
-                $model->flagged_reason = "detected unknown script";
+                $model->flagged_by_user_id = 2;
+                $model->flagged_reason = "detected unknown script in title";
+                $model->deleted_at = now();
+            };
+
+            if($model->content != $model->detectScripts($model->content)) {
+                $model->flagged_by_user_id = 2;
+                $model->flagged_reason = "detected unknown script in content";
                 $model->deleted_at = now();
             };
 
@@ -113,7 +119,8 @@ class Content extends Model
 
 
     public function detectScripts($input){
-        return preg_replace('#<script(.*?)>(.*?)</script>#is', '', $input);
+        return preg_replace('#<script#is', '', $input);
+//        return preg_replace('#<script(.*?)>(.*?)</script>#is', '', $input);
     }
 
 
