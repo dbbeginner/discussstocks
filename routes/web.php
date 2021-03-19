@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-require __DIR__.'/guest.php';
+require __DIR__.'/static.php';
+require __DIR__.'/user.php';
 
 
-Route::get('logout', 'App\Http\Controllers\Accounts\LoginController@logout')
-    ->middleware('auth');
+//Route::get('logout', 'App\Http\Controllers\Accounts\LoginController@logout')
+//    ->middleware('auth');
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -59,6 +60,10 @@ Route::get('/u/{username}/posts', [\App\Http\Controllers\UserController::class, 
 Route::get('/u/{username}/replies', [\App\Http\Controllers\UserController::class, 'index']);
 
 
+
+
+// Homepage
+Route::get('/', '\App\Http\Controllers\HomepageController@index');
 
 
 // ShortURL straight to channel or post (for social sharing)
