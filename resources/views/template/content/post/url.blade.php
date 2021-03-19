@@ -5,6 +5,7 @@
     <div class="post-content-container">
         <h1 class="post-title">
             <a href="{{$post->content}}" target="_blank">{{ $post->title }}</a> <span class="url-parsed">({{ parse_url($post->content, PHP_URL_HOST) }} )</span>
+            @include('template.content.post.votes-badge')
         </h1>
 
         <p class="post-byline">

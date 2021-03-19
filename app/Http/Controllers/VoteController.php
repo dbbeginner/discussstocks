@@ -38,12 +38,16 @@ class VoteController extends Controller
             $result['status'] = "identical vote, deleting";
         }
 
-        $permanent_votes = Content::where('id', '=', $content_id)->first()->upvotes_total;
-        $additional_votes = DB::table('votes')->where('content_id', '=', $content_id)->where('swept_at', '=', null)->sum('vote');
+        $permanent_upvotes = Content::where('id', '=', $content_id)->first()->upvotes_total;
+        $additional_upvotes = DB::table('votes')->where('content_id', '=', $content_id)->where('swept_at', '=', null)->sum('vote');
 
-        $result['new_vote_total'] = $permanent_votes + $additional_votes;
+        $permanent_votes = Content::where('id', '=', $content_id)->first()->votes_total;
+        $additional_votes = DB::table('votes')->where('content_id', '=', $content_id)->where('swept_at', '=', null)->count('vote');
 
-        return $result;
+        $percent = round( (($permanent_upvotes + $additional_upvotes) / ($permanent_votes + $additional_votes) * 100), 0) . '%';
+
+        return ['votes' => $percent];
+
     }
 
     public function VoteDirectionToValue($direction) {

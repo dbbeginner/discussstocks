@@ -21,39 +21,39 @@
 
     @include('template.master.navigation')
 
-    <div class="col-sm-12 bg-tertiary" style="padding-top: 3pt; height: 24pt;">
-    @if(Auth::guest())
-        <form method="post" action="/login">
-            @csrf
-            <div class="form-row align-items-center justify-content-center">
-                <input name="current" type="hidden" value="{{ url()->full() }}">
-                <div class="col-auto input-group-sm">
-                    <label class="sr-only" for="inlineFormInput">Name</label>
-                    <input type="text" class="form-control input-group-sm mb-2" id="inlineFormInput" name="username" placeholder="Username or email">
-                </div>
-                <div class="col-auto">
-                    <label class="sr-only" for="inlineFormInputGroup">Username</label>
-                    <div class="input-group input-group-sm mb-2">
-                        <input type="password" class="form-control input-group-sm " id="inlineFormInputGroup" name="password" placeholder="Password">
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary btn-sm mb-2">Submit</button>
-                </div>
-                <div class="col-auto">
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-                        <label class="form-check-label" for="autoSizingCheck">
-                            Remember me
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </form>
-        @else
-        Text here
-        @endif
-    </div>
+{{--    <div class="col-sm-12 bg-tertiary" style="padding-top: 3pt; height: 24pt;">--}}
+{{--    @if(Auth::guest())--}}
+{{--        <form method="post" action="/login">--}}
+{{--            @csrf--}}
+{{--            <div class="form-row align-items-center justify-content-center">--}}
+{{--                <input name="current" type="hidden" value="{{ url()->full() }}">--}}
+{{--                <div class="col-auto input-group-sm">--}}
+{{--                    <label class="sr-only" for="inlineFormInput">Name</label>--}}
+{{--                    <input type="text" class="form-control input-group-sm mb-2" id="inlineFormInput" name="username" placeholder="Username or email">--}}
+{{--                </div>--}}
+{{--                <div class="col-auto">--}}
+{{--                    <label class="sr-only" for="inlineFormInputGroup">Username</label>--}}
+{{--                    <div class="input-group input-group-sm mb-2">--}}
+{{--                        <input type="password" class="form-control input-group-sm " id="inlineFormInputGroup" name="password" placeholder="Password">--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-auto">--}}
+{{--                    <button type="submit" class="btn btn-primary btn-sm mb-2">Submit</button>--}}
+{{--                </div>--}}
+{{--                <div class="col-auto">--}}
+{{--                    <div class="form-check mb-2">--}}
+{{--                        <input class="form-check-input" type="checkbox" id="autoSizingCheck">--}}
+{{--                        <label class="form-check-label" for="autoSizingCheck">--}}
+{{--                            Remember me--}}
+{{--                        </label>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </form>--}}
+{{--        @else--}}
+{{--        Text here--}}
+{{--        @endif--}}
+{{--    </div>--}}
 
 <div class="row" style="margin-left: 0pt;  margin-right: 0;">
     <div class="col-sm" style="margin-top: 6pt;">
