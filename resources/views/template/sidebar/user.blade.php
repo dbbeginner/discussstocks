@@ -11,5 +11,11 @@
     <div class="col-12">
         <a href="/user/subscriptions">Manage Subscriptions</a>
     </div>
+    <div class="col-12">
+        -
+    </div>
+    <div class="col-12">
+        <a href="/logout">Logout</a>
+    </div>
 </div>
 

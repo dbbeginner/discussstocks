@@ -22,5 +22,16 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
     </form>
+
+    <div class="col-12">
+        <br>
+    </div>
+
+    <h5 class="col-12">
+        Don't have an account?
+    </h5>
+    <div class="col-12">
+        <a href="/register">Get one!</a>
+    </div>
 </div>
 

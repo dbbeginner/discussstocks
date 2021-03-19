@@ -270,14 +270,18 @@ button.vote:active {
 
 
 .footer {
-    background: #00459b;
     padding: 15px;
     color: #fff;
+}
+.footer a {
+    color: #fff;
+    text-decoration: solid;
 }
 
 .side-col-panel {
     text-align: left;
     margin-top: -2pt;
+    margin-right: 0pt;
     padding-top: 15pt;
     padding-bottom: 15pt;
     line-height: 14pt;
@@ -306,7 +310,19 @@ button.vote:active {
 .side-col button {
     background: #428df5;
     color: #fff;
+    border: #fff 1pt solid;
 }
+.side-col button:hover {
+    background: #257bf4;
+    color: #fff;
+    border: #fff 1pt solid;
+}
+.side-col button:active {
+    background: #528df5;
+    color: #fff;
+    border: #fff 1pt solid;
+}
+
 
 .side-col-panel  input.form-control {
     color: #fff;

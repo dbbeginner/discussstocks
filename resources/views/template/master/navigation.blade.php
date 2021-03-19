@@ -31,11 +31,5 @@
             </li>
         </ul>
 
-        @if (Auth::guest())
-            <a class="nav-link" href="/register">Register</a>
-        @else
-            <a class="nav-link" href="/logout">Logout</a>
-        @endif
-
     </div>
 </nav>
