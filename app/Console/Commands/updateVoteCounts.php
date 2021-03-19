@@ -3,15 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Models\Content;
-use App\Models\Queue;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 use App\Models\Votes;
 
 class updateVoteCounts extends Command
 {
 
-    public $queue;
     /**
      * The name and signature of the console command.
      *
@@ -44,11 +41,6 @@ class updateVoteCounts extends Command
     public function handle()
     {
 
-        // Create the queue
-        $queue = new Queue;
-        $queue->task = "Began updating vote counts";
-        $queue->save();
-
         // claim the votes
         $votes = Votes::where('swept_at', '=', null)->get();
 
@@ -61,17 +53,7 @@ class updateVoteCounts extends Command
             $content->total_upvotes = $content->total_upvotes + $vote->vote;
             $content->save();
         }
-        // Note that the job finished
-        $queue = new Queue;
-        $queue->task = "Finished updating vote counts";
-        $queue->save();
 
     }
-
-    private function claimVotes()
-    {
-        return $votes;
-    }
-
 
 }
