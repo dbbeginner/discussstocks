@@ -139,21 +139,14 @@ class Content extends Model
             return $this->content;
     }
 
-    // Outputs the full URL to a given content
+    // Outputs the full URL to a given content (only for channels and posts)
     public function url(){
-        $prefix = null;
 
-        $appurl = config('app.url');
         switch ($this->type) {
             case 'channel':
-                return $appurl . '/c/' . $this->slug . '/' . $this->hash_id();
+                return config('app.url') . '/c/' . $this->slug . '/' . $this->hash_id();
             case 'post':
-                $parent = $this->parentByType('channel');
-                return $parent->url() . '/' . $this->slug . '/' . $this->hash_id();
-                break;
-            case 'reply':
-                $prefix = 'r';
-                break;
+                return $this->parentByType('channel')->url() . '/' . $this->slug . '/' . $this->hash_id();
         }
         return config('app.url') . "/$prefix/" . $this->slug . '/' . Hashids::encode($this->id);
     }
