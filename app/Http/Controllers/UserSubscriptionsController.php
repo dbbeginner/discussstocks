@@ -6,6 +6,7 @@ use App\Models\Subscriptions;
 use Illuminate\Http\Request;
 use App\Models\Channels;
 use Vinkla\Hashids\Facades\Hashids;
+use App\Models\Content;
 
 class UserSubscriptionsController extends Controller
 {
@@ -18,12 +19,14 @@ class UserSubscriptionsController extends Controller
             ->simplePaginate( setting('pagination'));
 
         return view('user.subscriptions', $data);
+
     }
 
     public function store(Request $request){
         $post = $request->all();
         $content_id = Hashids::decode($post['content_id'])[0];
         $user_id = Hashids::decode($post['user_id'])[0];
+
 
         $query = Subscriptions::where('content_id', '=', $content_id)
             ->where('user_id', '=', $user_id)

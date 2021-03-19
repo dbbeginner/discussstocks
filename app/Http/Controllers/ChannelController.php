@@ -10,7 +10,6 @@ class ChannelController extends Controller
 {
     //
 
-
     public function AllChannels() {
 
         $data['channels'] = Channels::where('type', '=', 'channel')

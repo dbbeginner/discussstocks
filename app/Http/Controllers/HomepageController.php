@@ -13,7 +13,7 @@ class HomepageController extends Controller
 {
     //
 
-    public function index(PostController $postController) {
+    public function index() {
         if(Auth::guest()) {
             $data['posts'] = $this->AllRecentPosts();
             $data['title'] = 'All Recent Posts';
@@ -26,7 +26,6 @@ class HomepageController extends Controller
     }
 
     public function AllRecentPosts(){
-
         return Posts::where('type', '=', 'post')
             ->with('user', 'votes')
             ->withCount('votes')
@@ -35,8 +34,6 @@ class HomepageController extends Controller
             ->simplePaginate( setting('pagination', 10) );
 
     }
-
-
 
     public function PostsFromUsersSubscriptions() {
         // Get list of channels the current logged in user is subscribed to
