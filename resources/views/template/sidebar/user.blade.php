@@ -12,7 +12,7 @@
         <a href="/user/subscriptions">Manage Subscriptions</a>
     </div>
     <div class="col-12">
-        -
+        <br>
     </div>
     <div class="col-12">
         <a href="/logout">Logout</a>

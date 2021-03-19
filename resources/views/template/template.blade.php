@@ -67,8 +67,8 @@
             @include('template.sidebar.guest')
         @endif
         @if (Auth::check())
-            @include('template.sidebar.content')
             @include('template.sidebar.user')
+            @include('template.sidebar.content')
             @include('template.sidebar.stats')
         @endif
         @if(isset( $type ))
