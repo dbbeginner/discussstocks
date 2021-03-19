@@ -18,7 +18,7 @@ class Posts extends Content
 //     Posts can have subtypes, which indicate whether its an article, URL, etc.
     protected $attributes = [
         'type' => 'post',
-        'subtype' => 'article'
+        'subtype' => 'post'
         ];
 
 //    Anytime a post is modified, it also modifies the updated_at column in its parent channel
