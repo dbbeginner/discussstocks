@@ -1,62 +1,73 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# DiscussStocks
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+DiscussStocks is Reddit-like discussion board for individual investors to come together and share ideas. It's still a 
+work in progess: Below is a list of what is working (small), and what's not working (long)
 
-## About Laravel
+## Design Notes
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+One decision I've made in the design process is to use a single table (Content) to store the bulk of data in the site. 
+Channels, Posts and Replies are all stored there. Directing this data is the Content Model, which is extended by the
+Channels, Posts and Replies models.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+I know this isn't a methodology that many will agree with, but I felt like I *had* to give it a try in order to see what
+the outcome is. I'm not seeing a particular downside to this method, except for the need to declare the type of data 
+that is being searched for (ex, in order to pull out all posts, you need to do `Posts::where('type', '=', 'post')` 
+rather than `Posts::all()` 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation
+This uses PHP 8, Laravel 8, MySQL database, and so far has been running on the Apache web server. Make sure the following
+is set in your .env file:
 
-## Learning Laravel
+* `APP_NAME` = is displayed throughout the app
+* `APP_KEY` = is used by Hash_Id's as its salt for generating unique hash_id's for use in the UI
+* `APP_URL` = is used in places, and must the actual URL of your site, with no trailing slash.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+I am using [Mailtrap.io](https://mailtrap.io) to test outbound email links, you may choose a different service altogether, 
+or even none at all.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+####Seeding the database with sample data: 
+`php artisan migrate:refresh --seed` generates channels, posts, threaded replies and users.
 
-## Laravel Sponsors
+####Create administrator:
+`php artisan make:admin` creates your admin user, prompting for username, email, password. It performs no validation 
+just take strings
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Notes
+Familiarize yourself with the Content, Channels, Posts, and Replies models, they do the heavy lifting.
 
-### Premium Partners
+##
+This is not functional yet. It's just a skeleton that's still getting fleshed out. Don't clone this repository thinking 
+that you can get up and running. You can't. If you want to help contribute, maybe we'll get to a final product sooner, 
+though!
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+## What is working
 
-## Contributing
+* Account registration (new accounts can be created)
+* Registration emails & account validation
+* Subscribing / unsubscribing from Channels 
+* Viewing posts only for subscribed channels
+* Channels can have Posts, which can have Replies, and those Replies can have successive levels of replies after that
+* Logged in users can vote on Posts and Replies - only a single upvote or downvote. If a user tries to cast a second vote,
+if just nullifies the first. A third vote will then be recorded.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## TODO
 
-## Code of Conduct
+* User roles
+  * Guest users only see posts, not replies
+  * Logged in users get full experience, but might also show ads with Google and use Google for analytics
+  * Paid users will not recieve ads OR analyics. Ultimately, all HTTP rests made by paid users will be to resources
+    on the same domain for privacy purposes
+  * Admin users who will be able to moderate (soft-delete) everything on the site except for content from the super admin
+  * Superadmin who can moderate and delete everything
+* Allow Users to create posts
+  * Posts will be able to have attachments (image, excel, PDF);
+* Allow Users to reply to posts
+* Allow Users to reply to replies
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* Allow channel owners to see subcribers to their channel
+* Allow channel owners to set whether content posted to their channel is live immediately or if it needs approval
+* Allow channel owners to approve posts, and to remove posts that violate their channels rules.
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* Decide on a company to use for stock market data. Retrieve real time quotes whenever a stock is mentioned in a post or 
+comment, so we can later show how that stock performed since the user mentioned it.
+  
