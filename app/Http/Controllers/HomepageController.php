@@ -23,7 +23,7 @@ class HomepageController extends Controller
         }
 
         if(count($content) < setting('pagination') - 1) {
-            $notice = "There aren't many posts here. Perhaps you want to subscribe to more channels?";
+            $notice = "There aren't many posts here. Perhaps you want to <a href=\"/user/subscriptions\">subscribe</a> to more channels?";
         } else {
             $notice = null;
         }

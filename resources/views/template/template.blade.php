@@ -30,8 +30,7 @@
 
         @if($notice ?? '')
             <div class="jumbotron">
-                {{ $notice }}
-
+                {!! $notice !!}
             </div>
         @endif
 
