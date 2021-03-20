@@ -12,11 +12,11 @@
             </div>
             <div class="col-sm-2">
             @if(Auth::user()->isSubscribedTo($channel->id))
-                <button id="{{ $channel->hash_id() }}" class="btn subscription-button subscribed" onclick="subscribe('{{ $channel->hash_id() }}', '{{ Auth::user()->hash_id() }}' )">
+                <button id="{{ $channel->hashId() }}" class="btn subscription-button subscribed" onclick="subscribe('{{ $channel->hashId() }}', '{{ Auth::user()->hashId() }}' )">
                     Subscribed
                 </button>
             @else
-                <button id="{{ $channel->hash_id() }}" class="btn subscription-button" onclick="subscribe('{{ $channel->hash_id() }}', '{{ Auth::user()->hash_id() }}' )">
+                <button id="{{ $channel->hashId() }}" class="btn subscription-button" onclick="subscribe('{{ $channel->hashId() }}', '{{ Auth::user()->hashId() }}' )">
                     Not Subscribed
                 </button>
             @endif

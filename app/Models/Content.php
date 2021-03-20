@@ -67,7 +67,7 @@ class Content extends Model
 
         static::saved(function($model){
             // scans the content for any stock symbols (identified by '$' plus a string of letters)
-            $model->StoreStockMentions($model);
+            $model->storeStockMentions($model);
 
 //          The DetectScripts method scans any content for the string <script>, and if it detects that,
 //          automatically flags the content as questionable.
@@ -87,7 +87,7 @@ class Content extends Model
     // If the post has mentions in it, save these to the mentions table.
     // To do: return the fact that mentions existed to the controller so we can ask for sentiment.
     // To do: get a realtime quote of the stock to store in the mentions table.
-    public function StoreStockMentions($model) {
+    public function storeStockMentions($model) {
         $strings = explode(' ', $model->content);
         foreach ($strings as $string){
 
@@ -112,7 +112,7 @@ class Content extends Model
 
 
     // The prunes images out of markdown posts. The last thing I want is someone spamming comments with bad images
-    public function FormattedContent() {
+    public function formattedContent() {
         return Purifier::clean(new HtmlString($this->converter->convertToHtml($this->content)));
     }
 
@@ -121,19 +121,19 @@ class Content extends Model
 
         switch ($this->type) {
             case 'channel':
-                return config('app.url') . '/c/' . $this->slug . '/' . $this->hash_id();
+                return config('app.url') . '/c/' . $this->slug . '/' . $this->hashId();
             case 'post':
-                return $this->parentByType('channel')->url() . '/' . $this->slug . '/' . $this->hash_id();
+                return $this->parentByType('channel')->url() . '/' . $this->slug . '/' . $this->hashId();
         }
     }
 
-    // Outputs the shortened URL (only the encoded hash_id) of a piece of content
+    // Outputs the shortened URL (only the encoded hashId) of a piece of content
     public function shortUrl(){
         return config('app.url') . '/' . Hashids::encode($this->id);
     }
 
-    // Outputs the hashed Id of a contents ID for display in user facing pages
-    public function hash_id(){
+    // Outputs the hashID of a contents ID for display in user facing pages
+    public function hashId(){
         return Hashids::encode($this->id);
     }
 

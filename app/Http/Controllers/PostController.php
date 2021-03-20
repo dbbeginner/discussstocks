@@ -29,14 +29,14 @@ class PostController extends Controller
         return view('posts', $data);
     }
 
-    public function viewPostsInChannel(Request $request, $slug, $hash_id){
-        $data['posts'] = Posts::where('parent_id', '=', Hashids::decode($hash_id))
+    public function viewPostsInChannel(Request $request, $slug, $hashId){
+        $data['posts'] = Posts::where('parent_id', '=', Hashids::decode($hashId))
             ->with('user', 'votes')
             ->withSum('votes', 'vote')
             ->orderByDesc('updated_at')
             ->simplePaginate( setting( 'pagination', 10) );
 
-        $channel = Channels::where('id', '=', Hashids::decode($hash_id))->first();
+        $channel = Channels::where('id', '=', Hashids::decode($hashId))->first();
 
         $data['title'] = 'Viewing posts filed in ' . $channel->title;
 
@@ -44,10 +44,10 @@ class PostController extends Controller
 
     }
 
-    public function viewPost($channel_slug, $channel_hash_id, $post_slug, $hashid){
+    public function viewPost($channelSlug, $channelHashId, $postSlug, $hashId){
 
         $data['post'] = Posts::where('type', '=', 'post')
-            ->where('id', '=', Hashids::decode($hashid))
+            ->where('id', '=', Hashids::decode($hashId))
             ->with('user', 'votes', 'repliesWithChildren')
             ->withCount('votes')
             ->withSum('votes', 'vote')

@@ -19,7 +19,7 @@ This uses PHP 8, Laravel 8, MySQL database, and so far has been running on the A
 is set in your .env file:
 
 * `APP_NAME` = is displayed throughout the app
-* `APP_KEY` = is used by Hash_Id's as its salt for generating unique hash_id's for use in the UI
+* `APP_KEY` = is used by hashId() as its salt for generating unique hash_id's for use in the UI
 * `APP_URL` = is used in places, and must the actual URL of your site, with no trailing slash.
 
 I am using [Mailtrap.io](https://mailtrap.io) to test outbound email links, you may choose a different service altogether, 

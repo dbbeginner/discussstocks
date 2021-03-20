@@ -14,10 +14,10 @@ Route::get('markdown', '\App\Http\Controllers\StaticController@Markdown');
 Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels');
 
 // View a single channel
-Route::get('/c/{slug}/{hash_id}', '\App\Http\Controllers\PostController@ViewPostsInChannel');
+Route::get('/c/{slug}/{hashId}', '\App\Http\Controllers\PostController@ViewPostsInChannel');
 
 // View a single story in a channel
-Route::get('/c/{channel_slug}/{channel_hash_id}/{post_slug}/{post_hash_id}', '\App\Http\Controllers\PostController@viewPost');
+Route::get('/c/{channelSlug}/{channelHashId}/{postSlug}/{postHashId}', '\App\Http\Controllers\PostController@viewPost');
 
 
 

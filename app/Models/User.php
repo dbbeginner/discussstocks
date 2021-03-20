@@ -103,14 +103,13 @@ class User extends Authenticatable
         return $this->hasMany(Settings::class, 'user_id');
     }
 
-    public function hash_id() {
+    public function hashId() {
         return Hashids::encode( $this->id );
     }
 
-    public function from_hash_id( $hash_id) {
-        return User::where('id','=', Hashids::decode($hash_id))->first();
+    public function fromHashId( $hashId) {
+        return User::where('id','=', Hashids::decode($hashId))->first();
     }
-
 
     public function isSubscribedTo($channel_id) {
         return Subscriptions::where('user_id', '=', $this->id)
