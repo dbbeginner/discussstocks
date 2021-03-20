@@ -17,10 +17,6 @@ require __DIR__.'/static.php';
 require __DIR__.'/user.php';
 
 
-//Route::get('logout', 'App\Http\Controllers\Accounts\LoginController@logout')
-//    ->middleware('auth');
-
-
 Route::group(['middleware' => 'auth'], function () {
     // Paths for registered users to create and delete channels
     Route::group(['prefix' => 'channel'], function() {
@@ -33,7 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'user'], function() {
 //        Manage user settings
-        Route::get('settings', 'App\Http\Controllers\UserSettingsController@view');
+        Route::get('settings', 'App\Http\Controllers\UserSettingsController@index');
         Route::post('settings', 'App\Http\Controllers\UserSettingsController@store');
 
 //        Manage channel subscriptions
@@ -44,8 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Route::post('/vote/', '\App\Http\Controllers\VoteController@CastVote');
-Route::get('/vote/', '\App\Http\Controllers\VoteController@CastVote');
+Route::post('/vote/', '\App\Http\Controllers\VoteController@store');
 
 
 

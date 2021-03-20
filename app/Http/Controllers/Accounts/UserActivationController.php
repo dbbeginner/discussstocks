@@ -11,15 +11,15 @@ class UserActivationController extends Controller
 {
     //
 
-    public function index(Request $request) {
+    public function create(Request $request) {
         if(!$request->has('token') || trim($request->input('token')) == null) {
             return view('accounts.activate');
         }
 
-        return $this->update($request);
+        return $this->store($request);
     }
 
-    public function update(Request $request) {
+    public function store(Request $request) {
         $user = User::where('token', '=', $request->input('token'))->first();
 
         if(!$user) {

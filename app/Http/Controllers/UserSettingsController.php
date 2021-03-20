@@ -12,7 +12,7 @@ class UserSettingsController extends Controller
 {
     //
 
-    public function view(Request $request) {
+    public function index(Request $request) {
 
         $data['timezones'] = $this->loadTimezonesFromJson();
 

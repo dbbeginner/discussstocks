@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class VoteController extends Controller
 {
 
-    public function CastVote(Request $request){
+    public function store(Request $request){
         $post = $request->all();
         $content_id = Hashids::decode($post['content_id'])[0];
         $user_id = Hashids::decode($post['user_id'])[0];

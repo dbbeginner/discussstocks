@@ -10,7 +10,11 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     //
-    public function authenticate(Request $request){
+    public function create(){
+        return view('accounts.login');
+    }
+
+    public function store(Request $request){
         $user = $this->retrieveUserRecord($request);
         if($user && Auth::attempt(['name' => $user->name, 'password' => $request->password, 'active' => 1], $request->remember)) {
             $request->session()->regenerate();
@@ -19,7 +23,7 @@ class LoginController extends Controller
         return redirect()->back()->with('warning', 'Login failed for this username and password. Did you forget to <a href="/verify">verify</a> your account?');
     }
 
-    public function retrieveUserRecord(Request $request){
+    private function retrieveUserRecord(Request $request){
         $user = User::where('name', '=', $request->username)->first();
         if(!isset($user->id)) {
             $user = User::where('email', '=', $request->username)->first();
@@ -27,7 +31,7 @@ class LoginController extends Controller
         return $user;
     }
 
-    public function logout(Request $request){
+    public function destroy(Request $request){
         Auth::logout();
 
         $request->session()->invalidate();
