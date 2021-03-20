@@ -17,6 +17,10 @@ class Votes extends Model
         'content',
     ];
 
+    protected $fillable = [
+        'content_id', 'user_id', 'vote'
+    ];
+
     public $incrementing = true;
 
     public $timestamps = true;

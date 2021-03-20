@@ -14,37 +14,30 @@ class VoteController extends Controller
 
     public function store(Request $request){
         $post = $request->all();
-        $content_id = Hashids::decode($post['content_id'])[0];
-        $user_id = Hashids::decode($post['user_id'])[0];
-        $vote_value = $this->VoteDirectionToValue( $post['direction']);
+        $contentId = Hashids::decode($post['content_id'])[0];
+        $userId = Hashids::decode($post['user_id'])[0];
+        $voteValue = $this->VoteDirectionToValue( $post['direction']);
 
-        $vote = Votes::where('content_id', '=', $content_id)->where('user_id','=',$user_id)->first();
+        $vote = Votes::where('content_id', '=', $contentId)->where('user_id', '=', $userId)->first();
 
+        if($vote) {
+        // if we find a vote, reverse that vote
+            $vote->delete();
+            $result['status'] = "identical vote, deleting";
+        } else {
         // If there is no match for a vote on this content_id by this user_id, we can record the vote.
-        if(!$vote) {
-            $vote = new Votes;
-            $vote->content_id = $content_id;
-            $vote->user_id = $user_id;
-            $vote->vote = $vote_value;
-            $vote->save();
+            Votes::create(['content_id' => $contentId, 'user_id' => $userId, 'vote' => $voteValue]);
             $result['status'] = "vote recorded";
         }
 
-        // if there is a match for this vote on content_id and user_id, just delete the existing vote.
-        // the user can then post a new vote.
-        // It should be apparent in the UI that the user has already voted, though. That is a TODO item.
-        else {
-            $vote->delete();
-            $result['status'] = "identical vote, deleting";
-        }
 
-        $permanent_upvotes = Content::where('id', '=', $content_id)->first()->upvotes_total;
-        $additional_upvotes = DB::table('votes')->where('content_id', '=', $content_id)->where('swept_at', '=', null)->sum('vote');
+        $permanentUpvotes = Content::where('id', '=', $contentId)->first()->upvotes_total;
+        $additionalUpvotes = DB::table('votes')->where('content_id', '=', $contentId)->where('swept_at', '=', null)->sum('vote');
 
-        $permanent_votes = Content::where('id', '=', $content_id)->first()->votes_total;
-        $additional_votes = DB::table('votes')->where('content_id', '=', $content_id)->where('swept_at', '=', null)->count('vote');
+        $permanentVotes = Content::where('id', '=', $contentId)->first()->votes_total;
+        $additionalVotes = DB::table('votes')->where('content_id', '=', $contentId)->where('swept_at', '=', null)->count('vote');
 
-        $percent = round( (($permanent_upvotes + $additional_upvotes) / ($permanent_votes + $additional_votes) * 100), 0) . '%';
+        $percent = round( (($permanentUpvotes + $additionalUpvotes) / ($permanentVotes + $additionalVotes) * 100), 0) . '%';
 
         return ['votes' => $percent];
 
