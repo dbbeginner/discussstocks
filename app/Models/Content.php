@@ -12,6 +12,7 @@ use League\CommonMark\Environment;
 use League\CommonMark\Extension\Table\TableExtension;
 use Mews\Purifier\Facades\Purifier;
 use Vinkla\Hashids\Facades\Hashids;
+use App\Models\FlaggedContent;
 
 // The Content table is the main storage repository for this application, and holds Channels, Posts and Replies.
 // While the content model provides the underlying functionality, it is extended by the Channels, Posts and Replies models
@@ -46,8 +47,6 @@ class Content extends Model
             'allow_unsafe_links' => false,
             'max_nesting_level' => 5,
             'html_input' => 'escape'
-
-
         ], $environment);
     }
 
@@ -55,39 +54,32 @@ class Content extends Model
     {
         parent::boot();
         static::saving(function($model){
-
-//          The DetectScripts method scans any content for the string <script>, and if it detects that,
-//          automatically flags the content as questionable.
-            if($model->title != $model->detectScripts($model->title)) {
-                $model->flagged_by_user_id = 2;
-                $model->flagged_reason = "detected unknown script in title";
-                $model->deleted_at = now();
-            };
-
-            if($model->content != $model->detectScripts($model->content)) {
-                $model->flagged_by_user_id = 2;
-                $model->flagged_reason = "detected unknown script in content";
-                $model->deleted_at = now();
-            };
-
-//            Generate a more SEO friendly slug for the content. This data is indexed but it's not unique,
-//            meaning multiple people can have posts of the same title.
-            $model->slug = Str::slug($model->title);
+//      Generate a more SEO friendly slug for the content. This data is indexed but it's not unique,
+//      meaning multiple people can have posts of the same title.
+            $model->slug = Str::limit(Str::slug($model->title), 128);
         });
 
         static::created(function($model){
             // Add initial upvote from user that created the content
-            $vote = new Votes;
-            $vote->content_id = $model->id;
-            $vote->user_id = $model->user_id;
-            $vote->vote = 1;
-            $vote->swept_at = null;
-            $vote->save();
+            Votes::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'vote' => 1, 'swept_at' => null ]);
+
         });
 
         static::saved(function($model){
             // scans the content for any stock symbols (identified by '$' plus a string of letters)
             $model->StoreStockMentions($model);
+
+//          The DetectScripts method scans any content for the string <script>, and if it detects that,
+//          automatically flags the content as questionable.
+            if($model->title != $model->detectScripts($model->title)) {
+                FlaggedContent::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'reporter_id' => 2, 'reason' => "detected unknown script in title"]);
+                $model->delete();
+            };
+
+            if($model->content != $model->detectScripts($model->content)) {
+                FlaggedContent::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'reporter_id' => 2, 'reason' => "detected unknown script in the content"]);                $model->deleted_at = now();
+                $model->delete();
+            };
         });
     }
 
@@ -106,11 +98,7 @@ class Content extends Model
                 if(is_numeric($string)){
                     return;
                 } else {
-                    $mention = new \App\Models\Mentions;
-                    $mention->content_id = $model->id;
-                    $mention->user_id = $model->user_id;
-                    $mention->ticker = strtoupper($string);
-                    $mention->save();
+                    Mentions::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'ticker' => strtoupper($string)] );
                 }
             }
         }
@@ -120,30 +108,12 @@ class Content extends Model
 
     public function detectScripts($input){
         return preg_replace('#<script#is', '', $input);
-//        return preg_replace('#<script(.*?)>(.*?)</script>#is', '', $input);
     }
 
 
     // The prunes images out of markdown posts. The last thing I want is someone spamming comments with bad images
     public function FormattedContent() {
         return Purifier::clean(new HtmlString($this->converter->convertToHtml($this->content)));
-    }
-
-    public function TruncatedContent($length = 300){
-
-            // return with no change if string is shorter than $limit
-            if(strlen($this->content) <= $length) {
-                return $this->content;
-            }
-
-            // is $break present between $limit and the end of the string?
-            if(false !== ($breakpoint = strpos($this->content, " ", $length))) {
-                if($breakpoint < strlen($this->content) - 1) {
-                    $this->content = substr($this->content, 0, $length) . "...";
-                }
-            }
-
-            return $this->content;
     }
 
     // Outputs the full URL to a given content (only for channels and posts)
@@ -155,7 +125,6 @@ class Content extends Model
             case 'post':
                 return $this->parentByType('channel')->url() . '/' . $this->slug . '/' . $this->hash_id();
         }
-        return config('app.url') . "/$prefix/" . $this->slug . '/' . Hashids::encode($this->id);
     }
 
     // Outputs the shortened URL (only the encoded hash_id) of a piece of content
@@ -168,11 +137,20 @@ class Content extends Model
         return Hashids::encode($this->id);
     }
 
+    // Relationship to the FlaggedContent model
+    public function flagged()
+    {
+        return $this->hasMany(FlaggedContent::class, 'content_id', 'id');
+    }
+
+    // Relationship to undefined children
+    // From a channel, the child is post. From a post, the child is reply. From a reply, the child is also reply.
     public function children()
     {
         return $this->hasMany(Content::class, 'parent_id', 'id');
     }
 
+    // Reverse of the children relationship.
     public function parent(){
         return $this->hasOne(Content::class, 'id', 'parent_id');
     }
