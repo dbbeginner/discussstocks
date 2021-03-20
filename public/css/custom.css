@@ -5,6 +5,12 @@ html, body {
     line-spacing: 13pt;
     background: #428df5;
 }
+
+.content {
+    padding: 15pt;
+    background: #fff;
+    border-radius: 5pt;
+}
 .navbar {
     font-size: 9pt;
 }
@@ -97,6 +103,12 @@ h1 .small a, .h1 .small a {
     font-weight: 300;
 }
 
+h1.page-title {
+    color: #fff;
+    font-weight: 300;
+    font-size: 18pt;
+    padding: 30pt 0 5pt 15pt;
+}
 h1 {
     font-size: 18pt;
 }

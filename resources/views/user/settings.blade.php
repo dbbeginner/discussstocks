@@ -1,11 +1,17 @@
 @extends('template.template')
 
 @section('title')
-    User Settings
+    Edit Settings
 @stop
 
-@section('content')
 
+@section('page-title')
+    <h1 class="page-title">Edit Settings</h1>
+@stop
+
+
+@section('content')
+<div class="content">
     <form method="post" action="/user/settings">
         <div class="form-group row">
             <label for="pagination" class="col-sm-6 col-form-label">Maximum Posts Per Page</label>
@@ -42,5 +48,5 @@
         </div>
         @csrf
     </form>
-
+</div>
 @stop
