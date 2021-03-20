@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Scopes\ChannelScope;
+use App\Models\Subscriptions;
+use Illuminate\Support\Facades\Auth;
 
 // The Channels model extends the Content model and stores its data in the Content table.
 // Scope insures that calls to All channels returns only Channels, and not other data stored in the database.
@@ -22,6 +24,11 @@ class Channels extends Content
     {
 
         parent::boot();
+
+        static::created(function($model){
+            // Automatically subscribe a user to the channel that they created.
+            Subscriptions::create(['user_id' => Auth::user()->id, 'content_id' => $model->id]);
+        });
 
         static::saving(function($model){
         });

@@ -7,6 +7,8 @@
 @stop
 
 @section('content')
+    <strong style="color: #fff;">Found {{ $count }} posts total.</strong>
+
     @foreach($posts as $post)
 
         @include('template.content.post-no-content')

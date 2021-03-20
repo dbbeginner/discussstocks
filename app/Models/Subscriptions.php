@@ -13,6 +13,10 @@ class Subscriptions extends Model
 
     public $timestamps = true;
 
+    protected $fillable = [
+        'user_id', 'content_id'
+    ];
+
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');

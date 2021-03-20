@@ -17,6 +17,18 @@ require __DIR__.'/static.php';
 require __DIR__.'/user.php';
 
 
+// List of channels
+Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels');
+
+// View a single channel
+Route::get('/c/{slug}/{hashId}', '\App\Http\Controllers\PostController@ViewPostsInChannel');
+
+// View a single story in a channel
+Route::get('/c/{channelSlug}/{channelHashId}/{postSlug}/{postHashId}', '\App\Http\Controllers\PostController@viewPost');
+
+
+
+
 Route::group(['middleware' => 'auth'], function () {
     // Paths for registered users to create and delete channels
     Route::group(['prefix' => 'channel'], function() {
@@ -59,7 +71,7 @@ Route::get('/u/{username}/replies', [\App\Http\Controllers\UserController::class
 
 // Homepage
 Route::get('/', '\App\Http\Controllers\HomepageController@index');
-
+Route::post('/', '\App\Http\Controllers\HomepageController@count');
 
 // ShortURL straight to channel or post (for social sharing)
 // This has got to be the last route, because it matches with everything else.

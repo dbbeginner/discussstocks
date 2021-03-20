@@ -34,6 +34,8 @@ class ChannelController extends Controller
            'description' => 'bail|required|max:1000'
         ]);
 
+        // Need to check for duplicates and ask for confirmation to proceed;
+
         $channel = new Channels;
         $channel->title = $request->post('title');
         $channel->content = $request->post('description');
@@ -42,6 +44,10 @@ class ChannelController extends Controller
 
         return redirect()->back()->with('success', 'Your channel named <a href="' . $channel->url() .'">' . $channel->title . '</a> was created.');
 
+    }
+
+    private function checkForDuplicate($title){
+        return Channels::where('title', '=', $title)->where('type', '=', 'channel')->get();
     }
 
 }
