@@ -63,11 +63,12 @@ class Content extends Model
             // Add initial upvote from user that created the content
             Votes::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'vote' => 1, 'swept_at' => null ]);
 
+            // scans the content for any stock symbols (identified by '$' plus a string of letters)
+            $model->storeStockMentions($model);
         });
 
         static::saved(function($model){
-            // scans the content for any stock symbols (identified by '$' plus a string of letters)
-            $model->storeStockMentions($model);
+
 
 //          The DetectScripts method scans any content for the string <script>, and if it detects that,
 //          automatically flags the content as questionable.

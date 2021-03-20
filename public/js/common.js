@@ -55,8 +55,8 @@ function upvote($post_id, $user_id, $direction) {
             console.log(jqXHR.responseText);
         },
         success: function (data) {
-            console.log(data.votes);
-            $("#percent-" + $post_id).html(data.votes);
+            console.log(data);
+            $("#percent-" + $post_id).html(data.percent);
         },
         failure: function (data) {
             console.log(data);

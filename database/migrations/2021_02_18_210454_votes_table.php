@@ -22,6 +22,7 @@ class VotesTable extends Migration
             $table->dateTime('swept_at')
                 ->nullable();
             $table->timestamps();
+            $table->unique(['content_id', 'user_id']);
             $table->index('content_id');
             $table->index('user_id');
             $table->index(['content_id', 'swept_at']);
