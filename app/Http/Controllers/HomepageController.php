@@ -15,17 +15,23 @@ class HomepageController extends Controller
 
     public function index() {
         if(Auth::guest()) {
-            $data['posts'] = $this->AllRecentPosts();
-            $data['title'] = 'All Recent Posts';
+            $content = $this->allRecentPosts();
+            $title = 'All Recent Posts';
         } else {
-            $data['posts'] = $this->PostsFromUsersSubscriptions();
-            $data['title'] = 'Recent Posts Based On Your Preferences';
+            $content = $this->postsFromUsersSubscriptions();
+            $title = 'Recent Posts Based On Your Preferences';
         }
 
-        return view('posts', $data);
+        if(count($content) < setting('pagination') - 1) {
+            $notice = "There aren't many posts here. Perhaps you want to subscribe to more channels?";
+        } else {
+            $notice = null;
+        }
+
+        return view('posts', ['title' => $title, 'posts' => $content, 'notice' => $notice])->with('status', 'message');
     }
 
-    public function AllRecentPosts(){
+    public function allRecentPosts(){
         return Posts::where('type', '=', 'post')
             ->with('user', 'votes')
             ->withCount('votes')
@@ -35,7 +41,7 @@ class HomepageController extends Controller
 
     }
 
-    public function PostsFromUsersSubscriptions() {
+    public function postsFromUsersSubscriptions() {
         // Get list of channels the current logged in user is subscribed to
         $subs = Subscriptions::where('user_id', Auth::user()->id)->pluck('content_id');
 

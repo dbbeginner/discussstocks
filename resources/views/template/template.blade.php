@@ -28,7 +28,16 @@
 
         @include('template.master.messages')
 
+        @if($notice ?? '')
+            <div class="jumbotron">
+                {{ $notice }}
+
+            </div>
+        @endif
+
         @yield('content')
+
+
     </div>
 
     <div class="col-lg-3 col-md-4 side-col " style="margin-top: 6pt; float:right;">
@@ -48,7 +57,6 @@
 @include('template.master.footer')
 
 </div>
-</body>
 
 <script>
     $(function () {
