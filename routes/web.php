@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/static.php';
 require __DIR__.'/user.php';
 
-
+Route::get('/p/create', '\App\Http\Controllers\PostController@create');
 // List of channels
 Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels');
 
@@ -71,7 +71,8 @@ Route::get('/u/{username}/replies', [\App\Http\Controllers\UserController::class
 
 // Homepage
 Route::get('/', '\App\Http\Controllers\HomepageController@index');
-Route::post('/', '\App\Http\Controllers\HomepageController@count');
+Route::get('/all', '\App\Http\Controllers\HomepageController@allPosts');
+Route::get('/subscribed', '\App\Http\Controllers\HomepageController@subscribedPosts');
 
 // ShortURL straight to channel or post (for social sharing)
 // This has got to be the last route, because it matches with everything else.

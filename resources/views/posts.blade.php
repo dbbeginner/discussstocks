@@ -7,7 +7,15 @@
 @stop
 
 @section('content')
-    <strong style="color: #fff;">Found {{ $count }} posts total.</strong>
+
+    <ul>
+    @if(!Auth::guest())
+        <li><a style="color: #fff;" href="/subscribed">Based on your preference</a></li>
+
+        <li><a style="color: #fff;" href="/all">All posts</a></li>
+    @endif
+        <li><strong style="color: #fff;">Found {{ $count }} posts total.</strong></li>
+    </ul>
 
     @foreach($posts as $post)
 
