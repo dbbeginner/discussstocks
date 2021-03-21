@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Channels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\isChannelTitleUnique;
 
 class ChannelController extends Controller
 {
@@ -23,15 +24,20 @@ class ChannelController extends Controller
 
     public function create()
     {
+        return view('channel.create', ['title' => 'Create Channel']);
+    }
+
+    public function verify()
+    {
         return view('channel.create');
     }
 
+
     public function store(Request $request)
     {
-
-        $validator = $request->validate([
-           'title' =>  'required|regex:/^[\pL\s\-]+$/u|max:60',
-           'description' => 'bail|required|max:1000'
+        $request->validate([
+            'title' => ['required', new isChannelTitleUnique ],
+            'description' => ['required', 'max:1000' ],
         ]);
 
         // Need to check for duplicates and ask for confirmation to proceed;

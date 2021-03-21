@@ -24,7 +24,9 @@
 <div class="row" style="margin-left: 0pt;  margin-right: 0;">
 
     <div class="col-lg-9 col-md-8" style="margin-top: 6pt; float:left;">
-        @yield('title')
+        <h1 style="color: #fff;">
+            @yield('title')
+        </h1>
 
         @include('template.master.messages')
 
