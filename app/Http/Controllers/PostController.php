@@ -15,6 +15,10 @@ class PostController extends Controller
 {
     //
 
+    public function create(){
+        return view('post.choose');
+    }
+
     public function recentPosts(){
 
         $data['posts'] = Posts::where('type', '=', 'post')
