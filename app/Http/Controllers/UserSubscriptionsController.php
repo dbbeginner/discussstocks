@@ -18,7 +18,7 @@ class UserSubscriptionsController extends Controller
             ->orderByDesc('title')
             ->simplePaginate( setting('pagination'));
 
-        return view('user.subscriptions', $data);
+        return view('settings.subscriptions', $data);
 
     }
 

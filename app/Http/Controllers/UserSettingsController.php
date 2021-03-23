@@ -16,7 +16,7 @@ class UserSettingsController extends Controller
 
         $data['timezones'] = $this->loadTimezonesFromJson();
 
-        return view('user.settings', $data);
+        return view('settings.preferences', $data);
 
     }
 
