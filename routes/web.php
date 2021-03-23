@@ -62,7 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 //        Manage channel subscriptions
         Route::get('subscriptions', 'App\Http\Controllers\UserSubscriptionsController@index');
-        Route::post('subscriptions/save', 'App\Http\Controllers\UserSubscriptionsController@store');
+        Route::post('subscriptions', 'App\Http\Controllers\UserSubscriptionsController@store');
     });
 });
 
@@ -86,9 +86,9 @@ Route::get('/u/{username}/replies', [\App\Http\Controllers\UserController::class
 
 
 // Homepage
-Route::get('/', '\App\Http\Controllers\HomepageController@index');
-Route::get('/all', '\App\Http\Controllers\HomepageController@allPosts');
-Route::get('/subscribed', '\App\Http\Controllers\HomepageController@subscribedPosts');
+Route::get('/', '\App\Http\Controllers\HomeController@index');
+Route::get('/all', '\App\Http\Controllers\HomeController@allPosts');
+Route::get('/subscribed', '\App\Http\Controllers\HomeController@subscribedPosts');
 
 // ShortURL straight to channel or post (for social sharing)
 // This has got to be the last route, because it matches with everything else.
