@@ -71,7 +71,7 @@ function subscribe($content_id, $user_id) {
         _token: token, content_id: $content_id, user_id: $user_id
     };
     $.ajax({
-        url: '/user/subscriptions/save',
+        url: '/user/subscriptions',
         type: 'post',
         dataType: 'json',
         data: postdata,
