@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 require __DIR__.'/static.php';
-require __DIR__.'/user.php';
+require __DIR__.'/account.php';
 
 
 
