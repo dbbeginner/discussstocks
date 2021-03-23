@@ -32,6 +32,10 @@ class Content extends Model
 
     protected $table = 'content';
     public $timestamps = true;
+
+    protected $fillable = [
+        'parent_id', 'user_id', 'type', 'subtype', 'title', 'content',
+    ];
     public $converter;
     public $hashids;
 

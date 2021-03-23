@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/static.php';
 require __DIR__.'/user.php';
 
-Route::get('/p/create', '\App\Http\Controllers\PostController@create');
+
+
+
 // List of channels
 Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels');
 
@@ -26,7 +28,21 @@ Route::get('/c/{slug}/{hashId}', '\App\Http\Controllers\PostController@ViewPosts
 // View a single story in a channel
 Route::get('/c/{channelSlug}/{channelHashId}/{postSlug}/{postHashId}', '\App\Http\Controllers\PostController@viewPost');
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'post'], function () {
+        Route::get('/', '\App\Http\Controllers\PostController@create');                                 // Choose whether to post an article or a link
 
+        Route::get('article/create', '\App\Http\Controllers\Create\PostCreationController@index');      // User enters their data
+        Route::post('article/verify', '\App\Http\Controllers\Create\PostCreationController@verify');    // User verifies their input
+        Route::post('article/store', '\App\Http\Controllers\Create\PostCreationController@store');      // Store user input
+
+        Route::get('url/create', '\App\Http\Controllers\Create\LinkCreationController@index');          // User enters data
+        Route::post('url/verify', '\App\Http\Controllers\Create\LinkCreationController@verify');        // User verifies their input
+        Route::post('url/store', '\App\Http\Controllers\Create\LinkCreationController@store');          // Store user input
+        Route::post('url/ajax', '\App\Http\Controllers\Create\LinkCreationController@titleHelper');     // Ajax responder to preview the title of a link
+
+    });
+});
 
 
 Route::group(['middleware' => 'auth'], function () {

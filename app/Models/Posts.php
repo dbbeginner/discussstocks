@@ -23,14 +23,8 @@ class Posts extends Content
 
 //    Anytime a post is modified, it also modifies the updated_at column in its parent channel
     protected $touches = [
-        'channel'
+        'channel',
     ];
-
-//    A post can only belong to a single channel
-//    public function channel()
-//    {
-//        return $this->belongsTo(Channels::class, 'id', 'parent_id');
-//    }
 
 //    A post can only belong to a single user
     public function user()

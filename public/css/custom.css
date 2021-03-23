@@ -379,3 +379,8 @@ input.shared-link {
     background: #00cc47;
     color: #ffffff;
 }
+
+a.tabbed-content {
+    color: #ff0000;
+    padding: 5pt 40pt 5pt 40pt;
+}
