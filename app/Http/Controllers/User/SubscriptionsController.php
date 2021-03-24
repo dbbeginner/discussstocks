@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Subscriptions;
 use Illuminate\Http\Request;
 use App\Models\Channels;
 use Vinkla\Hashids\Facades\Hashids;
 use App\Models\Content;
 
-class UserSubscriptionsController extends Controller
+class SubscriptionsController extends Controller
 {
     //
 

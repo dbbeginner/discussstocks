@@ -57,13 +57,16 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'user'], function() {
-//        Manage user settings
-        Route::get('settings', 'App\Http\Controllers\UserSettingsController@index');
-        Route::post('settings', 'App\Http\Controllers\UserSettingsController@store');
+        Route::get('settings', 'App\Http\Controllers\User\ProfileController@index');
+        Route::post('settings', 'App\Http\Controllers\User\ProfileController@store');
+
+        //        Manage user settings
+        Route::get('settings', 'App\Http\Controllers\User\SettingsController@index');
+        Route::post('settings', 'App\Http\Controllers\User\SettingsController@store');
 
 //        Manage channel subscriptions
-        Route::get('subscriptions', 'App\Http\Controllers\UserSubscriptionsController@index');
-        Route::post('subscriptions', 'App\Http\Controllers\UserSubscriptionsController@store');
+        Route::get('subscriptions', 'App\Http\Controllers\User\SubscriptionsController@index');
+        Route::post('subscriptions', 'App\Http\Controllers\User\SubscriptionsController@store');
     });
 });
 

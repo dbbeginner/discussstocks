@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Rules\validTimeZoneBySymbol;
 use Illuminate\Http\Request;
 use App\Models\Settings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class UserSettingsController extends Controller
+class SettingsController extends Controller
 {
     //
 

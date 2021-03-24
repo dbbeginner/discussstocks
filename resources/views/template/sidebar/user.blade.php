@@ -3,7 +3,7 @@
         Settings & Preferences
     </h5>
     <div class="col-12">
-        <a href="/u/edit">View/Edit Profile</a>
+        <a href="/user/profile">View/Edit Profile</a>
     </div>
     <div class="col-12">
         <a href="/user/settings">Edit Settings</a>
