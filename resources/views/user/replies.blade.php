@@ -1,7 +1,6 @@
-
-@inject('renderer', \App\Helpers\TextRenderer::class)
-
 @extends('user.user')
+
+@inject('render', \App\Helpers\TextRenderer::class)
 
 @section('title')
     recent replies By {{ $user->name }}
@@ -16,7 +15,7 @@
             Reply to <a href="{{ $reply->parentByType('post')->url() }}">{{ $reply->parentByType('post')->title }}</a> posted in {{ $reply->parentByType('channel')->title }} {{ $reply->parentByType('post')->created_at->diffForHumans() }}
         </h6>
 
-        {!! $renderer->markdownToHtml( $reply->content ) !!}
+        {!! $render->markdownToHtml( $reply->content ) !!}
 
     </div>
     @endforeach

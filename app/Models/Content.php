@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
-use League\CommonMark\CommonMarkConverter;
-use League\CommonMark\Environment;
-use League\CommonMark\Extension\Table\TableExtension;
-use Mews\Purifier\Facades\Purifier;
 use Vinkla\Hashids\Facades\Hashids;
 use App\Models\FlaggedContent;
 
@@ -38,21 +33,6 @@ class Content extends Model
     ];
     public $converter;
     public $hashids;
-
-    // load the CommonMark environment in order to display posts using MarkDown libraries to format them back to HTML
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-        $environment = Environment::createCommonMarkEnvironment();
-
-        $environment->addExtension(new TableExtension);
-
-        $this->converter = new CommonMarkConverter([
-            'allow_unsafe_links' => false,
-            'max_nesting_level' => 5,
-            'html_input' => 'escape'
-        ], $environment);
-    }
 
     protected static function boot()
     {
@@ -113,12 +93,6 @@ class Content extends Model
 
     public function detectScripts($input){
         return preg_replace('#<script#is', '', $input);
-    }
-
-
-    // The prunes images out of markdown posts. The last thing I want is someone spamming comments with bad images
-    public function formattedContent() {
-        return Purifier::clean(new HtmlString($this->converter->convertToHtml($this->content)));
     }
 
     // Outputs the full URL to a given content (only for channels and posts)

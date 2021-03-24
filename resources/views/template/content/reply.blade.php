@@ -1,3 +1,5 @@
+@inject('render', \App\Helpers\TextRenderer::class)
+
 @if($reply->repliesWithChildren)
     <ul>
         @foreach($reply->repliesWithChildren as $reply)
@@ -8,6 +10,9 @@
                     <p> <strong>{{ $reply->user->name }}</strong> said
                         at {{ $reply->created_at->format( 'h:i a' ) }}
                         on {{ $reply->created_at->format( 'm/d/Y' ) }} </p>
+
+                    {!! $render->markdownToHtml( $reply->content ) ?? "" !!}
+
                     <p>{!! $reply->formattedContent() !!}</p>
                     <p>
                     <div class="align-top" style="border-width: 0px; border-style: solid; display: inline-block; width: 40pt; margin: 0px; padding: 0px; background: #00459b; text-align: center; !important; color: #fff;">

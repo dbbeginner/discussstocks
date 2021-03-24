@@ -1,6 +1,6 @@
 @extends('template.template')
 
-@inject('renderer', \App\Helpers\TextRenderer::class)
+@inject('render', \App\Helpers\TextRenderer::class)
 
 @section('title')
     Verify your post
@@ -24,7 +24,7 @@
             </p>
 
             <p>
-                {!! $renderer->markdownToHtml( Session::get('content')) !!}
+                {!! $render->markdownToHtml( Session::get('content')) !!}
             </p>
         </div>
     </div>

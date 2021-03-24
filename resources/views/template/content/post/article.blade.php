@@ -1,4 +1,4 @@
-@inject('renderer', \App\Helpers\TextRenderer::class)
+@inject('render', \App\Helpers\TextRenderer::class)
 
 <div class="row" style="margin-bottom: 3pt;">
 
@@ -17,7 +17,7 @@
         </p>
 
         <p>
-            {!! $renderer->markdownToHtml( $post->content ) ?? "" !!}
+            {!! $render->markdownToHtml( $post->content ) ?? "" !!}
         </p>
 
         @include('template.content.post-meta')

@@ -1,4 +1,5 @@
 @extends('template.template')
+@inject('renderer', \App\Helpers\TextRenderer::class)
 
 @section('title')
     {{ $title ?? ""}}

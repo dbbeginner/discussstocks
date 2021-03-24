@@ -1,5 +1,7 @@
 @extends('template.template')
 
+@inject('render', \App\Helpers\TextRenderer::class)
+
 @section('title')
 Channels
 @stop
@@ -7,13 +9,14 @@ Channels
 @section('content')
 @foreach($channels as $channel)
 <div class="category">
-    <h1><a href="{{ $channel->url() }}">{{ $channel->title }}</a>
+    <h1>
+        <a href="{{ $channel->url() }}">{{ $channel->title }}</a>
         <span class="small">
             Owned by <strong><a href="/u/{{ $channel->user->name }}">{{ $channel->user->name }}</a></strong>
         </span>
     </h1>
     <div class="content content-hidden" id="{{ $channel->id }}">
-        {!! $channel->formattedContent($channel->id) !!}
+        {!! $render->markdownToHtml( $channel->content ) ?? "" !!}
     </div>
     <div class="footer">
         <a class="btn btn-link" style="padding: 0pt;" href="{{ $channel->url() }}">See all {{ count($channel->posts) }} posts</a>
