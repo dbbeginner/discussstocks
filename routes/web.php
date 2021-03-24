@@ -25,6 +25,9 @@ Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels');
 
 // View a single channel
 Route::get('/c/{slug}/{hashId}', '\App\Http\Controllers\PostController@ViewPostsInChannel');
+Route::get('/c/{slug}/{hashId}/settings', '\App\Http\Controllers\Channel\SettingsController@index');
+Route::post('/c/{slug}/{hashId}/settings', '\App\Http\Controllers\Channel\SettingsController@store');
+
 
 // View a single story in a channel
 Route::get('/c/{channelSlug}/{channelHashId}/{postSlug}/{postHashId}', '\App\Http\Controllers\PostController@viewPost');
