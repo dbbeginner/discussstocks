@@ -13,6 +13,10 @@ class Mentions extends Model
     public $timestamps = true;
     public $converter;
 
+    protected $fillable = [
+        'content_id', 'user_id', 'ticker',
+    ];
+
     // Stock mentions model - any time a stock is mentioned elsewhere on the site, that reference will be stored here
     // and eventually, we'll poll an API for the latest price at the time of the mention.
 

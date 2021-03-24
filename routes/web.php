@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/static.php';
 require __DIR__.'/account.php';
+require __DIR__.'/user.php';
 
 
 
@@ -78,10 +79,6 @@ Route::post('/vote/', '\App\Http\Controllers\VoteController@store');
 
 Route::get('/p/{slug}/{hashid}', [\App\Http\Controllers\PostController::class, 'viewPost']);
 Route::get('/r/{slug}/{hashid}', [\App\Http\Controllers\ReplyController::class, 'viewReply']);
-Route::get('/u/{username}', [\App\Http\Controllers\UserController::class, 'index']);
-Route::get('/u/{username}/posts', [\App\Http\Controllers\UserController::class, 'index']);
-Route::get('/u/{username}/replies', [\App\Http\Controllers\UserController::class, 'index']);
-
 
 
 

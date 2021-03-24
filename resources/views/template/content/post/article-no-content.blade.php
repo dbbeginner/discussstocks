@@ -9,7 +9,7 @@
         </h1>
 
         <p class="post-byline">
-            Created {{ $post->created_at->diffForHumans() }} ago by <a href="{{ $post->user->name }}">{{ $post->user->name }}</a>
+            Created {{ $post->created_at->diffForHumans() }} ago by <a href="/u/{{ $post->user->name }}">{{ $post->user->name }}</a>
             in <a href="{{ $post->parent->url() }}">{{ $post->parent->title }}</a>
         </p>
 
