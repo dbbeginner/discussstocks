@@ -10,7 +10,11 @@ Channels
 @foreach($channels as $channel)
 <div class="category">
     <h1>
-        <a href="{{ $channel->url() }}">{{ $channel->title }}</a>
+        @if(count($channel->posts) == 0)
+            {{ $channel->title }}
+        @else
+            <a href="{{ $channel->url() }}">{{ $channel->title }}</a>
+        @endif
         <span class="small">
             Owned by <strong><a href="/u/{{ $channel->user->name }}">{{ $channel->user->name }}</a></strong>
         </span>
@@ -19,7 +23,11 @@ Channels
         {!! $render->markdownToHtml( $channel->content ) ?? "" !!}
     </div>
     <div class="footer">
-        <a class="btn btn-link" style="padding: 0pt;" href="{{ $channel->url() }}">See all {{ count($channel->posts) }} posts</a>
+        @if(count($channel->posts) == 0)
+            No posts yet
+        @else
+            <a class="btn btn-link" style="padding: 0pt;" href="{{ $channel->url() }}">See all {{ count($channel->posts) }} posts</a>
+        @endif
         <button class="btn btn-link" style="padding: 0pt; color: #000;" onclick="readmore({{ $channel->id }})">Read More</button>
     </div>
 </div>
