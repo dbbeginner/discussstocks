@@ -54,10 +54,11 @@ class HomeController extends Controller
             ->withSum('votes', 'vote')
             ->orderByDesc('updated_at');;
         $title = 'Posts in ' . $channel->title;
-        return $this->renderView($query, $title);
+
+        return $this->renderView($query, $title, $channel, 'channel');
     }
 
-    public function renderView($data, $title = null) {
+    public function renderView($data, $title = null, $channel = null, $blade = 'posts') {
         $count = $data->count();
         $content = $data->simplePaginate( setting('pagination', 10) );
 
@@ -67,7 +68,13 @@ class HomeController extends Controller
             $notice = null;
         }
 
-        return view('posts', ['title' => $title, 'posts' => $content, 'count' => $count, 'notice' => $notice]);
+        return view($blade, [
+            'title' => $title,
+            'posts' => $content,
+            'count' => $count,
+            'notice' => $notice,
+            'channel' => $channel,
+            ]);
     }
 
 }
