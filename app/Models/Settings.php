@@ -14,7 +14,9 @@ class Settings extends Model
 
     public $timestamps = true;
 
-    protected $fillable = array('user_id', 'setting', 'value');
+    protected $fillable = [
+        'user_id', 'setting', 'value'
+    ];
 
     public function user()
     {
