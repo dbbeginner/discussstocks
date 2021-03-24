@@ -1,9 +1,7 @@
 @extends('template.template')
 
 @section('title')
-    @if($title)
-        {{ $title }}
-    @endif
+    {{ $title ?? ""}}
 @stop
 
 @section('content')
@@ -14,7 +12,14 @@
 
         <li><a style="color: #fff;" href="/all">All posts</a></li>
     @endif
-        <li><strong style="color: #fff;">Found {{ $count }} posts total.</strong></li>
+    @if(!Auth::guest())
+        @if(Auth::user()->id == $channel->user->id || Auth::user()->role == "admin" || Auth::user()->role == "superadmin") {
+        <li>
+            <a href="{{ $channel->url() }}/settings">Channel Settings</a>
+        </li>
+        @endif
+    @endif
+        <li><strong style="color: #fff;">Found {{ $count || 0}} posts total.</strong></li>
     </ul>
 
     @foreach($posts as $post)

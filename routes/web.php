@@ -24,7 +24,7 @@ require __DIR__.'/user.php';
 Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels');
 
 // View a single channel
-Route::get('/c/{slug}/{hashId}', '\App\Http\Controllers\PostController@ViewPostsInChannel');
+Route::get('/c/{slug}/{hashId}', '\App\Http\Controllers\HomeController@postsInChannel');
 Route::get('/c/{slug}/{hashId}/settings', '\App\Http\Controllers\Channel\ChannelSettings@index');
 Route::post('/c/{slug}/{hashId}/settings', '\App\Http\Controllers\Channel\ChannelSettings@store');
 
