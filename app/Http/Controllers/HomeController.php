@@ -34,11 +34,28 @@ class HomeController extends Controller
     }
 
     public function subscribedPosts(){
-        $query = Post::whereIn('parent_id', Auth::user()->subscriptions()->pluck('content_id'))
-            ->with('user', 'votes')
-            ->withCount('votes')
-            ->withSum('votes', 'vote')
-            ->orderByDesc('updated_at');;
+        $subscriptions = Auth::user()->subscriptions()->pluck('content_id');
+
+        // If user is not subscribed to any channels, send them to the subscription page
+        if(count($subscriptions) == 0 ) {
+            return redirect('/user/subscriptions')->with('info', "You're not subscribed to any channels yet. Pick a few below");
+        }
+
+        // If user is only subscribed to one channel, load just that channels posts
+        if(count($subscriptions) == 1 ) {
+            $query = Post::where('parent_id', '=', $subscriptions->first() )
+                ->with('user', 'votes')
+                ->withCount('votes')
+                ->withSum('votes', 'vote')
+                ->orderByDesc('updated_at');;
+        } else {
+        // If the user is subscribed to more than one channel, show the posts from all those channels
+            $query = Post::whereIn('parent_id', )
+                ->with('user', 'votes')
+                ->withCount('votes')
+                ->withSum('votes', 'vote')
+                ->orderByDesc('updated_at');;
+        }
         $title = 'Recent Posts Based On Your Preferences';
         return $this->renderView($query, $title);
     }
