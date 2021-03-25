@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('template')
 
 @inject('render', \App\Helpers\TextRenderer::class)
 

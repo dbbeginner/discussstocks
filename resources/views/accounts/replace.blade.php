@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('template.')
 
 @section('content')
     <form method="post" action="/activate/replace">

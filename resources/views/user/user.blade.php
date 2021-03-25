@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('template')
 
 @section('title')
     {{ $user->name }}'s profile

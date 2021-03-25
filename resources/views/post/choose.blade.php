@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('template')
 
 @section('title')
 What type of post are you making?

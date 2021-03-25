@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('template')
 
 @section('title')
     404 - PAGE NOT FOUND
