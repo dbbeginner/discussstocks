@@ -1,6 +1,6 @@
 <div class="row side-col-panel">
     <h5 class="col-12">
-        Settings & Preferences
+        Preferences
     </h5>
     <div class="col-12">
         <a href="/user/profile">View/Edit Profile</a>

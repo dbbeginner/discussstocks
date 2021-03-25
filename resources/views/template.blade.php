@@ -38,11 +38,12 @@
 
         @yield('content')
 
-
     </div>
 
     <div class="col-lg-3 col-md-4 side-col " style="margin-top: 6pt; float:right;">
-        @if (Auth::guest())
+        @yield('sidebar-before')
+
+    @if (Auth::guest())
             @include('template.sidebar.guest')
         @endif
         @if (Auth::check())
@@ -51,7 +52,7 @@
             @include('template.sidebar.stats')
         @endif
 
-        @yield('sidebar')
+        @yield('sidebar-after')
     </div>
 </div>
 

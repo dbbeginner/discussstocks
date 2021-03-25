@@ -16,8 +16,6 @@
             <a style="color:#fff;" href="/u/{{ $user->name }}/mentions">Mentions</a>
         </li>
     </ul>
-
-
     @yield('userdata')
 
 @stop
