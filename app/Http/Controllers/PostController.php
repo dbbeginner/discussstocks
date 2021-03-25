@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Channel;
 use App\Models\Post;
-use App\Models\Replies;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -57,7 +57,7 @@ class PostController extends Controller
 
         $data['title'] = $data['post']->title;
 
-        $data['replies'] = Replies::where('type', '=', 'reply')
+        $data['replies'] = Reply::where('type', '=', 'reply')
             ->where('parent_id', '=', $data['post']->id)
             ->with('user', 'votes', 'repliesWithChildren')
             ->get();

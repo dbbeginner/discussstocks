@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Content;
-use App\Models\Replies;
+use App\Models\Reply;
 use Illuminate\Support\Facades\Auth;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -26,7 +26,7 @@ class ReplyController extends Controller
 
         $parent = Content::where('id', '=', Hashids::decode($post['parent']))->first();
 
-        $reply = new Replies();
+        $reply = new Reply;
         $reply->parent_id = $parent->id;
         $reply->user_id = 1;
         $reply->content = $post['content'];

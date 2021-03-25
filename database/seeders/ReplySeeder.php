@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Replies;
+use App\Models\Reply;
 use Faker\Factory;
 
 class ReplySeeder extends Seeder
@@ -26,7 +26,7 @@ class ReplySeeder extends Seeder
             $i = random_int(1, 8);
 
             while($i < 6) {
-                $comment = new Replies;
+                $comment = new Reply;
                 $faker = Factory::create();
 
                 $comment->parent_id = $post->id;

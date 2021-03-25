@@ -46,13 +46,13 @@ class Post extends Content
 //    A post can have many replies
     public function replies()
     {
-        return $this->hasMany(Replies::class, 'parent_id');
+        return $this->hasMany(Reply::class, 'parent_id');
     }
 
 //    Replies can also have many replies
     public function repliesWithChildren()
     {
-        return $this->hasMany(Replies::class, 'parent_id', 'id')->with('replies');
+        return $this->hasMany(Reply::class, 'parent_id', 'id')->with('replies');
     }
 
     protected static function boot()

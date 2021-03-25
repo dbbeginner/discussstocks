@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 // Scope is added to enable the model to only pull replies out of that table
 
-class Replies extends Content
+class Reply extends Content
 {
     use HasFactory;
     use SoftDeletes;
@@ -44,13 +44,13 @@ class Replies extends Content
 //    Each reply can have its own replies
     public function replies()
     {
-        return $this->hasMany(Replies::class, 'parent_id', 'id');
+        return $this->hasMany(Reply::class, 'parent_id', 'id');
     }
 
 //    Each replies reply can have its own replies also, and so on.
     public function repliesWithChildren()
     {
-        return $this->hasMany(Replies::class, 'parent_id')->with('replies');
+        return $this->hasMany(Reply::class, 'parent_id')->with('replies');
     }
 
     protected static function boot()

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mentions;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Replies;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -38,7 +38,7 @@ class UserController extends Controller
     public function replies(Request $request, $username)
     {
         $data['user'] = User::where('name', '=', $username)->first();
-        $data['replies'] = Replies::where('type', '=', 'reply')
+        $data['replies'] = Reply::where('type', '=', 'reply')
             ->where('user_id', '=', $data['user']->id)
             ->simplePaginate( setting('pagination', 10));
 

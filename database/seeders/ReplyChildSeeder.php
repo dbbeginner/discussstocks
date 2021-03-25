@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Replies;
+use App\Models\Reply;
 use Faker\Factory;
 
 class ReplyChildSeeder extends Seeder
@@ -17,7 +17,7 @@ class ReplyChildSeeder extends Seeder
     public function run()
     {
 
-        $replies = Replies::where('type', '=', 'reply')->get();
+        $replies = Reply::where('type', '=', 'reply')->get();
         $userCount = count(User::all());
 
         foreach ($replies as $reply) {
@@ -25,7 +25,7 @@ class ReplyChildSeeder extends Seeder
             $i = random_int(1, 5);
 
             while($i < 3) {
-                $r = new Replies;
+                $r = new Reply;
                 $faker = Factory::create();
 
                 $r->parent_id = $reply->id;
