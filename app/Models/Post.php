@@ -8,7 +8,7 @@ use App\Scopes\PostScope;
 
 // The Posts extends the Content model stores Posts in the Content table, which can be of different types (article, url)
 
-class Posts extends Content
+class Post extends Content
 {
     use HasFactory;
     use SoftDeletes;

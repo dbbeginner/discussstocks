@@ -46,7 +46,7 @@ class Channel extends Content
     // Every channel can have multiple posts
     public function posts()
     {
-        return $this->hasMany(Posts::class, 'parent_id', 'id');
+        return $this->hasMany(Post::class, 'parent_id', 'id');
     }
 
 }

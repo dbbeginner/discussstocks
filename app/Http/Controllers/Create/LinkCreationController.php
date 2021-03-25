@@ -8,7 +8,7 @@ use App\Rules\isUserSubscribedToChannel;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
 use App\Models\User;
-use App\Models\Posts;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class LinkCreationController extends Controller {
@@ -49,7 +49,7 @@ class LinkCreationController extends Controller {
 
 
     public function store(Request $request) {
-        Posts::create([
+        Post::create([
             'parent_id' => $request->session()->get('channel_id'),
             'user_id' => $request->session()->get('user_id'),
             'type' => 'post',

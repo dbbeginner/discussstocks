@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mentions;
-use App\Models\Posts;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Replies;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function posts(Request $request, $username){
         $user = $this->user($username);
-        $posts = Posts::where('type', '=', 'post')
+        $posts = Post::where('type', '=', 'post')
             ->where('user_id', '=', $user->id)
             ->with('user', 'votes')
             ->withCount('votes')

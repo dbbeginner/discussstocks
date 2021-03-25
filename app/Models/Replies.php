@@ -28,7 +28,7 @@ class Replies extends Content
 //    Each reply belongs to a single post
     public function post()
     {
-        return $this->belongsTo(Posts::class, 'parent_id', 'id');
+        return $this->belongsTo(Post::class, 'parent_id', 'id');
     }
 //    Each reply belongs to a single user
     public function user()

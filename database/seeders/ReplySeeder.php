@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Posts;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Replies;
 use Faker\Factory;
@@ -18,7 +18,7 @@ class ReplySeeder extends Seeder
     public function run()
     {
         //
-        $posts = Posts::where('type', '=', 'post')->orWhere('type', '=', 'image')->get();
+        $posts = Post::where('type', '=', 'post')->orWhere('type', '=', 'image')->get();
         $userCount = count(User::all());
 
         foreach ($posts as $post) {

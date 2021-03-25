@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Channel;
-use App\Models\Posts;
+use App\Models\Post;
 use App\Models\Replies;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
@@ -18,7 +18,7 @@ class PostController extends Controller
 
     public function recentPosts(){
 
-        $data['posts'] = Posts::where('type', '=', 'post')
+        $data['posts'] = Post::where('type', '=', 'post')
             ->with('user', 'votes')
             ->withCount('votes')
             ->withSum('votes', 'vote')
@@ -31,7 +31,7 @@ class PostController extends Controller
     }
 
     public function viewPostsInChannel(Request $request, $slug, $hashId){
-        $data['posts'] = Posts::where('parent_id', '=', Hashids::decode($hashId))
+        $data['posts'] = Post::where('parent_id', '=', Hashids::decode($hashId))
             ->with('user', 'votes')
             ->withSum('votes', 'vote')
             ->orderByDesc('updated_at')
@@ -47,7 +47,7 @@ class PostController extends Controller
 
     public function viewPost($channelSlug, $channelHashId, $postSlug, $hashId){
 
-        $data['post'] = Posts::where('type', '=', 'post')
+        $data['post'] = Post::where('type', '=', 'post')
             ->where('id', '=', Hashids::decode($hashId))
             ->with('user', 'votes', 'repliesWithChildren')
             ->withCount('votes')

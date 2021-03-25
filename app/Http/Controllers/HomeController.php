@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Channel;
-use App\Models\Content;
-use App\Models\Posts;
+use App\Models\Post;
 use App\Models\Subscriptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\PostController;
-use Illuminate\Support\Facades\Hash;
 use Vinkla\Hashids\Facades\Hashids;
 
 class HomeController extends Controller
@@ -26,7 +23,7 @@ class HomeController extends Controller
     }
 
     public function allPosts(){
-        $query = Posts::where('type', '=', 'post')
+        $query = Post::where('type', '=', 'post')
             ->with('user', 'votes')
             ->withCount('votes')
             ->withSum('votes', 'vote')
@@ -37,7 +34,7 @@ class HomeController extends Controller
     }
 
     public function subscribedPosts(){
-        $query = Posts::whereIn('parent_id', Auth::user()->subscriptions()->pluck('content_id'))
+        $query = Post::whereIn('parent_id', Auth::user()->subscriptions()->pluck('content_id'))
             ->with('user', 'votes')
             ->withCount('votes')
             ->withSum('votes', 'vote')
@@ -48,7 +45,7 @@ class HomeController extends Controller
 
     public function postsInChannel(Request $request, $slug, $hashId){
         $channel = Channel::where('id', '=', Hashids::decode($hashId))->first();
-        $query = Posts::where('parent_id', '=', $channel->id)
+        $query = Post::where('parent_id', '=', $channel->id)
             ->with('user', 'votes')
             ->withCount('votes')
             ->withSum('votes', 'vote')

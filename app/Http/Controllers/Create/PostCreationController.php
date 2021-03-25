@@ -8,7 +8,7 @@ use App\Rules\isUserSubscribedToChannel;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
 use App\Models\User;
-use App\Models\Posts;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class PostCreationController extends Controller {
@@ -44,7 +44,7 @@ class PostCreationController extends Controller {
 
 
     public function store(Request $request) {
-        if(Posts::create([
+        if(Post::create([
             'parent_id' => $request->session()->get('channel_id'),
             'user_id' => $request->session()->get('user_id'),
             'type' => 'post',

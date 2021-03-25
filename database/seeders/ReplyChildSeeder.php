@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Posts;
 use App\Models\User;
 use App\Models\Replies;
 use Faker\Factory;
