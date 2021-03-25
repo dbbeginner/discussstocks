@@ -27,7 +27,7 @@ class Channel extends Content
 
         static::created(function($model){
             // Automatically subscribe a user to the channel that they created.
-            Subscriptions::create(['user_id' => Auth::user()->id, 'content_id' => $model->id]);
+            Subscriptions::create(['user_id' => $model->user_id, 'content_id' => $model->id]);
         });
 
         static::saving(function($model){
