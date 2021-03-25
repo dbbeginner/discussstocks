@@ -83,7 +83,7 @@ class Content extends Model
                 if(is_numeric($string)){
                     return;
                 } else {
-                    Mentions::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'ticker' => strtoupper($string)] );
+                    Mention::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'ticker' => strtoupper($string)] );
                 }
             }
         }

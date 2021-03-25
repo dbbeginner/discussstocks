@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mentions;
+use App\Models\Mention;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Reply;
@@ -51,7 +51,7 @@ class UserController extends Controller
     public function mentions(Request $request, $username)
     {
         $data['user'] = User::where('name', '=', $username)->first();
-        $data['mentions'] = Mentions::where('user_id', '=', $data['user']->id)->get();
+        $data['mentions'] = Mention::where('user_id', '=', $data['user']->id)->get();
 
 
         return view('user.mentions', $data);
