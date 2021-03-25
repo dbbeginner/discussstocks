@@ -12,7 +12,7 @@
     <div class="post-container">
 
         <h6>
-            Reply to <a href="{{ $reply->parentByType('post')->url() }}">{{ $reply->parentByType('post')->title }}</a> posted in {{ $reply->parentByType('channel')->title }} {{ $reply->parentByType('post')->created_at->diffForHumans() }}
+            Reply to <a href="{{ $reply->parentPost()->url() }}">{{ $reply->parentPost()->title }}</a> posted in {{ $reply->parentChannel()->title }} {{ $reply->parentPost()->created_at->diffForHumans() }}
         </h6>
 
         {!! $render->markdownToHtml( $reply->content ) !!}

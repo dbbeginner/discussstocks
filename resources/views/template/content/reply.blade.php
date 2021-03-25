@@ -21,7 +21,7 @@
                         <i class="far fa-angle-up" style="position: relative; top: 2pt; float: right; margin-right: 3pt; "></i>
                     </div>
                     Add Reply
-                    {{ $reply->parentByType('post')->id }}
+                    {{ $reply->parentPost()->id }}
                     </p>
                 </div>
             </li>

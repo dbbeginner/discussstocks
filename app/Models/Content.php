@@ -102,7 +102,7 @@ class Content extends Model
             case 'channel':
                 return config('app.url') . '/c/' . $this->slug . '/' . $this->hashId();
             case 'post':
-                return $this->parentByType('channel')->url() . '/' . $this->slug . '/' . $this->hashId();
+                return $this->parentChannel()->url() . '/' . $this->slug . '/' . $this->hashId();
         }
     }
 
@@ -144,5 +144,22 @@ class Content extends Model
         }
         return $this->parent()->first()->parentByType($type);
     }
+
+    // this iterates through parents of a content record in order to find the parent post for a child reply.
+    public function parentPost(){
+        if($this->parent()->first()->type == 'post') {
+            return $this->parent()->first();
+        }
+        return $this->parent()->first()->parentPost();
+    }
+
+    // this iterates through parents of a content record in order to find the parent channel for a child reply.
+    public function parentChannel(){
+        if($this->parent()->first()->type == 'channel') {
+            return $this->parent()->first();
+        }
+        return $this->parent()->first()->parentChannel();
+    }
+
 
 }

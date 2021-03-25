@@ -65,7 +65,8 @@ class Reply extends Content
             // This goes through related models until it finds the parent of the type specified, and increases the
             // parent's comment count by one.
             // In this case, we're increasing the comment count of the parent post by one
-            $parent = $model->parentByType('post');
+//            $parent = $model->parentByType('post');
+            $parent = $model->parentPost();
             $content = Content::where('id', $parent->id)->first();
             if($content) {
                 $content->reply_count = $content->reply_count + 1;
