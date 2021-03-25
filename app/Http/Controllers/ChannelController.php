@@ -16,7 +16,7 @@ class ChannelController extends Controller
         $data['channels'] = Channel::where('type', '=', 'channel')
             ->withCount('posts')
             ->orderByDesc('updated_at')
-            ->simplePaginate( setting('pagination'));
+            ->simplePaginate( preference('pagination', 10));
 
         return view('channels', $data);
 

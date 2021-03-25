@@ -16,7 +16,7 @@ class SubscriptionsController extends Controller
         $data['channels'] = Channel::where('type', '=', 'channel')
             ->withCount('posts')
             ->orderByDesc('title')
-            ->simplePaginate( setting('pagination'));
+            ->simplePaginate( preference('pagination', 10 ));
 
         return view('settings.subscriptions', $data);
 
@@ -36,10 +36,10 @@ class SubscriptionsController extends Controller
             $query->forceDelete();
             return ['status' => false];
         } else {
-            $sub = new Subscriptions;
-            $sub->content_id = $content_id;
-            $sub->user_id = $user_id;
-            $sub->save();
+            Subscriptions::create([
+                'user_id' => $user_id,
+                'content_id' => $content_id,
+            ]);
             return ['status' => true ];
         }
 

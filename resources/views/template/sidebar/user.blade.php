@@ -6,7 +6,7 @@
         <a href="/user/profile">View/Edit Profile</a>
     </div>
     <div class="col-12">
-        <a href="/user/settings">Edit Settings</a>
+        <a href="/user/settings">Edit Preferences</a>
     </div>
     <div class="col-12">
         <a href="/user/subscriptions">Manage Subscriptions</a>

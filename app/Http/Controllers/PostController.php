@@ -23,7 +23,7 @@ class PostController extends Controller
             ->withCount('votes')
             ->withSum('votes', 'vote')
             ->orderByDesc('updated_at')
-            ->simplePaginate( setting('pagination', 10) );
+            ->simplePaginate( preference('pagination', 10) );
 
         $data['title'] = 'Recent Posts';
 

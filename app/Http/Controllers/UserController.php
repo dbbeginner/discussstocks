@@ -28,7 +28,7 @@ class UserController extends Controller
             ->withSum('votes', 'vote')
             ->orderByDesc('updated_at');
         $data['count'] = $posts->count();
-        $data['posts'] = $posts->simplePaginate(setting('pagination', 10));
+        $data['posts'] = $posts->simplePaginate( preference('pagination', 10));
         $data['user'] = $user;
         $data['title'] = 'Recent Posts';
 
@@ -40,7 +40,7 @@ class UserController extends Controller
         $data['user'] = User::where('name', '=', $username)->first();
         $data['replies'] = Reply::where('type', '=', 'reply')
             ->where('user_id', '=', $data['user']->id)
-            ->simplePaginate( setting('pagination', 10));
+            ->simplePaginate( preference('pagination', 10));
 
 
         return view('user.replies', $data);

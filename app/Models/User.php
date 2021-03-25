@@ -6,10 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Vinkla\Hashids\Facades\Hashids;
-use App\Models\Settings;
+use App\Models\Preference;
 
 class User extends Authenticatable
 {
@@ -64,10 +63,10 @@ class User extends Authenticatable
 
         static::created(function ($post) {
             // Duplicate the guest users settings and apply to this user
-            $defaultSettings = Settings::where('user_id', '=', '1')->get();
+            $defaultSettings = Preference::where('user_id', '=', '1')->get();
 
             foreach($defaultSettings as $setting){
-                $save = new Settings;
+                $save = new Preference;
                 $save->user_id = $post->id;
                 $save->setting = $setting->setting;
                 $save->value = $setting->value;
@@ -99,8 +98,8 @@ class User extends Authenticatable
         return $this->hasMany(Votes::class, 'user_id');
     }
 
-    public function settings() {
-        return $this->hasMany(Settings::class, 'user_id');
+    public function preferences() {
+        return $this->hasMany(Preference::class, 'user_id');
     }
 
     public function subscriptions() {

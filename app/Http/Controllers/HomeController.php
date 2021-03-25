@@ -57,9 +57,9 @@ class HomeController extends Controller
 
     public function renderView($data, $title = null, $channel = null, $blade = 'posts') {
         $count = $data->count();
-        $content = $data->simplePaginate( setting('pagination', 10) );
+        $content = $data->simplePaginate( preference('pagination', 10) );
 
-        if( $count < setting('pagination') - 1) {
+        if( $count < preference('pagination') - 1) {
             $notice = "There aren't many posts here. Perhaps you want to <a href=\"/user/subscriptions\">subscribe</a> to more channels?";
         } else {
             $notice = null;

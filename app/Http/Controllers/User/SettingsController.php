@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Rules\validTimeZoneBySymbol;
 use Illuminate\Http\Request;
-use App\Models\Settings;
+use App\Models\Preference;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -59,7 +59,7 @@ class SettingsController extends Controller
     }
 
     public function saveSetting($user_id, $setting, $value) {
-        $settings = Settings::where('user_id', '=', $user_id)
+        $settings = Preference::where('user_id', '=', $user_id)
             ->where('setting', '=', $setting)
             ->first();
 

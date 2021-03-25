@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Settings extends Model
+class Preference extends Model
 {
     use HasFactory;
 
-    protected $table = 'settings';
+    protected $table = 'preferences';
 
     public $timestamps = true;
 

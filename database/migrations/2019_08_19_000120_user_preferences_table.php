@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Preference;
 
-class UserSettingsTable extends Migration
+class UserPreferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +14,9 @@ class UserSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('preferences');
 
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('preferences', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('setting');
@@ -37,11 +38,11 @@ class UserSettingsTable extends Migration
 
         foreach ( $users as $user ) {
             foreach ($settings as $key => $value) {
-                $setting = new \App\Models\Settings;
-                $setting->user_id = $user->id;
-                $setting->setting = $key;
-                $setting->value = $value;
-                $setting->save();
+                Preference::create([
+                    'user_id' => $user->id,
+                    'setting' => $key,
+                    'value' => $value,
+                    ]);
             }
         }
     }
@@ -55,7 +56,7 @@ class UserSettingsTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('preferences');
 
     }
 }
