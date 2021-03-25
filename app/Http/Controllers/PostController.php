@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Channels;
+use App\Models\Channel;
 use App\Models\Posts;
 use App\Models\Replies;
 use Illuminate\Http\Request;
-use App\Models\Settings;
-use Illuminate\Support\Facades\Hash;
 use Vinkla\Hashids\Facades\Hashids;
-use App\Helpers\ParentByType;
 
 class PostController extends Controller
 {
@@ -40,7 +37,7 @@ class PostController extends Controller
             ->orderByDesc('updated_at')
             ->simplePaginate( setting( 'pagination', 10) );
 
-        $channel = Channels::where('id', '=', Hashids::decode($hashId))->first();
+        $channel = Channel::where('id', '=', Hashids::decode($hashId))->first();
 
         $data['title'] = 'Viewing posts filed in ' . $channel->title;
 

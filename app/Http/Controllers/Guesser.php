@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Channels;
+use App\Models\Channel;
 use http\Client\Response;
 use Illuminate\Http\Request;
 use App\Models\Content;
@@ -15,7 +15,7 @@ class Guesser extends Controller
     // This controller provides a 301 redirect to the page being referenced on the site.
 
     public function guessByHashId($hashId) {
-        $destination = Channels::where('id', '=', Hashids::decode($hashId))->first();
+        $destination = Channel::where('id', '=', Hashids::decode($hashId))->first();
 
         if(!$destination) {
             abort(404);

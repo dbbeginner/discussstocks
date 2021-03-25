@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Create;
 
 use App\Http\Controllers\Controller;
-use App\Models\Channels;
+use App\Models\Channel;
 use App\Rules\isUserSubscribedToChannel;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
@@ -15,7 +15,7 @@ class LinkCreationController extends Controller {
 
     public function index(Request $request){
         $data['url'] = $request->old('page-url');
-        $data['subscriptions'] = Channels::whereIn('id', Auth::user()->subscriptions()->pluck('content_id'))
+        $data['subscriptions'] = Channel::whereIn('id', Auth::user()->subscriptions()->pluck('content_id'))
             ->orderBy('title')
             ->get();
         return view('post.create.url', $data);
@@ -40,7 +40,7 @@ class LinkCreationController extends Controller {
         $request->session()->put('title', $title);
         $request->session()->put('content', $content);
         $request->session()->put('channel_id', $channel_id);
-        $request->session()->put('channel_title', Channels::where('id', '=', $channel_id)->first()['title']);
+        $request->session()->put('channel_title', Channel::where('id', '=', $channel_id)->first()['title']);
         $request->session()->put('user_id', $user_id);
         $request->session()->put('username', User::where('id', '=', $user_id)->first()['name']);
 

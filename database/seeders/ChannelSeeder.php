@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Channels;
+use App\Models\Channel;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -30,7 +30,7 @@ class ChannelSeeder extends Seeder
 
         foreach($channel_titles as $title) {
             $faker = Factory::create();
-            $category = new Channels;
+            $category = new Channel;
 
             $paragraphs = rand(1, 5);
             $i = 0;

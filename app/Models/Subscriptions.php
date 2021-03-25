@@ -24,7 +24,7 @@ class Subscriptions extends Model
 
     public function channel()
     {
-        return $this->hasOne(Channels::class, 'id', 'parent_id');
+        return $this->hasOne(Channel::class, 'id', 'parent_id');
     }
 
 }

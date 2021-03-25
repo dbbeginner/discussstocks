@@ -5,16 +5,15 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Subscriptions;
 use Illuminate\Http\Request;
-use App\Models\Channels;
+use App\Models\Channel;
 use Vinkla\Hashids\Facades\Hashids;
-use App\Models\Content;
 
 class SubscriptionsController extends Controller
 {
     //
 
-    public function index(Channels $channels, Request $request) {
-        $data['channels'] = Channels::where('type', '=', 'channel')
+    public function index(Channel $channels, Request $request) {
+        $data['channels'] = Channel::where('type', '=', 'channel')
             ->withCount('posts')
             ->orderByDesc('title')
             ->simplePaginate( setting('pagination'));

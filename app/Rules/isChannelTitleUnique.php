@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use App\Models\Channels;
+use App\Models\Channel;
 
 class isChannelTitleUnique implements Rule
 {
@@ -26,7 +26,7 @@ class isChannelTitleUnique implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Channels::where('type', '=', 'channel')
+        return Channel::where('type', '=', 'channel')
             ->where('title', '=', $value)
             ->get()
             ->isEmpty();

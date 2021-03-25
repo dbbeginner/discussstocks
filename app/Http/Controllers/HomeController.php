@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Channels;
+use App\Models\Channel;
 use App\Models\Content;
 use App\Models\Posts;
 use App\Models\Subscriptions;
@@ -47,7 +47,7 @@ class HomeController extends Controller
     }
 
     public function postsInChannel(Request $request, $slug, $hashId){
-        $channel = Channels::where('id', '=', Hashids::decode($hashId))->first();
+        $channel = Channel::where('id', '=', Hashids::decode($hashId))->first();
         $query = Posts::where('parent_id', '=', $channel->id)
             ->with('user', 'votes')
             ->withCount('votes')

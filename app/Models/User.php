@@ -82,7 +82,7 @@ class User extends Authenticatable
 
     public function channel()
     {
-        return $this->hasMany(Channels::class, 'user_id', 'id');
+        return $this->hasMany(Channel::class, 'user_id', 'id');
     }
 
     public function posts()

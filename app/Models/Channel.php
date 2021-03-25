@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 // The Channels model extends the Content model and stores its data in the Content table.
 // Scope insures that calls to All channels returns only Channels, and not other data stored in the database.
 
-class Channels extends Content
+class Channel extends Content
 {
     use HasFactory;
     use SoftDeletes;
