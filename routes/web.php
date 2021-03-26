@@ -60,6 +60,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'user'], function() {
+        Route::get('profile', 'App\Http\Controllers\User\ProfileController@index');
+        Route::get('profile/edit', 'App\Http\Controllers\User\ProfileController@edit');
+        Route::post('profile/edit', 'App\Http\Controllers\User\ProfileController@verify');
+        Route::post('profile', 'App\Http\Controllers\User\ProfileController@store');
+
+        Route::get('password', 'App\Http\Controllers\User\PasswordResetController@index');
+        Route::get('password', 'App\Http\Controllers\User\PasswordResetController@store');
+
         Route::get('settings', 'App\Http\Controllers\User\ProfileController@index');
         Route::post('settings', 'App\Http\Controllers\User\ProfileController@store');
 
