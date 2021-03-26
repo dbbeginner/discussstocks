@@ -65,6 +65,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('profile/edit', 'App\Http\Controllers\User\ProfileController@verify');
         Route::post('profile', 'App\Http\Controllers\User\ProfileController@store');
 
+        Route::get('email', 'App\Http\Controllers\User\EmailController@index');
+        Route::post('email', 'App\Http\Controllers\User\EmailController@store');
+
         Route::get('password', 'App\Http\Controllers\User\PasswordResetController@index');
         Route::get('password', 'App\Http\Controllers\User\PasswordResetController@store');
 

@@ -15,8 +15,11 @@
             </div>
 
             <h5>Email</h5>
-            <div class="form-group">
+            <div class="input-group">
                 <input class="form-control" name="email" id="email" value="{{ $user->email }}" disabled>
+                <div class="input-group-append">
+                    <a class="btn btn-outline-secondary" href="/user/email">Edit Email</a>
+                </div>
             </div>
             @error('email')
             <div class="validation-feedback  alert alert-danger">{{ $message }}</div>
