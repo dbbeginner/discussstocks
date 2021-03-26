@@ -22,7 +22,7 @@ class RegistrationController extends Controller
         $request->validate([
             'name' => 'alpha_num|unique:users',
             'email' => 'email|unique:users',
-            'password' => 'min:8|confirmed'
+            'password' => 'min:8|max:72|confirmed'
         ]);
 
         $user = User::create([
