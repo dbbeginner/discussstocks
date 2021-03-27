@@ -8,8 +8,8 @@ Channels
 
 @section('content')
 @foreach($channels as $channel)
-<div class="category">
-    <h1>
+<div class="post-container">
+    <h1 style="margin-left: 15pt; margin-top: 5pt; margin-bottom: 5pt;">
         @if(count($channel->posts) == 0)
             {{ $channel->title }}
         @else
@@ -26,7 +26,7 @@ Channels
         @if(count($channel->posts) == 0)
             No posts yet
         @else
-            <a class="btn btn-link" style="padding: 0pt;" href="{{ $channel->url() }}">See all {{ count($channel->posts) }} posts</a>
+            <a class="btn btn-link" style="color: #000; margin-right: 30pt;" href="{{ $channel->url() }}">See all {{ count($channel->posts) }} posts</a>
         @endif
         <button class="btn btn-link" style="padding: 0pt; color: #000;" onclick="readmore({{ $channel->id }})">Read More</button>
     </div>

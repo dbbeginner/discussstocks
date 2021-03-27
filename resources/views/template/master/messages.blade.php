@@ -16,7 +16,7 @@
 @elseif (\Session::has('info'))
     <div class="alert alert-info alert-dismissible alert-container" role="alert">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Just FYY...</strong> {!! \Session::get('info') !!}
+        <strong>Just FYI...</strong> {!! \Session::get('info') !!}
     </div>
 @endif
 

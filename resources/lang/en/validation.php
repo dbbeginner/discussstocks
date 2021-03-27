@@ -134,6 +134,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'email' => [
+            'same' => 'Email and verify fields must match',
+        ],
+
     ],
 
     /*

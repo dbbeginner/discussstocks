@@ -66,7 +66,7 @@
         <div class="form-group row">
             <label for="userAssets" class="col-sm-6 col-form-label">
                 Analytics Engine<br>
-                <small>Paid users can opt of being tracked by Google Analyics. No data is shared if you choose the Matomo option</small>
+                <small>Paid users can preserve their privacy by opting out of being tracked by Google Analytics.</small>
             </label>
             <div class="col-sm-6">
                 <select name="analytics" class="custom-select">
@@ -87,7 +87,7 @@
 
         <div class="form-group row">
             <label for="userAssets" class="col-sm-6 col-form-label">
-                Analytics Engine<br>
+                Display Advertising<br>
                 <small>Paid users can turn off advertising altogether</small>
             </label>
             <div class="col-sm-6">

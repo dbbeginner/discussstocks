@@ -8,16 +8,17 @@
 
 @section('content')
 
-    <ul>
+    <div style="margin-top: 16pt; margin-bottom: 6pt;">
     @if(!Auth::guest())
-        <li><a style="color: #fff;" href="/subscribed">Based on your preference</a></li>
-
-        <li><a style="color: #fff;" href="/all">All posts</a></li>
-
+        <a class="btn btn-sm btn-light" href="/subscribed">
+            Based on your preference
+        </a>
+        <a class="btn btn-sm btn-light" href="/all">
+            All posts
+        </a>
     @endif
-
-        <li><strong style="color: #fff;">Found {{ $count || 0}} posts total.</strong></li>
-    </ul>
+        <strong style="display: inline-block; float: right;  color: #fff;">Found {{ $count || 0}} posts total.</strong>
+    </div>
 
     @foreach($posts as $post)
 

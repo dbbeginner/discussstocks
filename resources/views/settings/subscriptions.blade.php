@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-    Edit Subscriptions
+    Manage Subscriptions
 @stop
 
 @section('page-title')
