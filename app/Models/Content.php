@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Vinkla\Hashids\Facades\Hashids;
 use App\Models\FlaggedContent;
+use App\Importers\StockInfo;
+use Illuminate\Support\Facades\Log;
 
 // The Content table is the main storage repository for this application, and holds Channels, Posts and Replies.
 // While the content model provides the underlying functionality, it is extended by the Channels, Posts and Replies models
@@ -47,12 +49,12 @@ class Content extends Model
             // Add initial upvote from user that created the content
             Votes::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'vote' => 1, 'swept_at' => null ]);
 
+
             // scans the content for any stock symbols (identified by '$' plus a string of letters)
             $model->storeStockMentions($model);
         });
 
         static::saved(function($model){
-
 
 //          The DetectScripts method scans any content for the string <script>, and if it detects that,
 //          automatically flags the content as questionable.
@@ -83,7 +85,12 @@ class Content extends Model
                 if(is_numeric($string)){
                     return;
                 } else {
-                    Mention::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'ticker' => strtoupper($string)] );
+                    $info = new StockInfo;
+                    $stock = $info->getFromTicker($string);
+                   // Only store reference to a stock if we actually find its ticker
+                    if($stock) {
+                        Mention::create(['content_id' => $model->id, 'user_id' => $model->user_id, 'ticker_id' => $stock ] );
+                    }
                 }
             }
         }

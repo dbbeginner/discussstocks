@@ -14,7 +14,7 @@ class Mention extends Model
     public $converter;
 
     protected $fillable = [
-        'content_id', 'user_id', 'ticker',
+        'content_id', 'user_id', 'ticker_id',
     ];
 
     // Stock mentions model - any time a stock is mentioned elsewhere on the site, that reference will be stored here
