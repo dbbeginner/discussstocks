@@ -50,7 +50,7 @@ class HomeController extends Controller
                 ->orderByDesc('updated_at');;
         } else {
         // If the user is subscribed to more than one channel, show the posts from all those channels
-            $query = Post::whereIn('parent_id', )
+            $query = Post::whereIn('parent_id', $subscriptions )
                 ->with('user', 'votes')
                 ->withCount('votes')
                 ->withSum('votes', 'vote')
