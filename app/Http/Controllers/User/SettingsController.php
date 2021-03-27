@@ -45,15 +45,22 @@ class SettingsController extends Controller
             'analytics' => ['required', 'in:Google,Matomo'],
             ]);
 
-        $this->saveSetting(Auth::user()->id, 'pagination', $request->input('pagination'));
+        // The true value is meaningless here, but it lets array_key_intersect work to make sure we're only submitting
+        // values for the allowed fields rather than arbitrary fields.
+        $allowed = [
+            'pagination' => true,
+            'timezone' => true,
+            'assets' => true,
+            'advertising' => true,
+            'analytics' => true
+        ];
 
-        $this->saveSetting(Auth::user()->id, 'timezone', $request->input('timezone'));
+        $submitted = $request->toArray();
+        $validated = array_intersect_key($submitted, $allowed);
 
-        $this->saveSetting(Auth::user()->id, 'assets', $request->input('assets'));
-
-        $this->saveSetting(Auth::user()->id, 'advertising', $request->input('advertising'));
-
-        $this->saveSetting(Auth::user()->id, 'analytics', $request->input('analytics'));
+        foreach($validated as $setting => $value) {
+            $this->saveSetting(Auth::user()->id, $setting, $value);
+        }
 
         return redirect()->back()->with('success', 'settings saved!');
 
