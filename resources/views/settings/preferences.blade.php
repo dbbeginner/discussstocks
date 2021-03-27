@@ -42,6 +42,72 @@
         </div>
 
         <div class="form-group row">
+            <label for="userAssets" class="col-sm-6 col-form-label">
+                Asset Locations<br>
+                <small>Paid users can choose to use locally hosted JS and CSS libraries for greater privacy</small>
+            </label>
+            <div class="col-sm-6">
+                <select name="assets" class="custom-select">
+                    @foreach($assets as $asset)
+                        @if($asset == preference('assets', 'local'))
+                            <option value="{{ $asset }}" selected>{{ $asset }}</option>
+                        @else
+                            <option value="{{ $asset }}">{{ $asset }}</option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('assets')
+                <div class="validation-feedback alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="userAssets" class="col-sm-6 col-form-label">
+                Analytics Engine<br>
+                <small>Paid users can opt of being tracked by Google Analyics. No data is shared if you choose the Matomo option</small>
+            </label>
+            <div class="col-sm-6">
+                <select name="analytics" class="custom-select">
+                    @foreach($analytics as $analytic)
+                        @if($analytic == preference('analytics', 'local'))
+                            <option value="{{ $analytic }}" selected>{{ $analytic }}</option>
+                        @else
+                            <option value="{{ $analytic }}">{{ $analytic }}</option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('analytics')
+                <div class="validation-feedback alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="userAssets" class="col-sm-6 col-form-label">
+                Analytics Engine<br>
+                <small>Paid users can turn off advertising altogether</small>
+            </label>
+            <div class="col-sm-6">
+                <select name="advertising" class="custom-select">
+                    @foreach($advertising as $ads)
+                        @if($ads == preference('advertising', 'yes'))
+                            <option value="{{ $ads }}" selected>{{ $ads }}</option>
+                        @else
+                            <option value="{{ $ads}}">{{ $ads }}</option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('advertising')
+                <div class="validation-feedback alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+
+        <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Save Preferences</button>
             </div>

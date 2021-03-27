@@ -16,6 +16,9 @@ class SettingsController extends Controller
     public function index(Request $request) {
 
         $data['timezones'] = $this->loadTimezonesFromJson();
+        $data['assets'] = ['local', 'hosted'];
+        $data['analytics'] = ['Google', 'Matomo'];
+        $data['advertising'] = ['yes', 'no'];
 
         return view('settings.preferences', $data);
 
@@ -26,17 +29,6 @@ class SettingsController extends Controller
         return json_decode(Storage::disk('resources')->get('timezones.json'), TRUE);
     }
 
-    private function validateTimezoneEntry($input) {
-        $values = $this->loadTimezonesFromJson();
-
-        foreach ($values as $v) {
-            if ($input == $v['symbol']) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
     /**
      * Store user settings.
      *
@@ -46,13 +38,22 @@ class SettingsController extends Controller
      */
     public function store(Request $request){
         $request->validate([
-            'pagination' => ['required', 'integer', 'between:10,20'],
+            'pagination' => ['required', 'integer', 'between:10,50'],
             'timezone' => ['required', new validTimeZoneBySymbol ],
+            'assets' => ['required', 'in:local,hosted'],
+            'advertising' => ['required', 'in:yes,no'],
+            'analytics' => ['required', 'in:Google,Matomo'],
             ]);
 
         $this->saveSetting(Auth::user()->id, 'pagination', $request->input('pagination'));
 
         $this->saveSetting(Auth::user()->id, 'timezone', $request->input('timezone'));
+
+        $this->saveSetting(Auth::user()->id, 'assets', $request->input('assets'));
+
+        $this->saveSetting(Auth::user()->id, 'advertising', $request->input('advertising'));
+
+        $this->saveSetting(Auth::user()->id, 'analytics', $request->input('analytics'));
 
         return redirect()->back()->with('success', 'settings saved!');
 
@@ -68,4 +69,5 @@ class SettingsController extends Controller
         $settings->save();
 
     }
+
 }
