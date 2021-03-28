@@ -24,18 +24,12 @@
 
 <div class="row" style="margin-left: 0pt;  margin-right: 0;">
 
-    <div class="col-lg-9 col-md-8" style="margin-top: 6pt; float:left;">
-        <h1 style="color: #fff;">
+    <div class="col-lg-9 col-md-8">
+        <h1 style="margin-top: 24pt; margin-bottom: 6pt; color: #fff;">
             @yield('title')
         </h1>
 
         @include('template.master.messages')
-
-        @if($notice ?? '')
-            <div class="jumbotron">
-                {!! $notice !!}
-            </div>
-        @endif
 
         @yield('content')
 

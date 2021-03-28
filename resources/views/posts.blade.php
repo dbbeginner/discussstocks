@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <div style="margin-top: 16pt; margin-bottom: 6pt;">
+    <div style="margin-top: 6pt; margin-bottom: 6pt;">
     @if(!Auth::guest())
         <a class="btn btn-sm btn-light" href="/subscribed">
             Based on your preference
@@ -19,6 +19,13 @@
     @endif
         <strong style="display: inline-block; float: right;  color: #fff;">Found {{ $count || 0}} posts total.</strong>
     </div>
+
+    @if( $count < preference('pagination', 10) - 1 )
+    <div class="jumbotron" style="margin-top: 18pt;">
+        There aren't many posts here. Perhaps you want to <a href="/user/subscriptions">subscribe to more channels</a>?
+    </div>
+    @endif
+
 
     @foreach($posts as $post)
 
