@@ -22,7 +22,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
+        'email_verified_at',
     ];
 
     /**
@@ -32,7 +34,6 @@ class User extends Authenticatable
      */
     protected $attributes = [
         'role' => 'unverified',
-        'active' => false,
     ];
 
     /**

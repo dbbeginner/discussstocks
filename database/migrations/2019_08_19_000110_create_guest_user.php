@@ -14,13 +14,12 @@ class CreateGuestUser extends Migration
      */
     public function up()
     {
-
+        // null password should prevent logins with this user_id
         DB::table('users')->insert([
             'id' => '1',
             'name' => 'Guest',
-            'active' => false,
             'email' => 'guest@example.com',
-            'password' => Hash::make(hash( "sha256", random_bytes(64))),
+            'password' => null,
             'role' => 'guest',
         ]);
     }

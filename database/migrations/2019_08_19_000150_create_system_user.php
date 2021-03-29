@@ -16,17 +16,14 @@ class CreateSystemUser extends Migration
     public function up()
     {
         // Creates a system user with ID 2 to be default owner of any records not created by actual users
-        // Password should be unguessable this way.
-        $user = new \App\Models\User;
-        $user->name = 'System User';
-        $user->email = 'system@example.com';
-        $user->role = 'guest';
-        $user->active = false;
-        $user->password = Hash::make(hash( "sha256", random_bytes(64)));
-        $user->save();
+        // Null password should make it impossible to login to this account.
 
-
-
+        User::create([
+            'name' => 'System User',
+            'email' => 'system@example.com',
+            'role' => 'system',
+            'password' => null,
+        ]);
     }
 
     /**

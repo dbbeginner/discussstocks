@@ -32,7 +32,7 @@ class ConfirmEmailAfterRegistration extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.activation-first')
+        return $this->view('mail.verify')
             ->subject(config('app.name') . ": ACTION REQUIRED");
     }
 }

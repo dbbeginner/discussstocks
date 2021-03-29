@@ -18,12 +18,8 @@ class UpdateUsersTable extends Migration
                 ->after('email')
                 ->nullable()
                 ->index();
-            $table->boolean('active')
-                ->default(false)
-                ->after('email')
-                ->index();
             $table->uuid('token')
-                ->after('active')
+                ->after('role')
                 ->nullable()
                 ->index();
             $table->unique('name', 'unique_name');
@@ -38,9 +34,7 @@ class UpdateUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function($table) {
-            $table->dropColumn('active');
             $table->dropIndex('unique_name');
-
         });
     }
 }

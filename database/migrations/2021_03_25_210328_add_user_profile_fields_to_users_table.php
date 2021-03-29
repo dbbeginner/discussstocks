@@ -21,9 +21,6 @@ class AddUserProfileFieldsToUsersTable extends Migration
             $table->longText('bio')
                 ->after('image')
                 ->nullable();
-            $table->boolean('display_email')
-                ->after('email')
-                ->default(false);
         });
     }
 

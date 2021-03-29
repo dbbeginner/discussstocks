@@ -42,14 +42,15 @@ class addAdminUser extends Command
         $username = $this->ask('Enter username');
         $email = $this->ask('Enter email (leave blank for default');
         if(strlen(trim($email)) == 0) {
-            $email = "admin@admin.com";
+            $email = "admin@example.com";
         }
 
-        $user = new User;
-        $user->name = $username;
-        $user->email = $email;
-        $user->password = Hash::make($this->secret('Enter password:'));
-        $user->active = true;
-        $user->save();
+        User::create([
+            'name' => $username,
+            'email' => $email,
+            'role' => 'superadmin',
+            'password' => Hash::make($this->secret('Enter password:')),
+            'email_verified_at' => '2021-01-01 01:01:01',
+        ]);
     }
 }
