@@ -11,12 +11,17 @@ class LoginController extends Controller
 {
     //
     public function create(){
-        return view('accounts.login');
+        return view('auth.login');
     }
 
     public function store(Request $request){
         $user = $this->retrieveUserRecord($request);
-        if($user && Auth::attempt(['name' => $user->name, 'password' => $request->password, 'active' => 1], $request->remember)) {
+
+        if($user->active == false) {
+            return "user not active";
+        }
+
+        if($user && Auth::attempt(['name' => $user->name, 'password' => $request->password], $request->remember)) {
             $request->session()->regenerate();
             return redirect()->to($request->current)->with('success', 'Login succeeded');
         }
@@ -24,9 +29,12 @@ class LoginController extends Controller
     }
 
     private function retrieveUserRecord(Request $request){
-        $user = User::where('name', '=', $request->username)->first();
+        $user = User::where('name', '=', $request->username)
+            ->where('active', '=', true)->first();
+
         if(!isset($user->id)) {
-            $user = User::where('email', '=', $request->username)->first();
+            $user = User::where('email', '=', $request->username)
+                ->where('active', '=', true)->first();
         }
         return $user;
     }

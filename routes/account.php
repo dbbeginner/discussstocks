@@ -16,6 +16,6 @@ Route::get('login', 'App\Http\Controllers\Accounts\LoginController@create')
 Route::post('login', 'App\Http\Controllers\Accounts\LoginController@store');
 Route::any('logout', 'App\Http\Controllers\Accounts\LoginController@destroy');
 
-// Registration pages
-Route::get('register', '\App\Http\Controllers\Accounts\RegistrationController@create');
-Route::post('register', '\App\Http\Controllers\Accounts\RegistrationController@store');
+//// Registration pages
+//Route::get('register', '\App\Http\Controllers\Accounts\RegistrationController@create');
+//Route::post('register', '\App\Http\Controllers\Accounts\RegistrationController@store');

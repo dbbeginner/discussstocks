@@ -13,15 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+require __DIR__.'/auth.php';
 require __DIR__.'/static.php';
 require __DIR__.'/account.php';
 require __DIR__.'/user.php';
+require __DIR__.'/admin.php';
 
+
+
+
+// Homepage
+Route::get('/', '\App\Http\Controllers\HomeController@index')
+    ->name('home');
+Route::get('/all', '\App\Http\Controllers\HomeController@allPosts')
+    ->name('all-posts');
+Route::get('/subscribed', '\App\Http\Controllers\HomeController@subscribedPosts')
+    ->name('subscribed-posts');
 
 
 
 // List of channels
-Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels');
+Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels')
+    ->name('channels');
 
 // View a single channel
 Route::get('/c/{slug}/{hashId}', '\App\Http\Controllers\HomeController@postsInChannel');
@@ -74,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('settings', 'App\Http\Controllers\User\ProfileController@index');
         Route::post('settings', 'App\Http\Controllers\User\ProfileController@store');
 
-        //        Manage user settings
+//        Manage user settings
         Route::get('settings', 'App\Http\Controllers\User\SettingsController@index');
         Route::post('settings', 'App\Http\Controllers\User\SettingsController@store');
 
@@ -91,18 +104,12 @@ Route::post('/vote/', '\App\Http\Controllers\VoteController@store');
 
 
 
-//require __DIR__.'/auth.php';
 
 
 Route::get('/p/{slug}/{hashid}', [\App\Http\Controllers\PostController::class, 'viewPost']);
 Route::get('/r/{slug}/{hashid}', [\App\Http\Controllers\ReplyController::class, 'viewReply']);
 
 
-
-// Homepage
-Route::get('/', '\App\Http\Controllers\HomeController@index');
-Route::get('/all', '\App\Http\Controllers\HomeController@allPosts');
-Route::get('/subscribed', '\App\Http\Controllers\HomeController@subscribedPosts');
 
 // ShortURL straight to channel or post (for social sharing)
 // This has got to be the last route, because it matches with everything else.
