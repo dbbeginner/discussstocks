@@ -87,7 +87,7 @@
 
         <div class="form-group row">
             <label for="userAssets" class="col-sm-6 col-form-label">
-                Display Advertising<br>
+                Show Advertising<br>
                 <small>Paid users can turn off advertising altogether</small>
             </label>
             <div class="col-sm-6">
@@ -96,7 +96,7 @@
                         @if($ads == preference('advertising', 'yes'))
                             <option value="{{ $ads }}" selected>{{ $ads }}</option>
                         @else
-                            <option value="{{ $ads}}">{{ $ads }}</option>
+                            <option value="{{ $ads }}">{{ $ads }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -105,6 +105,73 @@
                 @enderror
             </div>
         </div>
+
+
+        <div class="form-group row">
+            <label for="displayEmail" class="col-sm-6 col-form-label">
+                Display Email<br>
+                <small>Can other registered users see your email?</small>
+            </label>
+            <div class="col-sm-6">
+                <select name="display_email" class="custom-select">
+                    @foreach($display_email as $pref)
+                        @if($pref == preference('display_email', 'yes'))
+                            <option value="{{ $pref }}" selected>{{ $pref }}</option>
+                        @else
+                            <option value="{{ $pref }}">{{ $pref }}</option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('advertising')
+                <div class="validation-feedback alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="shareEmail" class="col-sm-6 col-form-label">
+                Share Email<br>
+                <small>Can we share your email with affiliates, advertisers, etc?</small>
+            </label>
+            <div class="col-sm-6">
+                <select name="share_email" class="custom-select">
+                    @foreach($share_email as $pref)
+                        @if($pref == preference('display_email', 'yes'))
+                            <option value="{{ $pref }}" selected>{{ $pref }}</option>
+                        @else
+                            <option value="{{ $pref }}">{{ $pref }}</option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('advertising')
+                <div class="validation-feedback alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="receiveEmail" class="col-sm-6 col-form-label">
+                Receive Email<br>
+                <small>Can we send you email about activity on this site (missed posts, replies, messages, etc?)</small>
+            </label>
+            <div class="col-sm-6">
+                <select name="receive_email" class="custom-select">
+                    @foreach($receive_email as $pref)
+                        @if($pref == preference('receive_email', 'yes'))
+                            <option value="{{ $pref }}" selected>{{ $pref }}</option>
+                        @else
+                            <option value="{{ $pref }}">{{ $pref }}</option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('advertising')
+                <div class="validation-feedback alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+
 
 
         <div class="form-group row">

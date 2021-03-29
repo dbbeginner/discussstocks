@@ -15,10 +15,14 @@ class SettingsController extends Controller
 
     public function index(Request $request) {
 
+        $data['pagination'] = null;  // numeric field
         $data['timezones'] = $this->loadTimezonesFromJson();
         $data['assets'] = ['local', 'hosted'];
         $data['analytics'] = ['Google', 'Matomo'];
         $data['advertising'] = ['yes', 'no'];
+        $data['display_email'] = ['yes', 'no'];
+        $data['share_email'] = ['yes', 'no'];
+        $data['receive_email'] = ['yes', 'no'];
 
         return view('settings.preferences', $data);
 
@@ -37,26 +41,17 @@ class SettingsController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request){
-        $request->validate([
+        $validated = $request->validate([
             'pagination' => ['required', 'integer', 'between:10,50'],
             'timezone' => ['required', new validTimeZoneBySymbol ],
             'assets' => ['required', 'in:local,hosted'],
             'advertising' => ['required', 'in:yes,no'],
             'analytics' => ['required', 'in:Google,Matomo'],
+            'display_email' => ['required', 'in:yes,no'],
+            'share_email' => ['required', 'in:yes,no'],
+            'receive_email' => ['required', 'in:yes,no'],
             ]);
 
-        // The true value is meaningless here, but it lets array_key_intersect work to make sure we're only submitting
-        // values for the allowed fields rather than arbitrary fields.
-        $allowed = [
-            'pagination' => true,
-            'timezone' => true,
-            'assets' => true,
-            'advertising' => true,
-            'analytics' => true
-        ];
-
-        $submitted = $request->toArray();
-        $validated = array_intersect_key($submitted, $allowed);
 
         foreach($validated as $setting => $value) {
             $this->saveSetting(Auth::user()->id, $setting, $value);
@@ -67,13 +62,22 @@ class SettingsController extends Controller
     }
 
     public function saveSetting($user_id, $setting, $value) {
-        $settings = Preference::where('user_id', '=', $user_id)
+        $preference = Preference::where('user_id', '=', $user_id)
             ->where('setting', '=', $setting)
             ->first();
 
-        $settings->value = $value;
-
-        $settings->save();
+        // if the user already has this preference store, update the value. If it's a new preference that doesn't exist
+        // yet, then we need to create a new key and value for it.
+        if($preference) {
+            $preference->value = $value;
+            $preference->save();
+        } else {
+            Preference::create([
+                'user_id' => $user_id,
+                'setting' => $setting,
+                'value' => $value
+            ]);
+        }
 
     }
 
