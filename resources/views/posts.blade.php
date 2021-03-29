@@ -7,7 +7,6 @@
 @stop
 
 @section('content')
-
     <div style="margin-top: 6pt; margin-bottom: 6pt;">
     @if(!Auth::guest())
         <a class="btn btn-sm btn-light" href="/subscribed">
@@ -17,7 +16,7 @@
             All posts
         </a>
     @endif
-        <strong style="display: inline-block; float: right;  color: #fff;">Found {{ $count || 0}} posts total.</strong>
+        <strong style="display: inline-block; float: right;  color: #fff;">Found {{ $count ?? 0 }} posts total.</strong>
     </div>
 
     @if( $count < preference('pagination', 10) - 1 )

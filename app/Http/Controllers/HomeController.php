@@ -59,12 +59,14 @@ class HomeController extends Controller
 
     public function renderView($data, $title = null, $channel = null, $blade = 'posts')
     {
-        $count = $data->count();
         $content = $data->with('user', 'votes')
             ->withCount('votes')
             ->withSum('votes', 'vote')
-            ->orderByDesc('updated_at')
-            ->simplePaginate( preference('pagination', 10) );
+            ->orderByDesc('updated_at');
+
+        $count = count($content->get());
+
+        $content = $data->simplePaginate( preference('pagination', 10) );
 
         return view($blade, [
             'title' => $title,
