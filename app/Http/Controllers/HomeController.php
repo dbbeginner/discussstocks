@@ -16,12 +16,13 @@ class HomeController extends Controller
     {
         if (Auth::guest()) {
             return $this->allPosts();
-        } else {
-            return $this->subscribedPosts();
         }
+
+        return $this->subscribedPosts();
     }
 
-    public function allPosts(){
+    public function allPosts()
+    {
         $query = Post::where('type', '=', 'post');
 
         $title = 'All Recently Posted';
@@ -29,8 +30,11 @@ class HomeController extends Controller
         return $this->renderView($query, $title);
     }
 
-    public function subscribedPosts(){
-        $subscriptions = Auth::user()->subscriptions()->pluck('content_id');
+    public function subscribedPosts()
+    {
+
+        $subscriptions = Auth::user()->getSubscriptionsForUser();
+
 
         // If user is not subscribed to any channels, send them to the subscription page
         if(count($subscriptions) == 0 ) {
@@ -43,7 +47,8 @@ class HomeController extends Controller
         return $this->renderView($query, $title);
     }
 
-    public function postsInChannel(Request $request, $slug, $hashId){
+    public function postsInChannel(Request $request, $slug, $hashId)
+    {
         $channel = Channel::where('id', '=', Hashids::decode($hashId))->first();
         $query = Post::where('parent_id', '=', $channel->id);
 
@@ -52,7 +57,8 @@ class HomeController extends Controller
         return $this->renderView($query, $title, $channel, 'channel');
     }
 
-    public function renderView($data, $title = null, $channel = null, $blade = 'posts') {
+    public function renderView($data, $title = null, $channel = null, $blade = 'posts')
+    {
         $count = $data->count();
         $content = $data->with('user', 'votes')
             ->withCount('votes')
@@ -67,5 +73,4 @@ class HomeController extends Controller
             'channel' => $channel,
             ]);
     }
-
 }

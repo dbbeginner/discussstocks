@@ -31,6 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $attributes = [
+        'role' => 'unverified',
         'active' => false,
     ];
 
@@ -98,33 +99,44 @@ class User extends Authenticatable
         return $this->hasMany(Votes::class, 'user_id');
     }
 
-    public function preferences() {
+    public function preferences()
+    {
         return $this->hasMany(Preference::class, 'user_id');
     }
 
-    public function subscriptions() {
+    public function subscriptions()
+    {
         return $this->hasMany(Subscriptions::class, 'user_id', 'id');
     }
 
 
-    public function hashId() {
+    public function hashId()
+    {
         return Hashids::encode( $this->id );
     }
 
-    public function fromHashId( $hashId) {
+    public function fromHashId( $hashId)
+    {
         return User::where('id','=', Hashids::decode($hashId))->first();
     }
 
-    public function isSubscribedTo($channel_id) {
+    public function isSubscribedTo($channel_id)
+    {
         return Subscriptions::where('user_id', '=', $this->id)
             ->where('content_id', '=', $channel_id)
             ->get()
             ->count();
     }
-    public function subscribed()
+
+    public function getSubscriptionsForUser()
     {
-        return $this->hasMany(Subscriptions::class, 'user_id', 'id');
+        return $this->hasMany(Subscriptions::class, 'user_id', 'id')->pluck('content_id');
     }
 
+
+//    public function subscribed()
+//    {
+//        return $this->hasMany(Subscriptions::class, 'user_id', 'id');
+//    }
 
 }
