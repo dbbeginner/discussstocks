@@ -18,5 +18,10 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong>Just FYI...</strong> {!! \Session::get('info') !!}
     </div>
+@elseif (\Session::has('status'))
+    <div class="alert alert-info alert-dismissible alert-container" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {!! \Session::get('status') !!}
+    </div>
 @endif
 

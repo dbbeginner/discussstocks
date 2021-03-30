@@ -24,6 +24,10 @@
     </form>
 
     <div class="col-12">
+        <a href="/forgot-password">Forgot your password?</a>
+    </div>
+
+    <div class="col-12">
         <br>
     </div>
 
