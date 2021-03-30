@@ -15,6 +15,10 @@
         <a class="btn btn-sm btn-light" href="/all">
             All posts
         </a>
+    @else
+        <a class="btn btn-sm btn-light" href="/register">
+            Create an account to subscribe to channels.
+        </a>
     @endif
         <strong style="display: inline-block; float: right;  color: #fff;">Found {{ $count ?? 0 }} posts total.</strong>
     </div>
