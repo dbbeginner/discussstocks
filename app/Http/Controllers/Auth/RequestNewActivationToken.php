@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Accounts;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +13,7 @@ class RequestNewActivationToken extends Controller
 {
     //
     public function create() {
-        return view('accounts.replace');
+        return view('auth.replace-token');
     }
 
     public function store(Request $request) {
@@ -22,15 +22,19 @@ class RequestNewActivationToken extends Controller
         ]);
 
         $user = User::where('email', '=', $request->input('email'))->first();
-        if($user->active == true) {
-            return redirect('/')->with('success', 'Account already activated, try logging in');
+
+        if($user->hasBeenActivated() == true) {
+            return redirect('/')
+                ->with('success', 'Account already activated, try logging in');
         }
 
         $user->token = Str::uuid(4);
         $user->save();
 
-        Mail::to($request->input(['email']))->send(new ConfirmEmailAfterRegistration($user));
+        Mail::to($request->input(['email']))
+            ->send(new ConfirmEmailAfterRegistration($user));
 
-        return redirect('/')->with('success', 'Check your email for a new activation link');
+        return redirect('/')
+            ->with('success', 'Check your email for a new activation link');
     }
 }

@@ -121,6 +121,14 @@ class User extends Authenticatable
         return User::where('id','=', Hashids::decode($hashId))->first();
     }
 
+    public function hasBeenActivated()
+    {
+        if($this->email_verified_at === null) {
+            return false;
+        }
+        return true;
+    }
+
     public function isSubscribedTo($channel_id)
     {
         return Subscriptions::where('user_id', '=', $this->id)

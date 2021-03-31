@@ -23,15 +23,16 @@
         </div>
     </form>
 
+    <h5 class="col-12" style="margin-top: 12pt;">
+        Forgot your password?
+    </h5>
     <div class="col-12">
-        <a href="/forgot-password">Forgot your password?</a>
+        <a href="/forgot-password">Reset your password</a>
     </div>
 
-    <div class="col-12">
-        <br>
-    </div>
+    <br>
 
-    <h5 class="col-12">
+    <h5 class="col-12" style="margin-top: 12pt;">
         Don't have an account?
     </h5>
     <div class="col-12">
