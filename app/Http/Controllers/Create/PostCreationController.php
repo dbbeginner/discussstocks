@@ -24,7 +24,8 @@ class PostCreationController extends Controller {
     {
         $request->validate([
             'title'     =>      ['required'],
-            'content'   =>      ['max:5000']
+            'content'   =>      ['max:5000'],
+            'channel_id' =>     [ new isUserSubscribedToChannel ],
         ]);
 
         $title = $request->input('title');
