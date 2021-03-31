@@ -114,12 +114,14 @@ class Content extends Model
     }
 
     // Outputs the shortened URL (only the encoded hashId) of a piece of content
-    public function shortUrl(){
+    public function shortUrl()
+    {
         return config('app.url') . '/' . Hashids::encode($this->id);
     }
 
     // Outputs the hashID of a contents ID for display in user facing pages
-    public function hashId(){
+    public function hashId()
+    {
         return Hashids::encode($this->id);
     }
 
@@ -137,7 +139,8 @@ class Content extends Model
     }
 
     // Reverse of the children relationship.
-    public function parent(){
+    public function parent()
+    {
         return $this->hasOne(Content::class, 'id', 'parent_id');
     }
 
