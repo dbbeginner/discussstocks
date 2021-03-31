@@ -9,7 +9,7 @@
             <form id="post-create" method="post" action="/post/article/verify">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input class="form-control" type="text" name="title" id="title" placeholder="Title">
+                    <input class="form-control" type="text" name="title" id="title" placeholder="Title" value="{{ old('title') }}">
                     <small id="titleHelp" class="form-text text-muted">Required.</small>
                     @error('title')
                     <div class="validation-feedback alert alert-danger">{{ $message }}</div>
@@ -18,7 +18,7 @@
 
                 <div class="form-group">
                     <label for="description">Add text (optional)</label>
-                    <textarea class="form-control" name="content" id="content" placeholder="Write about your channel here"></textarea>
+                    <textarea class="form-control" name="content" id="content" placeholder="Write about your channel here">{{ old('content') }}</textarea>
                     <small id="titleHelp" class="form-text text-muted">1000 characters max. <a href="/markdown">Markdown</a> formatting allowed.</small>
                     @error('content')
                     <div class="validation-feedback alert alert-danger">{{ $message }}</div>
@@ -33,7 +33,7 @@
                             <option value="{{ $sub->hashId() }}">{{ $sub->title }}</option>
                         @endforeach
                     </select>
-                    @error('channel')
+                    @error('channel_id')
                     <div class="validation-feedback alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
