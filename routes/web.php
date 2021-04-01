@@ -32,8 +32,27 @@ Route::get('/subscribed', '\App\Http\Controllers\HomeController@subscribedPosts'
 
 
 // List of channels
-Route::get('/channels', '\App\Http\Controllers\ChannelController@AllChannels')
+Route::get('/channels/{param?}', '\App\Http\Controllers\ChannelController@index')
     ->name('channels');
+Route::get('/channels/oldest', '\App\Http\Controllers\ChannelController@oldest')
+    ->name('channels-oldest');
+Route::get('/channels/newest', '\App\Http\Controllers\ChannelController@newest')
+    ->name('channels-newest');
+Route::get('/channels/most-active', '\App\Http\Controllers\ChannelController@mostActive')
+    ->name('channels-most-active');
+Route::get('/channels/least-active', '\App\Http\Controllers\ChannelController@leastActive')
+    ->name('channels-least-active');
+Route::get('/channels/ascending', '\App\Http\Controllers\ChannelController@ascending')
+    ->name('channels-ascending');
+Route::get('/channels/descending', '\App\Http\Controllers\ChannelController@descending')
+    ->name('channels-descending');
+Route::get('/channels/random', '\App\Http\Controllers\ChannelController@random')
+    ->name('channels-random');
+Route::get('/channels/most-recently-active', '\App\Http\Controllers\ChannelController@mostRecentlyActive')
+    ->name('channels-random');
+Route::get('/channels/least-recently-active', '\App\Http\Controllers\ChannelController@leastRecentlyActive')
+    ->name('channels-random');
+
 
 // View a single channel
 Route::get('/c/{slug}/{hashId}', '\App\Http\Controllers\HomeController@postsInChannel');

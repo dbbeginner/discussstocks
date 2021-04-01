@@ -3,10 +3,32 @@
 @inject('render', \App\Helpers\TextRenderer::class)
 
 @section('title')
-Channels
+{{ $title }}
 @stop
 
 @section('content')
+    <div class="row" style="margin-left: 15px; margin-right: 15px;">
+        <div class="col-xs-2">
+            <a class="btn btn-sm btn-light" href="/channels/ascending">Alphabetical (a-z)</a><br>
+            <a class="btn btn-sm btn-light" href="/channels/descending">Alphabetical (z-a)</a>
+        </div>
+        <div class="col-xs-2">
+            <a class="btn btn-sm btn-light" href="/channels/oldest">Oldest</a><br>
+            <a class="btn btn-sm btn-light" href="/channels/newest">Newest</a>
+        </div>
+        <div class="col-xs-2">
+            <a class="btn btn-sm btn-light" href="/channels/most-active">Most Active</a><br>
+            <a class="btn btn-sm btn-light" href="/channels/least-active">Least Active</a>
+        </div>
+        <div class="col-xs-2">
+            <a class="btn btn-sm btn-light" href="/channels/most-recently-active">Most Recent Activity</a><br>
+            <a class="btn btn-sm btn-light" href="/channels/least-recently-active">Least Recent Activity</a>
+        </div>
+        <div class="col-xs-2">
+            <a class="btn btn-sm btn-light" href="/channels/random">Random Order</a>
+        </div>
+    </div>
+
 @foreach($channels as $channel)
 <div class="post-container">
     <h1 style="margin-left: 15pt; margin-top: 5pt; margin-bottom: 5pt;">
