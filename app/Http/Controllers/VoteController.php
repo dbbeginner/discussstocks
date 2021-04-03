@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
 use App\Models\Votes;
+use App\Models\Content;
 
 class VoteController extends Controller
 {
@@ -24,24 +25,18 @@ class VoteController extends Controller
             Votes::create(['content_id' => $contentId, 'user_id' => $userId, 'vote' => $voteValue]);
         }
 
-        (int)$voteCount = $this->countOfVotes($contentId);
-        (int)$upvoteCount = $this->countOfUpvotes($contentId);
-        $percentPositive = round($upvoteCount / $voteCount * 100, 0) . '%';
+        $content = Content::where('id', '=', $contentId)->first();
+
+        (int)$voteCount = $content->countOfVotes();
+        (int)$voteSum = $content->sumOfVotes();
+        $percentPositive = round($voteSum / $voteCount * 100, 0) . '%';
 
         return [
-            'countOfVotes' => $voteCount,
-            'countOfUpvotes' => $upvoteCount,
+            'sumOfVotes' => $content->sumOfVotes(),
+            'countOfVotes' => $content->countOfVotes(),
             'percent' => $percentPositive,
         ];
 
-    }
-
-    private function countOfVotes($contentId) {
-        return (int) Votes::where('content_id', '=', $contentId)->count();
-    }
-
-    private function countOfUpvotes($contentId) {
-        return (int) Votes::where('content_id', '=', $contentId)->where('vote', '=', 1)->count();
     }
 
     private function VoteDirectionToValue($direction) {

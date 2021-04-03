@@ -171,5 +171,15 @@ class Content extends Model
         return $this->parent()->first()->parentChannel();
     }
 
+    public function sumOfVotes()
+    {
+        return $this->hasMany(Votes::class, 'content_id', 'id')->sum('vote') + $this->total_upvotes;
+    }
+
+    public function countOfVotes()
+    {
+        return $this->hasMany(Votes::class, 'content_id', 'id')->count('vote') + $this->total_votes;
+    }
+
 
 }

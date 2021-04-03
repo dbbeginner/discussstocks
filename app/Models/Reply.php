@@ -35,7 +35,8 @@ class Reply extends Content
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-//    Each reply can have many votes
+
+    //    Each reply can have many votes
     public function votes()
     {
         return $this->hasMany(Votes::class, 'content_id', 'id');

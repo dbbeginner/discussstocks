@@ -21,6 +21,5 @@
             <i class="far fa-angle-up"></i>
         </button>
     @endif
-
     </div>
 </div>

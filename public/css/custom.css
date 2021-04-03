@@ -10,7 +10,9 @@ html, body {
     padding: 15pt;
     background: #fff;
     border-radius: 5pt;
+    margin-bottom: 15pt;
 }
+
 .navbar {
     font-size: 9pt;
 }
@@ -255,26 +257,16 @@ p.post-replies ul li {
 }
 
 button.vote {
-    font-size: 13pt;
     position: relative;
-    top: -4pt;
     color: #000;
-    margin: 0pt;
-    margin-bottom: -12pt;
-    padding-right: -5pt;
-    margin-right: -0pt;
     background: transparent;
-    width: 1em;
-    height: 2em;
     border: none;
-    float: right;
+    font-size: 12pt;
+    top: 2pt;
 }
-button.vote-down {
-    margin-left: -2pt;
-    margin-right: 3pt;
-}
+
 button.vote:hover {
-    color: yellow;
+    color: #4444dd;
 }
 button.vote:active {
     color: red;
