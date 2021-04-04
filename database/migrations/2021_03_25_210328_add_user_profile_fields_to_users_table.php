@@ -33,9 +33,8 @@ class AddUserProfileFieldsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('image');
-            $table->dropColumn('bio');
-            $table->dropColumn('display_email');
+//            $table->dropColumn('image');
+//            $table->dropColumn('bio');
         });
     }
 }
