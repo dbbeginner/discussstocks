@@ -30,21 +30,6 @@ class PostController extends Controller
         return view('posts', $data);
     }
 
-    public function viewPostsInChannel(Request $request, $slug, $hashId){
-        $data['posts'] = Post::where('parent_id', '=', Hashids::decode($hashId))
-            ->with('user', 'votes')
-            ->withSum('votes', 'vote')
-            ->orderByDesc('updated_at')
-            ->simplePaginate( setting( 'pagination', 10) );
-
-        $channel = Channel::where('id', '=', Hashids::decode($hashId))->first();
-
-        $data['title'] = 'Viewing posts filed in ' . $channel->title;
-
-        return view( 'posts', $data);
-
-    }
-
     public function viewPost($channelSlug, $channelHashId, $postSlug, $hashId){
 
         $data['post'] = Post::where('type', '=', 'post')
@@ -60,6 +45,7 @@ class PostController extends Controller
         $data['replies'] = Reply::where('type', '=', 'reply')
             ->where('parent_id', '=', $data['post']->id)
             ->with('user', 'votes', 'repliesWithChildren')
+            ->withSum('votes', 'vote')
             ->get();
 
         return view('post', $data);
