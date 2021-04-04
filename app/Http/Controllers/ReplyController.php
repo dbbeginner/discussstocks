@@ -18,19 +18,15 @@ class ReplyController extends Controller
     }
     //
     public function Store(Request $request) {
-        $post = $request->all();
+        $post = $request->validate([
+            'content' => 'required|min:2|max:5000',
+            'parent' => 'required',
+        ]);
 
-        if(strlen($post['content']) > 5000) {
-            return "comment too long (keep it shorter than 5000 characters!";
-        }
-
-        $parent = Content::where('id', '=', Hashids::decode($post['parent']))->first();
-
-        $reply = new Reply;
-        $reply->parent_id = $parent->id;
-        $reply->user_id = 1;
-        $reply->content = $post['content'];
-        $reply->save();
-
+        return Reply::create([
+            'parent_id' => Hashids::decode($post['parent']),
+            'user_id' => Auth::user()->id,
+            'content' => $post['content'],
+        ]);
     }
 }
