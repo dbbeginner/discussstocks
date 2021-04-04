@@ -127,35 +127,40 @@ function getTitle() {
             }
         });
     };
-
-
-    // var postdata = {
-    //     _token: token, address: $content_id, user_id: $user_id
-    // };
-    // $.ajax({
-    //     url: '/p/create/get-title',
-    //     type: 'post',
-    //     dataType: 'json',
-    //     data: postdata,
-    //     error: function (jqXHR, exception) {
-    //         console.log(jqXHR.responseText);
-    //     },
-    //     success: function (data) {
-    //         if(data.status == true) {
-    //             $( "button#" + $content_id ).text( 'Subscribed' );
-    //         } else {
-    //             $( "button#" + $content_id ).text( 'Not Subscribed' );
-    //         }
-    //         $( "button#" + $content_id ).toggleClass( "subscribed", "fast" )
-    //     },
-    //     failure: function (data) {
-    //         console.log(data);
-    //     }
-    // });
 }
 
 
 function isUrl(s) {
     var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
     return regexp.test(s);
+}
+
+// The is activated by the Add Reply link visible on post pages, and displays the reply form.
+function showReplyContainer($replyId)
+{
+// If the replies form is visible, hide it.
+    if ($('#reply-container-' + $replyId).length)
+    {
+        console.log('form is visible');
+        $('#reply-container-' + $replyId).remove();
+    }
+    // if the reply form is not visible, display it.
+    else {
+        console.log('form is hidden');
+        $("#container-" + $replyId).after('<div id="reply-container-' + $replyId + '" style="width: calc(100% - 30pt);">' +
+            '    <form class="form" id="form-' + $replyId + '" method="post" action="" onsubmit="postReply(\'' + $replyId + '\', \'' + $userId + '\')">' +
+            '        <textarea class="form-control" style="min-height: 80pt; margin-bottom: 3pt;"></textarea>' +
+            '        <div style="display:block;">' +
+            '            <button class="btn btn-primary" style="float:right;">Save</button>' +
+            '            <button class="btn btn-secondary" type="reset" style="float:right;">Reset</button>' +
+            '        </div>' +
+            '    </form>' +
+            '</div>');
+    }
+}
+
+function postReply($replyId, $userId)
+{
+    event.preventDefault();
+    console.log($replyId + $userId);
 }

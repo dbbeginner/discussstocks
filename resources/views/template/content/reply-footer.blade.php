@@ -15,5 +15,5 @@
             <i class="far fa-arrow-alt-circle-up"></i>
         </button>
     @endif
-    <button class="btn btn-link reply-button" id="reply-{{$reply->hashId()}}">Add Reply</button>
+    <button class="btn btn-link reply-button" id="reply-{{$reply->hashId()}}" onclick="showReplyContainer('{{ $reply->hashid() }}')">Add Reply</button>
 </div>

@@ -18,7 +18,7 @@
                 <ul class="replies">
                     @foreach ($replies as $reply)
                     <li>
-                        <div style="display: inline-block; width: calc(100% - 30pt); margin-right: 3px; padding: 0px; ">
+                        <div id="container-{{ $reply->hashId() }}" style="display: inline-block; width: calc(100% - 30pt); margin-right: 3px; padding: 0px; ">
                             <p> <strong>{{ $reply->user->name }}</strong> said at {{ $reply->created_at->format('h:i a') }} on {{ $reply->created_at->format('m/d/Y') }} </p>
                             {!! $render->markdownToHtml( $reply->content ) ?? "" !!}
 

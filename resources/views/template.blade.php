@@ -15,6 +15,14 @@
     @include('template.master.css')
     @include('template.master.javascript')
 
+    <script>
+        @if(Auth::guest())
+            var $userId = "{{ \Vinkla\Hashids\Facades\Hashids::encode(1) }}";
+        @else
+            var $userId = "{{ Auth::user()->hashId() }}";
+        @endif
+    </script>
+
 </head>
 
 <body>
