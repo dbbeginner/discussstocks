@@ -18,15 +18,21 @@ class ReplyController extends Controller
     }
     //
     public function Store(Request $request) {
-        $post = $request->validate([
+        $request->merge([
+            'user_id' => Hashids::decode($request->input('user_id'))[0],
+            'content_id' => Hashids::decode($request->input('reply_id'))[0],
+        ]);
+
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'content_id' => 'required|exists:content,id',
             'content' => 'required|min:2|max:5000',
-            'parent' => 'required',
         ]);
 
         return Reply::create([
-            'parent_id' => Hashids::decode($post['parent']),
-            'user_id' => Auth::user()->id,
-            'content' => $post['content'],
+            'parent_id' => $request->input('content_id'),
+            'user_id' => $request->input('user_id'),
+            'content' => $request->input('content'),
         ]);
     }
 }

@@ -149,9 +149,11 @@ function showReplyContainer($replyId)
         console.log('form is hidden');
         $("#container-" + $replyId).after('<div id="reply-container-' + $replyId + '" style="width: calc(100% - 30pt);">' +
             '    <form class="form" id="form-' + $replyId + '" method="post" action="" onsubmit="postReply(\'' + $replyId + '\', \'' + $userId + '\')">' +
-            '        <textarea class="form-control" style="min-height: 80pt; margin-bottom: 3pt;"></textarea>' +
+            '        <input type="hidden" name="user_id" value="' + $userId + '">' +
+            '        <input type="hidden" name="reply_id" value="' + $replyId + '">' +
+            '        <textarea name="content" class="form-control" style="min-height: 80pt; margin-bottom: 3pt;"></textarea>' +
             '        <div style="display:block;">' +
-            '            <button class="btn btn-primary" style="float:right;">Save</button>' +
+            '            <button class="btn btn-primary" type="submit" style="float:right;">Save</button>' +
             '            <button class="btn btn-secondary" type="reset" style="float:right;">Reset</button>' +
             '        </div>' +
             '    </form>' +
@@ -163,4 +165,30 @@ function postReply($replyId, $userId)
 {
     event.preventDefault();
     console.log($replyId + $userId);
+    postdata = $("#form-" + $replyId).serialize() ;
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url: '/reply',
+        type: 'post',
+        dataType: 'json',
+        data: postdata,
+        error: function (jqXHR, exception) {
+            console.log('error');
+            console.log(jqXHR.responseText);
+        },
+        success: function (data) {
+            console.log('success');
+            console.log(data);
+        },
+        failure: function (data) {
+            console.log('failure');
+            console.log(data);
+        }
+    });
 }

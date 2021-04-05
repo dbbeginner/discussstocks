@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('create', 'App\Http\Controllers\ChannelController@create');
         Route::post('create', 'App\Http\Controllers\ChannelController@store');
     });
+    Route::post('reply', 'App\Http\Controllers\ReplyController@store');
 });
 
 
