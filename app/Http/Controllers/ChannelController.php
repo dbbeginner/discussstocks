@@ -13,8 +13,6 @@ class ChannelController extends Controller
 
     public function index(Request $request, $order = null)
     {
-
-
         switch ($order) {
             case null:
               return $this->mostRecentlyActive();

@@ -14,8 +14,8 @@ class Guesser extends Controller
     //
     // This controller provides a 301 redirect to the page being referenced on the site.
 
-    public function guessByHashId($hashId) {
-        $destination = Channel::where('id', '=', Hashids::decode($hashId))->first();
+    public function guessByHashId($hash_id) {
+        $destination = Channel::where('id', '=', Hashids::decode($hash_id))->first();
 
         if(!$destination) {
             abort(404);
