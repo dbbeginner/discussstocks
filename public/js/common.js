@@ -184,7 +184,8 @@ function postReply($replyId, $userId)
         },
         success: function (data) {
             console.log('success');
-            console.log(data);
+            $('#reply-container-' + $replyId).remove();
+            $("#container-" + $replyId).after('<ul>' + data.html + '</ul>');
         },
         failure: function (data) {
             console.log('failure');

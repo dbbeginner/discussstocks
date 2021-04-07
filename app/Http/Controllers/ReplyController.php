@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Content;
 use App\Models\Reply;
 use Illuminate\Support\Facades\Auth;
 use Vinkla\Hashids\Facades\Hashids;
+use App\Models\User;
 
 class ReplyController extends Controller
 {
@@ -17,7 +17,8 @@ class ReplyController extends Controller
         }
     }
     //
-    public function Store(Request $request) {
+    public function Store(Request $request)
+    {
         $request->merge([
             'user_id' => Hashids::decode($request->input('user_id'))[0],
             'content_id' => Hashids::decode($request->input('reply_id'))[0],
@@ -29,10 +30,23 @@ class ReplyController extends Controller
             'content' => 'required|min:2|max:5000',
         ]);
 
-        return Reply::create([
+        $reply = Reply::create([
             'parent_id' => $request->input('content_id'),
             'user_id' => $request->input('user_id'),
             'content' => $request->input('content'),
         ]);
+
+
+
+        return json_encode(['html' => \View('template.content.reply-body', ['reply' => $reply])->render() ]);
+
+        return 'hello';
+
+        return json_encode([
+            'html' => view('template.content.reply-body', [
+                'reply' => $reply,
+            ])->render(),
+        ]);
+
     }
 }
