@@ -25,26 +25,6 @@ class UserPreferencesTable extends Migration
             $table->index('user_id');
             $table->unique(['user_id', 'setting']);
         });
-
-        $users = \App\Models\User::all();
-
-        $settings = [
-            'pagination' => 10,
-            'timezone' => 'UTC',
-            'time_display' => '12',
-            'date_format'=> 'm/d/Y'
-        ];
-
-
-        foreach ( $users as $user ) {
-            foreach ($settings as $key => $value) {
-                Preference::create([
-                    'user_id' => $user->id,
-                    'setting' => $key,
-                    'value' => $value,
-                    ]);
-            }
-        }
     }
 
 

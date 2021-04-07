@@ -64,16 +64,7 @@ class User extends Authenticatable
         });
 
         static::created(function ($post) {
-            // Duplicate the guest users settings and apply to this user
-            $defaultSettings = Preference::where('user_id', '=', '1')->get();
 
-            foreach($defaultSettings as $setting){
-                $save = new Preference;
-                $save->user_id = $post->id;
-                $save->setting = $setting->setting;
-                $save->value = $setting->value;
-                $save->save();
-            }
         });
 
         static::saved( function($model) {
