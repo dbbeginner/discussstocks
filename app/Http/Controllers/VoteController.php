@@ -11,32 +11,36 @@ class VoteController extends Controller
 {
     public function store(Request $request){
         $post = $request->all();
-        $contentId = Hashids::decode($post['content_id'])[0];
-        $userId = Hashids::decode($post['user_id'])[0];
-        $voteValue = $this->VoteDirectionToValue( $post['direction']);
+        $content_id = Hashids::decode($post['content_id'])[0];
+        $user_id = Hashids::decode($post['user_id'])[0];
+        $vote_value = $this->VoteDirectionToValue( $post['direction']);
 
-        $vote = Votes::where('content_id', '=', $contentId)->where('user_id', '=', $userId)->first();
+        $vote = Votes::where('content_id', '=', $content_id)->where('user_id', '=', $user_id)->first();
 
         if($vote) {
         // if we find a vote, reverse that vote
             $vote->delete();
         } else {
         // If there is no match for a vote on this content_id by this user_id, we can record the vote.
-            Votes::create(['content_id' => $contentId, 'user_id' => $userId, 'vote' => $voteValue]);
+            Votes::create(['content_id' => $content_id, 'user_id' => $user_id, 'vote' => $vote_value]);
         }
 
-        $content = Content::where('id', '=', $contentId)->first();
+        $content = Content::where('id', '=', $content_id)->first();
 
-        (int)$voteCount = $content->countOfVotes();
-        (int)$voteSum = $content->sumOfVotes();
-        $percentPositive = round($voteSum / $voteCount * 100, 0) . '%';
+        (int)$vote_count = $content->countOfVotes();
+        (int)$vote_sum = $content->sumOfVotes();
 
-        return [
-            'sumOfVotes' => $content->sumOfVotes(),
-            'countOfVotes' => $content->countOfVotes(),
-            'percent' => $percentPositive,
-        ];
+        if($vote_count == 0 || $vote_sum == 0) {
+            $percent_positive = '0%';
+        } else {
+            $percent_positive = round($vote_sum / $vote_count * 100, 0) . '%';
+        }
 
+        return json_encode([
+            'sumOfVotes' => $vote_count,
+            'countOfVotes' => $vote_sum,
+            'percent' => $percent_positive,
+        ]);
     }
 
     private function VoteDirectionToValue($direction) {
