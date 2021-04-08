@@ -107,9 +107,9 @@ class User extends Authenticatable
         return Hashids::encode( $this->id );
     }
 
-    public function fromHashId( $hashId)
+    public function fromHashId( $hash_id)
     {
-        return User::where('id','=', Hashids::decode($hashId))->first();
+        return User::where('id','=', Hashids::decode( $hash_id ))->first();
     }
 
     public function hasBeenActivated()
@@ -120,7 +120,7 @@ class User extends Authenticatable
         return true;
     }
 
-    public function isSubscribedTo($channel_id)
+    public function isSubscribedTo( $channel_id )
     {
         return Subscriptions::where('user_id', '=', $this->id)
             ->where('content_id', '=', $channel_id)
@@ -132,11 +132,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Subscriptions::class, 'user_id', 'id')->pluck('content_id');
     }
-
-
-//    public function subscribed()
-//    {
-//        return $this->hasMany(Subscriptions::class, 'user_id', 'id');
-//    }
 
 }
