@@ -11,24 +11,26 @@ class ProfileController extends Controller
 {
     //
 
-    public function index(Request $request) {
+    public function index()
+    {
         return view('user.view', [
             'user' => User::where('id', '=', Auth::user()->id)->first(),
         ]);
     }
 
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
         return view('user.edit', [
             'user' => User::where('id', '=', Auth::user()->id)->first(),
         ]);
     }
 
-    public function verify(Request $request){
+    public function verify(Request $request)
+    {
         $request->validate([
             'show' => 'required',
             'bio' => 'max:1000'
         ]);
-
 
         $data = $request->all();
         $user = User::where('id', '=', Auth::user()->id)->first();
