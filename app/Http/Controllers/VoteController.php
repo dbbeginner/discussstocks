@@ -9,11 +9,11 @@ use App\Models\Content;
 
 class VoteController extends Controller
 {
-    public function store(Request $request){
-        $post = $request->all();
-        $content_id = Hashids::decode($post['content_id'])[0];
-        $user_id = Hashids::decode($post['user_id'])[0];
-        $vote_value = $this->VoteDirectionToValue( $post['direction']);
+    public function store(Request $request)
+    {
+        $content_id = Hashids::decode($request->input('content_id'))[0];
+        $user_id = Hashids::decode($request->input('user_id'))[0];
+        $vote_value = $this->VoteDirectionToValue( $request->input('direction'));
 
         $vote = Votes::where('content_id', '=', $content_id)->where('user_id', '=', $user_id)->first();
 
@@ -37,8 +37,8 @@ class VoteController extends Controller
         }
 
         return json_encode([
-            'sumOfVotes' => $vote_count,
-            'countOfVotes' => $vote_sum,
+            'sumOfVotes' => $vote_sum,
+            'countOfVotes' => $vote_count,
             'percent' => $percent_positive,
         ]);
     }
