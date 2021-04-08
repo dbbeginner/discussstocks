@@ -25,35 +25,6 @@
             <div class="validation-feedback  alert alert-danger">{{ $message }}</div>
             @enderror
 
-            <h5>Show email?</h5>
-            @if($user->display_email == true)
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="show" value="false">No
-                </label>
-            </div>
-            <div class="form-check disabled">
-                <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="show" value="true" checked>Yes
-                </label>
-            </div>
-            @else
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="show" value="false" checked>No
-                </label>
-            </div>
-            <div class="form-check disabled">
-                <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="show" value="true">Yes
-                </label>
-            </div>
-            @endif
-
-            @error('show')
-            <div class="validation-feedback  alert alert-danger">{{ $message }}</div>
-            @enderror
-
             <h5>Bio</h5>
             <div class="form-group">
                 <textarea id="bio" name="bio" rows=12 class="form-control">{{ $user->bio }}</textarea>

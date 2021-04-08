@@ -14,15 +14,6 @@
         <h5>Email</h5>
         <p>{{ $email }}</p>
 
-        <h5>Show email?</h5>
-        <p>
-            @if($show == 'true')
-                Yes
-            @else
-                No
-            @endif
-        </p>
-
         <h5>Bio</h5>
         @if($bio)
             {!! $render->markdownToHtml( $bio ) ?? "<p></p>" !!}

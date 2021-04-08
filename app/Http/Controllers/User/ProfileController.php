@@ -41,23 +41,14 @@ class ProfileController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'show' => 'required',
             'bio' => 'max:1000'
         ]);
 
-        if($request->input('show') == 'true') {
-            $display_email = true;
-        } else {
-            $display_email = false;
-        }
-
         User::where('id', '=', Auth::user()->id)->update([
             'bio' => $request->input('bio'),
-            'display_email' => $display_email,
         ]);
 
-        return redirect('/user/profile')->with('success', 'User record updated');
+        return redirect('/user/profile')
+            ->with('success', 'User record updated');
     }
-
-
 }

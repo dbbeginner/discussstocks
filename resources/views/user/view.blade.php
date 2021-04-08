@@ -22,17 +22,6 @@
             </div>
         </div>
 
-        <h5>Show email?</h5>
-        <div class="form-group">
-            <div class="form-control">
-                @if($user->display_email == true)
-                    Yes
-                @else
-                    No
-                @endif
-            </div>
-        </div>
-
         <h5>Bio</h5>
         @if($user->bio)
             <div class="form-group">
