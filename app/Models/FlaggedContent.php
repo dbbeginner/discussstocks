@@ -15,7 +15,8 @@ class FlaggedContent extends Model
 
     public $timestamps = true;
 
-    public function parent(){
+    public function parent()
+    {
         return $this->hasOne(Content::class, 'id', 'content_id');
     }
 

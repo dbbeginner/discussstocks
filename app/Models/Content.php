@@ -180,6 +180,4 @@ class Content extends Model
     {
         return $this->hasMany(Votes::class, 'content_id', 'id')->count('vote') + $this->total_votes;
     }
-
-
 }
