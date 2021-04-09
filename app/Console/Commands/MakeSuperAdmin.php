@@ -42,7 +42,7 @@ class MakeSuperAdmin extends Command
         $username = $this->ask('Enter username');
         $email = $this->ask('Enter email (leave blank for default');
         if(strlen(trim($email)) == 0) {
-            $email = "admin@example.com";
+            $email = "superadmin@example.com";
         }
 
         User::create([
