@@ -1,14 +1,16 @@
 <?php
 
 use App\Models\Preference;
+use Illuminate\Support\Facades\Auth;
 
 function preference($setting_name, $default = null) {
     if(Auth::guest()) {
-        $user_id = 1; }
-        else { $user_id = Auth::user()->id;
+        return $default;
     }
 
-    $result = Preference::where('setting', '=', $setting_name)->where('user_id', '=', $user_id)->first();
+    $result = Preference::where('setting', '=', $setting_name)
+        ->where('user_id', '=', Auth::user()->id)
+        ->first();
 
     if(!$result){
         return $default;
