@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Console\Command;
 
-class addAdminUser extends Command
+class MakeAdmin extends Command
 {
     /**
      * The name and signature of the console command.
@@ -48,7 +48,7 @@ class addAdminUser extends Command
         User::create([
             'name' => $username,
             'email' => $email,
-            'role' => 'superadmin',
+            'role' => 'admin',
             'password' => Hash::make($this->secret('Enter password:')),
             'email_verified_at' => '2021-01-01 01:01:01',
         ]);
