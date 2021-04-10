@@ -15,6 +15,8 @@
     @include('template.master.css')
     @include('template.master.javascript')
 
+    @yield('styles')
+
     <script>
         @if(Auth::guest())
             var $userId = "{{ \Vinkla\Hashids\Facades\Hashids::encode(1) }}";
