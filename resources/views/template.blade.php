@@ -55,6 +55,10 @@
             @include('template.sidebar.stats')
         @endif
 
+        @if(Auth::check() && Auth::user()->role == 'admin' || Auth::check() && Auth::user()->role == 'superadmin')
+            @include('template.sidebar.admin')
+        @endif
+
         @yield('sidebar-after')
     </div>
 </div>
