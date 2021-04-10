@@ -72,7 +72,7 @@ class User extends Authenticatable
         });
     }
 
-    public function channel()
+    public function channels()
     {
         return $this->hasMany(Channel::class, 'user_id', 'id');
     }
