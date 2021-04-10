@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('url/create', '\App\Http\Controllers\Create\LinkCreationController@index');          // User enters data
         Route::post('url/verify', '\App\Http\Controllers\Create\LinkCreationController@verify');        // User verifies their input
         Route::post('url/store', '\App\Http\Controllers\Create\LinkCreationController@store');          // Store user input
+
         Route::post('url/ajax', '\App\Http\Controllers\Create\LinkCreationController@titleHelper');     // Ajax responder to preview the title of a link
     });
 });

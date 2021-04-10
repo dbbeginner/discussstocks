@@ -6,13 +6,12 @@
         </button>
     @endif
         <div style="display: table-cell;  text-align: center; width: 40pt; vertical-align: middle; line-height: 8pt; height: 32px; border-radius: 16pt; background: #ff0000; color: #fff; font-size: 9pt;">
-            <strong id="percent-{{ $post->hashId() }}">
                 @if($post->total_upvotes + $post->votes_sum_vote == 0 || $post->total_votes + $post->votes_count == 0)
-                    0%
+                <strong id="percent-{{ $post->hashId() }}">0%</strong>
                 @else
-                {{ round(($post->total_upvotes + $post->votes_sum_vote) / ($post->total_votes + $post->votes_count) * 100, 0) }}%
+                <strong id="percent-{{ $post->hashId() }}">{{ round(($post->total_upvotes + $post->votes_sum_vote) / ($post->total_votes + $post->votes_count) * 100, 0) }}%</strong>
                 @endif
-            </strong><br>
+            <br>
             <small>upvoted</small>
         </div>
 

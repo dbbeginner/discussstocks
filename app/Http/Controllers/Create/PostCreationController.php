@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Auth;
 
 class PostCreationController extends Controller {
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $data['subscriptions'] = Channel::whereIn('id', Auth::user()->subscriptions()->pluck('content_id'))
             ->orderBy('title')
             ->get();
@@ -28,41 +29,29 @@ class PostCreationController extends Controller {
             'channel_id' =>     [ new isUserSubscribedToChannel ],
         ]);
 
-        $title = $request->input('title');
-        $content = $request->input('content');
-        $user_id = Hashids::decode($request->input('user_id'))[0];
-        $channel_id = Hashids::decode($request->input('channel_id'))[0];
+        $data = $request->only(['title', 'content', 'channel_id']);
+        $data['channel_title'] = Channel::where('id', '=', Hashids::decode($data['channel_id']))->first()['title'];
 
-        $request->session()->put('title', $title);
-        $request->session()->put('content', $content);
-        $request->session()->put('channel_id', $channel_id);
-        $request->session()->put('channel_title', Channel::where('id', '=', $channel_id)->first()['title']);
-        $request->session()->put('user_id', $user_id);
-        $request->session()->put('username', User::where('id', '=', $user_id)->first()['name']);
-
-        return view('post.verify.article');
+        return view('post.verify.article', $data );
     }
 
-
     public function store(Request $request) {
-        if(Post::create([
-            'parent_id' => $request->session()->get('channel_id'),
-            'user_id' => $request->session()->get('user_id'),
+        $validated = $request->validate([
+            'title'     =>      ['required'],
+            'content'   =>      ['max:5000'],
+            'channel_id' =>     [ new isUserSubscribedToChannel ],
+        ]);
+
+
+        $post = Post::create([
+            'parent_id' => Hashids::decode($request->input('channel_id'))[0],
+            'user_id' => Auth::user()->id,
             'type' => 'post',
             'subtype' => 'post',
-            'title' => $request->session()->get('title'),
-            'content' => $request->session()->get('content')])) {
+            'title' => $validated['title'],
+            'content' => $validated['content']
+        ]);
 
-            $request->session()->forget('channel_id');
-            $request->session()->forget('channel_title');
-            $request->session()->forget('user_id');
-            $request->session()->forget('username');
-            $request->session()->forget('title');
-            $request->session()->forget('content');
-        } else {
-            return "An error occured";
-        }
-
-        return redirect('/')->with('success', 'Your post is created');
+        return redirect('/' . $post->hashId() )->with('success', 'Your post is created');
     }
 }
