@@ -30,4 +30,12 @@ class StaticController extends Controller
 
         return view('static.markdown', $data);
     }
+
+    public function Privacy(){
+        $data['title'] = 'Privacy Policy';
+
+        $data['content'] = Storage::disk('static')->get('privacy.md');
+
+        return view('static', $data);
+    }
 }
