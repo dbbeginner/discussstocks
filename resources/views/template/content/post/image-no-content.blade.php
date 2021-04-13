@@ -4,9 +4,8 @@
     </div>
     <div class="post-content-container">
         <h1 class="post-title">
-            <img src="/images/thumb/{{ $post->content }}" style="height: 45pt; display: block; float: right;">
+            <img src="/images/thumb/{{ $post->content }}" class="post-image-thumbnail">
             <a id="{{ $post->hashId() }}" href="{{ $post->url() }}">{{ $post->title }}</a>
-{{--            @include('template.content.post.votes-badge')--}}
         </h1>
 
         @include('template.content.post.components.by-line')

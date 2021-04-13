@@ -45,7 +45,7 @@ p {
     vertical-align: top;
     margin: 0px;
     padding:0px;
-    width: 50px;
+    width: 55px;
 }
 .post-content-container {
     display: inline-block;
@@ -191,19 +191,11 @@ p.post-replies ul li {
 }
 
 .post-container {
-    /*background: #fafcfc;*/
-    /*background: -moz-linear-gradient(top, rgba(221,221,221,1.0) 0%,rgba(221,221,221,1.0) 50%,rgba(250,250,250,1.0) 100%); !* FF3.6-15 *!*/
-    /*background: -webkit-linear-gradient(top, rgba(221,221,221,1.0) 0%,rgba(221,221,221,1.0) 50%,rgba(250,250,250,1.0) 100%); !* Chrome10-25,Safari5.1-6 *!*/
-    /*background: linear-gradient(to bottom, rgba(240,240,240,1.0) 0%,rgba(248,248,248,1.0) 50%,rgba(255,255,255,1.0) 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
-
     background: #ffffff;
     border: 1px solid #eeeeee;
     border-radius: 5pt;
     margin-bottom: 15pt;
     padding-bottom: 3pt;
-    /*-webkit-box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.66);*/
-    /*box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.66);*/
-
     margin-top: 1pt;
 }
 
@@ -375,4 +367,11 @@ input.shared-link {
 a.tabbed-content {
     color: #ff0000;
     padding: 5pt 40pt 5pt 40pt;
+}
+
+img.post-image-thumbnail {
+    height: 45pt;
+    display: block;
+    float: right;
+    border: 1px #919090 solid;
 }
