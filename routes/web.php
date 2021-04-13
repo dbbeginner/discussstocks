@@ -17,7 +17,7 @@ require __DIR__.'/auth.php';
 require __DIR__.'/static.php';
 require __DIR__.'/user.php';
 require __DIR__.'/admin.php';
-
+require __DIR__.'/uploads.php';
 
 
 
@@ -55,8 +55,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('url/create', '\App\Http\Controllers\Create\LinkCreationController@index');          // User enters data
         Route::post('url/verify', '\App\Http\Controllers\Create\LinkCreationController@verify');        // User verifies their input
         Route::post('url/store', '\App\Http\Controllers\Create\LinkCreationController@store');          // Store user input
-
         Route::post('url/ajax', '\App\Http\Controllers\Create\LinkCreationController@titleHelper');     // Ajax responder to preview the title of a link
+
+        Route::get('image/create', '\App\Http\Controllers\Create\ImageCreationController@index');      // User uploads their image
+        Route::get('image/verify', '\App\Http\Controllers\Create\ImageCreationController@index');    // User verifies their image
+        Route::post('image/verify', '\App\Http\Controllers\Create\ImageCreationController@verify');    // User verifies their image
+        Route::post('image/store', '\App\Http\Controllers\Create\ImageCreationController@store');      // Store user image
     });
 });
 

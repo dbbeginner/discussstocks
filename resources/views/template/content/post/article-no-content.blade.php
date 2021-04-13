@@ -5,7 +5,6 @@
     <div class="post-content-container">
         <h1 class="post-title">
             <a id="{{ $post->hashId() }}" href="{{ $post->url() }}">{{ $post->title }}</a>
-            @include('template.content.post.votes-badge')
         </h1>
 
         <p class="post-byline">
