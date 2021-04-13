@@ -10,10 +10,7 @@
             <a id="{{ $post->hashId() }}" href="{{ $post->url() }}">{{ $post->title }}</a>
         </h1>
 
-        <p class="post-byline">
-            Created {{ $post->created_at->diffForHumans() }} ago by <a href="/u/{{ $post->user->name }}">{{ $post->user->name }}</a>
-            in <a href="{{ $post->parent->url() }}">{{ $post->parent->title }}</a>
-        </p>
+        @include('template.content.post.components.by-line')
 
         <p>
             <img src="/images/screen/{{ $post->content }}" style="width:100%">
