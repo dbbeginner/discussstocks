@@ -10,5 +10,5 @@ Route::prefix('admin')
         Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
         Route::resource('replies', \App\Http\Controllers\Admin\ReplyController::class);
         Route::resource('mentions', \App\Http\Controllers\Admin\MentionController::class);
-
+        Route::resource('flagged', \App\Http\Controllers\Admin\FlaggedController::class);
     });
