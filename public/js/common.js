@@ -192,3 +192,14 @@ function postReply($replyId, $userId)
         }
     });
 }
+
+function showReportContentModal($content_id, $user_id)
+{
+    $.get("/modals/report?content_id=" + $content_id + "&user_id=" + $user_id, function (data) {
+        $("#modal-stub").append(data);
+    });
+    $('#reportContent').modal('toggle')
+    // Insert hidden input with csrf token embedded
+    $("<input>").attr("type", "hidden").attr("name", "_token").attr("id", "token").val($('meta[name="csrf-token"]').attr('content')).appendTo("form");
+
+}

@@ -69,10 +69,8 @@
 
 </div>
 
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>
+<!-- Modal -->
+<div id="modal-stub"></div>
 
+</body>
 </html>

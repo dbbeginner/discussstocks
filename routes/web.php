@@ -18,7 +18,7 @@ require __DIR__.'/static.php';
 require __DIR__.'/user.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/uploads.php';
-
+require __DIR__.'/modals.php';
 
 
 // Homepage

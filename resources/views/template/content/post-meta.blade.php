@@ -1,5 +1,4 @@
 <ul class="post-meta">
-
     <li style="margin-top: -3.5pt;">
         @if(!Auth::guest())
             <button class="vote vote-down" onclick="upvote('{{ $post->hashId() }}', '{{ Auth::user()->hashId() }}', 'down')" style="margin-left: -6pt;">
@@ -27,6 +26,11 @@
     <li>
         <span id="share-{{ $post->hashId() }}" class="pseudo-link" onclick="shareLink('{{ $post->hashId() }}')">Share link</span>
     </li>
+    @if( Auth::check() )
+    <li>
+        <a onclick="showReportContentModal('{{ $post->hashId()}}', '{{ Auth::user()->hashId() }}')">Report this </a>
+    </li>
+    @endif
     <li>
         Last activity {{ $post->updated_at->diffForHumans() }}
     </li>
