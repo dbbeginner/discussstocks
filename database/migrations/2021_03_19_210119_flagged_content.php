@@ -20,7 +20,8 @@ class FlaggedContent extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('reporter_id')
                 ->comment('the user_id of the user who reported it');
-            $table->text('reason');
+            $table->text('reason')
+                ->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->index('content_id');

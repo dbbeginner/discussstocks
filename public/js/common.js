@@ -26,7 +26,7 @@ function shareLink($post_id){
 
     if(!share_box) {
         $("#share-" + $post_id).after("<div id=\"url-" + $post_id + "\">\n" +
-            "    <input class='shared-link' readonly id=\"link-" + $post_id + "\" type=\"text\" style=\"display: table; padding: 3pt; font-size: 10pt; font-face: fixed;\" value=\"" + site + "/" + $post_id + "\">\n" +
+            "    <input class='shared-link' readonly id=\"link-" + $post_id + "\" type=\"text\" style=\"display: table; padding: 3pt; font-size: 10pt; font-family: fixed;\" value=\"" + site + "/" + $post_id + "\">\n" +
             "</div>");
             var input = document.getElementById('link-' + $post_id);
                 input.focus();
@@ -195,11 +195,38 @@ function postReply($replyId, $userId)
 
 function showReportContentModal($content_id, $user_id)
 {
-    $.get("/modals/report?content_id=" + $content_id + "&user_id=" + $user_id, function (data) {
+    $.get("/modals/report?content_id=" + $content_id + "&reporter_id=" + $user_id , function (data) {
         $("#modal-stub").append(data);
     });
     $('#reportContent').modal('toggle')
     // Insert hidden input with csrf token embedded
     $("<input>").attr("type", "hidden").attr("name", "_token").attr("id", "token").val($('meta[name="csrf-token"]').attr('content')).appendTo("form");
+
+}
+
+function submitContentReport()
+{
+    event.preventDefault();
+    postdata = $("#content-report-form").serialize() ;
+
+    $.ajax({
+        url: '/report',
+        type: 'post',
+        dataType: 'json',
+        data: postdata,
+        error: function (jqXHR, exception) {
+            console.log('error');
+            console.log(jqXHR.responseText);
+        },
+        success: function (data) {
+            console.log('success');
+        },
+        failure: function (data) {
+            console.log('failure');
+            console.log(data)
+        }
+    });
+
+    $('#reportContent').modal('toggle')
 
 }

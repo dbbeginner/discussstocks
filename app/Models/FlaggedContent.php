@@ -15,6 +15,10 @@ class FlaggedContent extends Model
 
     public $timestamps = true;
 
+    protected $fillable = [
+        'content_id', 'user_id', 'reporter_id', 'reason',
+    ];
+
     public function parent()
     {
         return $this->hasOne(Content::class, 'id', 'content_id');

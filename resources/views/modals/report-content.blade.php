@@ -1,7 +1,7 @@
 <div class="modal" id="reportContent" tabindex="-1" role="dialog">
-    <form method="post" action="/report">
-        <input type="hidden" name="user_id" value="{{ $user_id }}">
-        <input type="hidden" name="content_id" value="{{ $user_id }}">
+    <form id="content-report-form" method="post" action="/report" onsubmit="submitContentReport()">
+        <input type="hidden" name="content_id" value="{{ $content_id }}">
+        <input type="hidden" name="reporter_id" value="{{ $reporter_id }}">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
