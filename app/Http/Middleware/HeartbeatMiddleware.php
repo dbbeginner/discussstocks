@@ -21,7 +21,7 @@ class HeartbeatMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        $request->session()->flush();
+        $request->session()->forget('heartbeat_id');
 //         don't trigger middleware when the following routes/resources
         if($request->is([
             '/',

@@ -24,7 +24,7 @@
         <a href="{{ $post->url() }}">{{ $post->reply_count }} replies</a>
     </li>
     <li>
-        <span id="share-{{ $post->hashId() }}" class="pseudo-link" onclick="shareLink('{{ $post->hashId() }}')">Share link</span>
+        <a id="share-{{ $post->hashId() }}" class="pseudo-link" onclick="shareLink('{{ $post->hashId() }}')">Share link</a>
     </li>
     @if( Auth::check() )
     <li>
