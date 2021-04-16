@@ -8,3 +8,4 @@
 @endif
 
 <script src="/js/common.js?{{ rand(0, 10000000) }}"></script>
+<script src="/js/heartbeat.js"></script>

@@ -19,10 +19,11 @@
 
     <script>
         @if(Auth::guest())
-            var $userId = "{{ \Vinkla\Hashids\Facades\Hashids::encode(1) }}";
+        var $userId = "{{ \Vinkla\Hashids\Facades\Hashids::encode(1) }}";
         @else
-            var $userId = "{{ Auth::user()->hashId() }}";
+        var $userId = "{{ Auth::user()->hashId() }}";
         @endif
+        var visit_id = "{{ Session::get('heartbeat_id') }}";
     </script>
 
 </head>

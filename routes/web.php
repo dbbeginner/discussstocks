@@ -106,15 +106,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::post('vote', '\App\Http\Controllers\VoteController@store')
     ->middleware('auth');
 
-
-
-
-
-
-Route::get('/p/{slug}/{hashid}', [\App\Http\Controllers\PostController::class, 'viewPost']);
-Route::get('/r/{slug}/{hashid}', [\App\Http\Controllers\ReplyController::class, 'viewReply']);
-
-
+// Heartbeat - monitors length of user visits, and receives back instructions to send to the browser
+Route::get('heartbeat', 'App\Http\Controllers\HeartbeatController@index');
+Route::get('heartbeat/update', 'App\Http\Controllers\HeartbeatController@update');
 
 // ShortURL straight to channel or post (for social sharing)
 // This has got to be the last route, because it matches with everything else.
