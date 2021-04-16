@@ -30,7 +30,7 @@ class PostController extends Controller
         return view('posts', $data);
     }
 
-    public function viewPost($channelSlug, $channelHashId, $postSlug, $hashId){
+    public function viewPost(Request $request, $channelSlug, $channelHashId, $postSlug, $hashId){
 
         $data['post'] = Post::where('type', '=', 'post')
             ->where('id', '=', Hashids::decode($hashId))
