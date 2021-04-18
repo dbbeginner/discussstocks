@@ -25,13 +25,7 @@ Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'create
 Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])
                 ->middleware('guest');
 
-//Route::get('/login', [AuthenticatedSessionController::class, 'create'])
-//                ->middleware('guest')
-//                ->name('login');
-//
-//Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-//                ->middleware('guest');
-////
+
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->middleware('guest')
                 ->name('password.request');
@@ -49,20 +43,22 @@ Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
 //                ->name('password.update');
 
 // User Account Activation Link
-Route::get('activate', '\App\Http\Controllers\Auth\UserActivationController@create')
+Route::get('verify', '\App\Http\Controllers\Auth\UserActivationController@create')
     ->middleware('guest')
-    ->name('activate');
-Route::post('activate', '\App\Http\Controllers\Auth\UserActivationController@store')
+    ->name('verify');
+
+Route::post('verify', '\App\Http\Controllers\Auth\UserActivationController@store')
     ->middleware('guest')
-    ->name('activate');
+    ->name('verify');
 
 // Generate and send replacement activation link
-Route::get('activate/replace', '\App\Http\Controllers\Auth\RequestNewActivationToken@create')
+Route::get('verify/replace', '\App\Http\Controllers\Auth\RequestNewActivationToken@create')
     ->middleware('guest')
-    ->name('replace-activation-token');
-Route::post('activate/replace', '\App\Http\Controllers\Auth\RequestNewActivationToken@store')
+    ->name('replace-verification-token');
+
+Route::post('verify/replace', '\App\Http\Controllers\Auth\RequestNewActivationToken@store')
     ->middleware('guest')
-    ->name('replace-activation-token');
+    ->name('replace-verification-token');
 
 
 //Route::get('/verify-email', [EmailVerificationPromptController::class, '__invoke'])

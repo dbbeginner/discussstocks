@@ -26,7 +26,7 @@ class LoginController extends Controller
 
                 $request->session()->regenerateToken();
 
-                return redirect()->to('/')->with('error', 'Account is not <a href="/verify">verified</a> yet.');
+                return redirect()->to('/')->with('error', 'Account is not <a href="/verify">verified</a> yet. Need a new <a href="/verify/replace">verification email</a> sent?');
             }
 
             $request->session()->regenerate();

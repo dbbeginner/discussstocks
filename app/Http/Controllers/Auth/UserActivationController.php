@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
 
 class UserActivationController extends Controller
 {
@@ -12,7 +14,7 @@ class UserActivationController extends Controller
 
     public function create(Request $request) {
         if(!$request->has('token') || $request->input('token') == null) {
-            return view('auth.activate');
+            return view('auth.verify');
         }
 
         return $this->store($request);
@@ -27,8 +29,8 @@ class UserActivationController extends Controller
 
         if(!$user) {
             return redirect()
-                ->to('/activate')
-                ->with('error', 'Token not found. <a href="/activate/replace">Need a new one</a>?');
+                ->to('/verify')
+                ->with('error', 'Token not found. <a href="/verify/replace">Need a new one</a>?');
         }
 
         $user->email_verified_at = now();
@@ -36,9 +38,9 @@ class UserActivationController extends Controller
         $user->role = 'registered';
         $user->save();
 
-        return redirect()
-            ->to('/')
-            ->with('success', 'Account activated!');
+        return new Response(\redirect()
+            ->to( config('app.url') )
+            ->with('success', 'Account verified, you can now login'));
 
     }
 }

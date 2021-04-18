@@ -1,12 +1,14 @@
 @extends('template')
 
 @section('title')
-    Activate your account
+Verify your email
 @stop
 
 @section('content')
     <div class="content">
-        <form method="post" action="/activate">
+        <p>You must verify your email address before logging into the site.</p>
+
+        <form method="post" action="/verify">
             @csrf
             <div class="form-group">
                 <label for="token">Paste your activation token here:</label>
@@ -16,7 +18,8 @@
                 @enderror
             </div>
             <div class="form-group">
-                <button class="btn btn-success">Activate</button>
+                <a class="btn btn-secondary" href="/verify/replace">Resend Welcome Email</a>
+                <button class="btn btn-success">Verify</button>
             </div>
         </form>
     </div>

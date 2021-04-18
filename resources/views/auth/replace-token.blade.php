@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content">
-        <form method="post" action="/activate/replace">
+        <form method="post" action="/verify/replace">
             @csrf
             <div class="form-group">
                 <label for="token">Please enter your email address. If we have an account registered to that email address, a new activation token will be sent</label>
