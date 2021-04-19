@@ -3,7 +3,7 @@
         <span class="post-type">{{ $post->subtype }}</span>
     </div>
     <div class="post-content-container">
-        <h1 class="post-title">
+        <h1 class="content-title">
             <a id="{{ $post->hashId() }}" href="{{ $post->url() }}">{{ $post->title }}</a>
         </h1>
 

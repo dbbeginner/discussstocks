@@ -13,11 +13,11 @@
             <span class="post-type post-link">URL</span>
         </div>
         <div class="post-content-container">
-            <h1 class="post-title">
+            <h1 class="content-title">
                 <a href="{{ Session::get('content') }}" target="_blank">{{ Session::get('title') }}</a> <span class="url-parsed">({{ parse_url( Session::get('content'), PHP_URL_HOST) }} )</span>
     {{--            @include('template.content.post.votes-badge')--}}
             </h1>
-            <p class="post-byline">
+            <p class="content-byline">
                 Created now by <a href="#">{{ Session::get('username') }}</a>
                 in <a href="#">{{ Session::get('channel_title') }}</a>
             </p>

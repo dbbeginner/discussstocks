@@ -30,18 +30,19 @@
     </div>
 
 @foreach($channels as $channel)
-<div class="post-container">
-    <h1 style="margin-left: 15pt; margin-top: 5pt; margin-bottom: 5pt;">
+<div class="content">
+    <h1 class="content-title inset-left">
         @if(count($channel->posts) == 0)
-            {{ $channel->title }}
+        {{ $channel->title }}
         @else
-            <a href="{{ $channel->url() }}">{{ $channel->title }}</a>
+        <a href="{{ $channel->url() }}">{{ $channel->title }}</a>
         @endif
-        <span class="small">
-            Owned by <strong><a href="/u/{{ $channel->user->name }}">{{ $channel->user->name }}</a></strong>
-        </span>
+        <br>
+        <p class="content-byline">
+            Owned by <a href="/u/{{ $channel->user->name }}">{{ $channel->user->name }}</a>
+        </p>
     </h1>
-    <div class="content content-hidden" id="{{ $channel->id }}">
+    <div class="content-hidden replace-stock-symbols" id="{{ $channel->id }}">
         {!! $render->markdownToHtml( $channel->content ) ?? "" !!}
     </div>
     <div class="footer">

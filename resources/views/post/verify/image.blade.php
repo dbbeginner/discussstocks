@@ -13,10 +13,10 @@
             <span class="post-type post-link">URL</span>
         </div>
         <div class="post-content-container">
-            <h1 class="post-title">
+            <h1 class="content-title">
                 <a href="#" target="_blank">{{ $title }}</a>
             </h1>
-            <p class="post-byline">
+            <p class="content-byline">
                 Created now by <a href="#">{{ Auth::user()->name }}</a>
                 in <a href="#">{{ $channel_title }}</a>
             </p>

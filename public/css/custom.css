@@ -7,12 +7,21 @@ html, body {
 }
 
 .content {
-    padding: 15pt;
-    background: #fff;
+    /*padding: 15pt;*/
+    /*background: #fff;*/
+    /*border-radius: 5pt;*/
+    /*margin-bottom: 15pt;*/
+    background: #ffffff;
+    border: 1px solid #eeeeee;
     border-radius: 5pt;
     margin-bottom: 15pt;
+    padding-bottom: 3pt;
+    margin-top: 1pt;
 }
 
+.inset-left {
+    margin-left: 15pt;
+}
 .navbar {
     font-size: 9pt;
 }
@@ -151,18 +160,19 @@ h1 {
     text-align: justify;
 }
 
-h1.post-title {
+h1.content-title {
     margin-top: 3pt;
     font-size: 14pt;
     line-height: 17pt;
     margin-bottom: 0pt;
 }
-
-p.post-byline {
-    font-size: 10pt;
+p.content-byline {
+    font-size:9pt;
     line-height: 17pt;
     margin-bottom: 0pt;
+    font-weight: 600;
 }
+
 .post-meta {
     padding-inline-start: 0px;
     line-height: 15pt;
@@ -184,7 +194,6 @@ p.post-replies ul li {
     font-size: 8pt;
     font-weight: 600;
 }
-
 
 .display-none {
     display: none;
