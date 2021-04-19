@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    var replaced = $("body").html().replace(/\$([a-zA-Z]+)\b/g,
+    var replaced = $(".content").html().replace(/\$([a-zA-Z]+)\b/g,
     '<a href="https://finance.yahoo.com/quote/$1">\$1</a>');
-    $("body").html(replaced);
+    $(".content").html(replaced);
 });
 
 function copyHashId(){
