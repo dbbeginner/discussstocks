@@ -230,3 +230,32 @@ function submitContentReport()
     $('#reportContent').modal('toggle')
 
 }
+
+function submitParentReply()
+{
+    event.preventDefault();
+    data = $("#parent-reply").serialize() ;
+    console.log(data);
+
+    $.ajax({
+        url: '/reply',
+        type: 'post',
+        dataType: 'json',
+        data: data,
+        error: function (jqXHR, exception) {
+            console.log('error');
+            console.log(jqXHR.responseText);
+        },
+        success: function (data) {
+            console.log('success');
+            console.log(data);
+            $("#replies").prepend( data.html );
+            $("#parent-reply-content").val('');
+        },
+        failure: function (data) {
+            console.log('failure');
+            console.log(data)
+        }
+    });
+
+}

@@ -15,7 +15,25 @@
     @else
         <div class="reply-container ">
             <div class="reply-content-container">
-                <ul class="replies">
+                <form id="parent-reply">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->hashid() }}">
+                    <input type="hidden" name="reply_id" value="{{ $post->hashId() }}">
+                    <div class="create-reply" style="padding: 5pt 5pt 5pt 25pt; text-align: right;">
+                        <p class="text-left">
+                            <label class="col-form-label">Reply as {{ Auth::user()->name }}</label>
+                        </p>
+                        <div class="parent-reply grow-wrap">
+                            <textarea class="form-control" name="content" id="parent-reply-content" style="min-height: 60pt; font-size: 11pt; " onInput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button id="submit-parent-reply" class="btn btn-sm btn-primary" style="border-radius: 6pt; margin: 6pt auto auto auto; padding: 2pt 12pt 2pt 12pt;" onclick="submitParentReply()">
+                                <strong>Save Reply</strong>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <ul id="replies" class="replies">
                     @foreach ($replies as $reply)
                     <li>
                         <div id="container-{{ $reply->hashId() }}" style="display: inline-block; width: calc(100% - 30pt); margin-right: 3px; padding: 0px; ">

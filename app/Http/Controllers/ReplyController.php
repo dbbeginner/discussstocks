@@ -11,11 +11,6 @@ use App\Models\User;
 class ReplyController extends Controller
 {
 
-    public function __construct() {
-        if(Auth::check()) {
-            return Redirect()->to('home')->with('error', 'You must be logged in to do this');
-        }
-    }
     //
     public function Store(Request $request)
     {
@@ -36,17 +31,7 @@ class ReplyController extends Controller
             'content' => $request->input('content'),
         ]);
 
-
-
         return json_encode(['html' => \View('template.content.reply-body', ['reply' => $reply])->render() ]);
-
-        return 'hello';
-
-        return json_encode([
-            'html' => view('template.content.reply-body', [
-                'reply' => $reply,
-            ])->render(),
-        ]);
-
+        
     }
 }
