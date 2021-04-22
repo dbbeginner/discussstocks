@@ -29,10 +29,10 @@
 </head>
 
 <body>
-<div class="container">
 
     @include('template.master.navigation')
 
+<div class="container">
 <div class="row" style="margin-left: 0pt;  margin-right: 0;">
 
     <div class="col-lg-9 col-md-8">
