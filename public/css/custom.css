@@ -3,8 +3,23 @@ html, body {
     padding: 0;
     font-size: 9pt;
     line-spacing: 13pt;
-    background: #428df5;
+    background: #EEEEEE;
 }
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 2000px) {
+    .container {
+        min-width: 1900px;
+    }
+}
+
+@media only screen and (min-width: 1500px) and (max-width: 1999px){
+    .container {
+        min-width: 1400px;
+    }
+}
+
+
 
 .content {
     /*padding: 15pt;*/
@@ -12,7 +27,7 @@ html, body {
     /*border-radius: 5pt;*/
     /*margin-bottom: 15pt;*/
     background: #ffffff;
-    border: 1px solid #eeeeee;
+    border: 1px solid #000000;
     border-radius: 5pt;
     margin-bottom: 15pt;
     padding-bottom: 3pt;
@@ -82,9 +97,9 @@ p {
 
 /* Modify the backgorund color */
 .navbar-custom {
-    margin-top: 5pt;
+    /*margin-top: 5pt;*/
     background-color: #0000CD;
-    border-radius: 5pt;
+    /*border-radius: 5pt;*/
     border: #00459b solid 1pt;
 }
 
@@ -115,13 +130,11 @@ h1 .small a, .h1 .small a {
 }
 
 h1.page-title {
-    color: #fff;
-    font-weight: 300;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
     font-size: 18pt;
-    padding: 30pt 0 5pt 15pt;
-}
-h1 {
-    font-size: 18pt;
+    padding: 30pt 0 5pt 0pt;
 }
 
 .category {
@@ -197,15 +210,6 @@ p.post-replies ul li {
 
 .display-none {
     display: none;
-}
-
-.post-container {
-    background: #ffffff;
-    border: 1px solid #eeeeee;
-    border-radius: 5pt;
-    margin-bottom: 15pt;
-    padding-bottom: 3pt;
-    margin-top: 1pt;
 }
 
 .reply-header {

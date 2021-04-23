@@ -36,7 +36,7 @@
 <div class="row" style="margin-left: 0pt;  margin-right: 0;">
 
     <div class="col-lg-9 col-md-8">
-        <h1 style="margin-top: 24pt; margin-bottom: 6pt; color: #fff;">
+        <h1 class="page-title">
             @yield('title')
         </h1>
 

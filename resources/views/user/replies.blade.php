@@ -9,7 +9,7 @@
 @section('userdata')
 
     @foreach($replies as $reply)
-    <div class="post-container">
+    <div class="content">
 
         <h6>
             Reply to <a href="{{ $reply->parentPost()->url() }}">{{ $reply->parentPost()->title }}</a> posted in {{ $reply->parentChannel()->title }} {{ $reply->parentPost()->created_at->diffForHumans() }}

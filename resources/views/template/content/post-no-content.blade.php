@@ -1,4 +1,4 @@
-<div class="post-container">
+<div class="content">
 @if( $post->subtype == 'post')
     @include('template.content.post.article-no-content')
 @elseif( $post->subtype == 'url')

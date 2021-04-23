@@ -8,7 +8,7 @@
 
 @section('userdata')
 
-    <div class="post-container">
+    <div class="content">
 
         <table class="table">
             <tr>

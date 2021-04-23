@@ -7,7 +7,7 @@
 @section('content')
 
 
-<div class="post-container">
+<div class="content">
     <div class="row" style="margin-bottom: 3pt;">
         <div class="post-type-container">
             <span class="post-type post-link">URL</span>

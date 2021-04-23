@@ -1,4 +1,4 @@
-<div class="post-container replace-stock-symbols">
+<div class="content replace-stock-symbols">
     @if( $post->subtype == 'post')
         @include('template.content.post.article')
     @elseif( $post->subtype == 'url')
