@@ -33,42 +33,42 @@
     @include('template.master.navigation')
 
 <div class="container">
-<div class="row" style="margin-left: 0pt;  margin-right: 0;">
+    <div class="row" style="margin-left: 0pt;  margin-right: 0;">
 
-    <div class="col-lg-9 col-md-8">
-        <h1 class="page-title">
-            @yield('title')
-        </h1>
+        <div class="col-lg-9 col-md-8">
+            <h1 class="page-title">
+                @yield('title')
+            </h1>
 
-        @include('template.master.messages')
+            @include('template.master.messages')
 
-        @yield('content')
+            @yield('content')
 
-    </div>
+        </div>
 
-    <div class="col-lg-3 col-md-4 side-col " style="margin-top: 6pt; float:right;">
-        @yield('sidebar-before')
+        <div class="col-lg-3 col-md-4 side-col " style="margin-top: 6pt; float:right;">
+            @yield('sidebar-before')
 
-    @if (Auth::guest())
-            @include('template.sidebar.guest')
-        @endif
-        @if (Auth::check())
-            @include('template.sidebar.user')
-            @include('template.sidebar.content')
-            @include('template.sidebar.stats')
-        @endif
+        @if (Auth::guest())
+                @include('template.sidebar.guest')
+            @endif
+            @if (Auth::check())
+                @include('template.sidebar.user')
+                @include('template.sidebar.content')
+                @include('template.sidebar.stats')
+            @endif
 
-        @if(Auth::check() && Auth::user()->role == 'admin' || Auth::check() && Auth::user()->role == 'superadmin')
-            @include('template.sidebar.admin')
-        @endif
+            @if(Auth::check() && Auth::user()->role == 'admin' || Auth::check() && Auth::user()->role == 'superadmin')
+                @include('template.sidebar.admin')
+            @endif
 
-        @yield('sidebar-after')
+            @yield('sidebar-after')
+        </div>
     </div>
 </div>
 
 @include('template.master.footer')
 
-</div>
 
 <!-- Modal -->
 <div id="modal-stub"></div>
