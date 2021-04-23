@@ -32,6 +32,6 @@ class ReplyController extends Controller
         ]);
 
         return json_encode(['html' => \View('template.content.reply-body', ['reply' => $reply])->render() ]);
-        
+
     }
 }
