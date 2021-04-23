@@ -20,12 +20,13 @@
             Create an account to subscribe to channels.
         </a>
     @endif
-        <strong style="display: inline-block; float: right;  color: #fff;">Found {{ $count ?? 0 }} posts total.</strong>
+        <span style="display: inline-block; position: relative; top: 6px; float: right;  color: #000;">Found {{ $count ?? 0 }} posts total.</span>
     </div>
 
     @if( $count < preference('pagination', 10) - 1 )
-    <div class="jumbotron" style="margin-top: 18pt;">
-        There aren't many posts here. Perhaps you want to <a href="/user/subscriptions">subscribe to more channels</a>?
+    <div class="alert alert-info alert-dismissible alert-container" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Just FYI...</strong> There aren't many posts here. Perhaps you want to <a href="/user/subscriptions">subscribe to more channels</a>?
     </div>
     @endif
 
