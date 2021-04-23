@@ -257,12 +257,16 @@ p.post-replies ul li {
 
 button.vote {
     position: relative;
-    color: #000;
+    color: #6e6e6e;
     background: transparent;
     border: none;
     font-size: 18pt;
     top: 2pt;
 }
+button.vote[disabled=disabled], button.vote:disabled {
+    color: #bababa;
+}
+
 
 button.vote:hover {
     color: #4444dd;
@@ -299,10 +303,8 @@ button.vote-down {
     padding-bottom: 15pt;
     line-height: 14pt;
     margin-bottom: 15pt;
-
     background: #0000CD;
     color: #fff;
-
     border: #ffffff 1px solid;
     border-radius: 5pt;
 }
@@ -321,7 +323,7 @@ button.vote-down {
 }
 
 .side-col button {
-    background: #428df5;
+    background: #0000CD;
     color: #fff;
     border: #fff 1pt solid;
 }
@@ -339,7 +341,7 @@ button.vote-down {
 
 .side-col-panel  input.form-control {
     color: #fff;
-    background: #428df5;
+    background: #0000CD;
     margin: 6pt 0;
 }
 
