@@ -1,16 +1,12 @@
 <div class="row" style="margin-bottom: 3pt;">
-    <div class="post-type-container">
-        <span class="post-type">{{ $post->subtype }}</span>
-    </div>
+    @include('template.content.post.components.votes')
     <div class="post-content-container">
         <h1 class="content-title">
-            <a id="{{ $post->hashId() }}" href="{{ $post->url() }}">{{ $post->title }}</a>
+            <a id="{{ $post->hashId() }}" href="{{ $post->url() }}">{{ $post->title }}</a> <span class="post-type">{{ $post->subtype }}</span>
         </h1>
 
         @include('template.content.post.components.by-line')
 
         @include('template.content.post-meta')
-
     </div>
-
 </div>

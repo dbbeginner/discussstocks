@@ -19,17 +19,11 @@ html, body {
     }
 }
 
-
-
 .content {
-    /*padding: 15pt;*/
-    /*background: #fff;*/
-    /*border-radius: 5pt;*/
-    /*margin-bottom: 15pt;*/
     background: #ffffff;
     border: 1px solid #000000;
     border-radius: 5pt;
-    margin-bottom: 15pt;
+    margin-bottom: 5pt;
     padding-bottom: 3pt;
     margin-top: 1pt;
 }
@@ -62,14 +56,15 @@ p {
     margin-bottom: 3pt;
 }
 
-.post-type-container {
+.votes-container {
     position: relative;
-    top: 3pt;
     display: inline-block;
     vertical-align: top;
-    margin: 0px;
     padding:0px;
-    width: 55px;
+    min-width: 55px;
+    text-align: center;
+    margin: 0pt -6pt 0pt 6pt;
+    line-height: 8pt;
 }
 .post-content-container {
     display: inline-block;
@@ -82,11 +77,10 @@ p {
     display: inline-block;
     background: #00459b;
     color: #fff;
-    font-size: 9pt;
+    font-size: 8pt;
     font-weight: bold;
     text-transform: uppercase;
-    padding: 1pt 4pt 1pt 4pt;
-    border: 1pt solid #ffffff;
+    padding: 0pt 3pt 0pt 3pt;
 }
 
 .post-link {
@@ -266,7 +260,7 @@ button.vote {
     color: #000;
     background: transparent;
     border: none;
-    font-size: 12pt;
+    font-size: 18pt;
     top: 2pt;
 }
 
@@ -276,8 +270,18 @@ button.vote:hover {
 button.vote:active {
     color: red;
 }
+button.vote-up {
+    margin-top: -3pt;
+    margin-left: 3pt;
+}
+button.vote-down {
+    margin-top: -5pt;
+}
 
-
+.vote-count {
+    margin-left: 2pt;
+    font-weight: bold;
+}
 .footer {
     padding: 15px;
     color: #fff;
@@ -296,7 +300,7 @@ button.vote:active {
     line-height: 14pt;
     margin-bottom: 15pt;
 
-    background: #428df5;
+    background: #0000CD;
     color: #fff;
 
     border: #ffffff 1px solid;
