@@ -9,7 +9,7 @@
 
         @include('template.content.post.components.by-line')
 
-        @include('template.content.post-meta')
+        @include('template.content.post.components.post-meta')
 
     </div>
 </div>

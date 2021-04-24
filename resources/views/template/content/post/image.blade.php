@@ -16,7 +16,7 @@
             <img src="/images/screen/{{ $post->content }}" style="width:100%">
         </p>
 
-        @include('template.content.post-meta')
+        @include('template.content.post.components.post-meta')
 
     </div>
 

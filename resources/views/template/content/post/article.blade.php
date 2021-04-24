@@ -17,7 +17,7 @@
             {!! $render->markdownToHtml( $post->content ) ?? "" !!}
         </p>
 
-        @include('template.content.post-meta')
+        @include('template.content.post.components.post-meta')
 
     </div>
 
