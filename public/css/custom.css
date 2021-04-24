@@ -6,6 +6,13 @@ html, body {
     background: #EEEEEE;
 }
 
+.replace-stock-symbols {
+/*
+    this is just a class that's inserted to various pages to let Jquery know that it should replace stock symbols that
+    it finds here with links to a finance website
+*/
+}
+
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 2000px) {
     .container {
@@ -245,8 +252,9 @@ p.post-replies ul li {
 .content-shown {
     height: auto;
 }
+
 .content-hidden {
-    max-height: 100px;
+    max-height: 38px;
     overflow: hidden;
 }
 
@@ -351,6 +359,15 @@ button.vote-down {
 .pseudo-link:hover {
     color: #007bff;
     text-decoration: underline;
+}
+
+.btn-search-scopes {
+    color: #8c8c8c;
+    font-weight: bold;
+    font-size: 7pt;
+    background: #ebebeb;
+    border: 1px #8c8c8c solid;
+    margin: 1px 2px 1px 2px;
 }
 
 input.shared-link {
