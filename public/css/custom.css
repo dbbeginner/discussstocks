@@ -138,40 +138,10 @@ h1.page-title {
     padding: 30pt 0 5pt 0pt;
 }
 
-.category {
-    margin-left: -15px;
-    padding: 9pt 9pt 0pt 9pt;
-    margin-bottom: 18pt;
-}
-
-.category:nth-of-type(even) {
-    background: #f0f7ff;
-}
-.category:nth-of-type(odd) {
-    background: #fff;
-
-}
-
-.category > h2,
-.category >.h2,
-.category > h2 > a,
-.category >.h2 > a{
-    margin-top: 5pt;
-    font-size: 18pt;
-    font-weight: normal;
-}
-
-.category > h2 > .small,
-.category > .h2 > .small {
-    font-size: 50%;
-    font-weight: bold;
-}
-
-.category > p {
-    font-size: 10.5pt;
-    line-height: 13pt;
-    font-weight: normal;
-    text-align: justify;
+.channel-container {
+    padding: 3pt;
+    margin: 6pt 6pt 9pt 6pt;
+    line-height: 9pt;
 }
 
 h1.content-title {
@@ -390,9 +360,11 @@ input.shared-link {
 }
 
 .subscription-button {
+    position: relative;
+    top: -2px;
     background: #428df5;
     color: #ffffff;
-    width: 120pt;
+    width: 100pt;
 }
 
 .subscribed {

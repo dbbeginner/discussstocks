@@ -12,14 +12,14 @@
 
 <div class="content">
 @foreach($channels as $channel)
-    <div class="row" style="margin-bottom: 10pt; line-height: 12pt;">
-        <div style="padding-left: 10pt; display: inline-block; width: calc(100% - 145pt);">
-            <span style="font-size: 12pt; " data-toggle="tooltip" data-placement="top" title="Created by {{ $channel->user->name }}">
-                <strong style="text-transform: uppercase;">{{ $channel->title }}</strong><br>
-                <small><small>{{ $channel->posts_count }} posts. Last activity {{ $channel->updated_at->diffForHumans() }}</small></small>
-            </span>
-        </div>
-        <div style="display: inline-block; width: 140pt; text-align: right;">
+<div class="channel-container">
+    <div style="display: inline-block;">
+        <span style="font-size: 12pt; " data-toggle="tooltip" data-placement="top" title="Created by {{ $channel->user->name }}">
+            <strong style="text-transform: uppercase;">{{ $channel->title }}</strong><br>
+            <small><small>{{ $channel->posts_count }} posts. Last activity {{ $channel->updated_at->diffForHumans() }}</small></small>
+        </span>
+    </div>
+    <div style="display: inline-block; width: 140pt; text-align: right; float: right;">
         @if(Auth::user()->isSubscribedTo($channel->id))
             <button id="{{ $channel->hashId() }}" class="btn subscription-button subscribed" onclick="subscribe('{{ $channel->hashId() }}', '{{ Auth::user()->hashId() }}' )">
                 Subscribed
@@ -29,8 +29,8 @@
                 Not Subscribed
             </button>
         @endif
-        </div>
     </div>
+</div>
 @endforeach
 </div>
 
