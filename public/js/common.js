@@ -12,11 +12,6 @@ $(document).ready(function(){
     // $(".replace-stock-symbols").html(replaced);
 });
 
-function copyHashId(){
-    document.getElementById("currentShortUrl").select();
-    document.execCommand('copy');
-}
-
 function readmore($id){
     $( "div#" + $id ).toggleClass( "content-hidden" )
 }
