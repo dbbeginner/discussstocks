@@ -16,13 +16,6 @@ function readmore($id){
     $( "div#" + $id ).toggleClass( "content-hidden" )
 }
 
-function showCommentArea($id){
-    $( "#" + $id).toggleClass("display-none");
-    $( "#hide-" + $id).toggleClass("display-none");
-    $( "#show-" + $id).toggleClass("display-none");
-
-}
-
 function shareLink($post_id){
     var site = $('meta[name="site"]').attr('content');
     const share_box = $("#url-" + $post_id).length;
