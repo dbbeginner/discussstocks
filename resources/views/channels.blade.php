@@ -1,36 +1,31 @@
 @extends('template')
 
-@inject('render', \App\Helpers\TextRenderer::class)
 
 @section('title')
 {{ $title }}
 @stop
 
 @section('content')
-    <div class="row" style="margin-left: 15px; margin-right: 15px; margin-bottom: 15pt;">
-        <div class="col-xs-2">
-            <a class="btn btn-sm btn-light" href="/channels/ascending">Alphabetical (a-z)</a><br>
-            <a class="btn btn-sm btn-light" href="/channels/descending">Alphabetical (z-a)</a>
-        </div>
-        <div class="col-xs-2">
-            <a class="btn btn-sm btn-light" href="/channels/oldest">Oldest</a><br>
-            <a class="btn btn-sm btn-light" href="/channels/newest">Newest</a>
-        </div>
-        <div class="col-xs-2">
-            <a class="btn btn-sm btn-light" href="/channels/most-active">Most Active</a><br>
-            <a class="btn btn-sm btn-light" href="/channels/least-active">Least Active</a>
-        </div>
-        <div class="col-xs-2">
-            <a class="btn btn-sm btn-light" href="/channels/most-recently-active">Most Recent Activity</a><br>
-            <a class="btn btn-sm btn-light" href="/channels/least-recently-active">Least Recent Activity</a>
-        </div>
-        <div class="col-xs-2">
-            <a class="btn btn-sm btn-light" href="/channels/random">Random Order</a>
-        </div>
+    <div class="row" style="margin-left: 0px; margin-right: 15px; margin-bottom: 6pt;">
+            <a class="btn btn-sm btn-light btn-search-scopes" href="/channels/ascending">Alphabetical (a-z)</a><br>
+            <a class="btn btn-sm btn-light btn-search-scopes" href="/channels/descending">Alphabetical (z-a)</a>
+
+            <a class="btn btn-sm btn-light btn-search-scopes" href="/channels/oldest">Oldest</a><br>
+            <a class="btn btn-sm btn-light btn-search-scopes" href="/channels/newest">Newest</a>
+
+            <a class="btn btn-sm btn-light btn-search-scopes" href="/channels/most-active">Most Active</a><br>
+            <a class="btn btn-sm btn-light btn-search-scopes" href="/channels/least-active">Least Active</a>
+
+            <a class="btn btn-sm btn-light btn-search-scopes" href="/channels/most-recently-active">Most Recent Activity</a><br>
+            <a class="btn btn-sm btn-light btn-search-scopes" href="/channels/least-recently-active">Least Recent Activity</a>
+
+            <a class="btn btn-sm btn-light btn-search-scopes" href="/channels/random">Random Order</a>
     </div>
 
 @foreach($channels as $channel)
-<div class="content">
+    @inject('render', \App\Helpers\TextRenderer::class)
+
+    <div class="content">
     <h1 class="content-title inset-left">
         @if(count($channel->posts) == 0)
         {{ $channel->title }}
@@ -48,7 +43,7 @@
     <div class="inset-left">
         <p>
         @if(count($channel->posts) == 0)
-            <strong>No posts yet</strong>
+            <strong style="color: #000; margin-right: 30pt; padding: 0pt;">No posts yet</strong>
         @else
         </p>
             <strong><a class="btn btn-link" style="color: #000; margin-right: 30pt; padding: 0pt;" href="{{ $channel->url() }}">

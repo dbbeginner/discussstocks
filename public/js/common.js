@@ -1,7 +1,15 @@
 $(document).ready(function(){
-    var replaced = $(".replace-stock-symbols").html().replace(/\$([a-zA-Z]+)\b/g,
-    '<a href="https://finance.yahoo.com/quote/$1">\$1</a>');
-    $(".replace-stock-symbols").html(replaced);
+    // replace content of EACH container with .replace-stock-symbols class with new content that includes a link to
+    // a finance website, which is currently Yahoo! Finance
+    $(".replace-stock-symbols").each(function(){
+        var replaced = $(this).html().replace(/\$([a-zA-Z]+)\b/g,
+            '<a href="https://finance.yahoo.com/quote/$1">\$1</a>');
+        $(this).html(replaced)
+    })
+    // Old version, which didn't iterate through content:
+    // var replaced = $(".replace-stock-symbols").html().replace(/\$([a-zA-Z]+)\b/g,
+    // '<a href="https://finance.yahoo.com/quote/$1">\$1</a>');
+    // $(".replace-stock-symbols").html(replaced);
 });
 
 function copyHashId(){

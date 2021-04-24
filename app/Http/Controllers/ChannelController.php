@@ -106,6 +106,13 @@ class ChannelController extends Controller
 
     public function ascending()
     {
+//
+//        return Channel::where('type', '=', 'channel')
+//            ->withCount('posts')
+//            ->orderBy('title')
+//            ->get();
+
+
         return view ('channels', [
             'title' => 'Channels (alphabetical, A-Z)',
             'channels' =>  Channel::where('type', '=', 'channel')
