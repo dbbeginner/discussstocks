@@ -7,7 +7,7 @@ Share a URL
 @section('content')
 
     <div class="content">
-        <form id="link-create" method="post" action="/post/url/verify">
+        <form id="post-create" method="post" action="/post/url/verify">
             <div class="form-group">
                 <label for="description">URL</label>
                 <textarea class="form-control" name="url" id="url" placeholder="http://example.com/">{{ old('url') }}</textarea>

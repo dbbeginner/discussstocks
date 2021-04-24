@@ -59,8 +59,13 @@ html, body {
     margin-top: 0pt;
     margin-bottom: 6pt;
 }
+
 p {
     margin-bottom: 3pt;
+}
+
+form#post-create {
+    padding: 6pt;
 }
 
 .votes-container {
@@ -106,7 +111,6 @@ p {
 
 .side-col {
     padding-top: 3pt;
-    text-align: justify;
 }
 
 .navbar-custom .navbar-brand,
@@ -207,7 +211,6 @@ p.post-replies ul li {
 .reply-container ul li p {
     font-size: 8pt;
     line-height: 13.5pt;
-    text-align: justify;
 }
 
 .reply-content-container {
