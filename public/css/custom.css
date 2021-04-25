@@ -152,11 +152,11 @@ h1.content-title {
     margin-top: 3pt;
     font-size: 14pt;
     line-height: 17pt;
-    margin-bottom: 0pt;
+    margin-bottom: 2pt;
 }
 .content-byline {
     font-size:9pt;
-    line-height: 17pt;
+    line-height: 11pt;
     margin-bottom: 0pt;
     font-weight: 600;
 }

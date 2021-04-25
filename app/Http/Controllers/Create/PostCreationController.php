@@ -27,6 +27,7 @@ class PostCreationController extends Controller {
             'title'     =>      ['required'],
             'content'   =>      ['max:5000'],
             'channel_id' =>     [ new isUserSubscribedToChannel ],
+            'file'  =>          ['nullable', 'file', 'min:1', 'max:200', 'mimes:txt,rtf,pdf,doc,docx,xls,xlsx,ppt' ]
         ]);
 
         $data = $request->only(['title', 'content', 'channel_id']);
