@@ -21,7 +21,7 @@
                 in <a href="#">{{ $channel_title }}</a>
             </p>
             <p>
-                <img src="/tmp/{{ $image }}" style="width: 100%;">
+                <img src="/tmp/{{ $image }}" style="width: 100%; max-width: 600px;">
             </p>
         </div>
     </div>

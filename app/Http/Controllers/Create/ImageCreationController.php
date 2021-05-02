@@ -49,20 +49,18 @@ class ImageCreationController extends Controller {
             'channel_id' =>     [ new isUserSubscribedToChannel ],
         ]);
 
-
         $file = $validated['content'];
         $temp = storage_path("app/public/images/tmp/$file");
         $source = storage_path("app/public/images/source/$file");
 
         rename($temp, $source);
 
-        Image::make($source)
-            ->resize(200,200)
-            ->save(storage_path("app/public/images/thumb/$file"));
+        $thumbnail = $this->resizeImage($source, 200);
+        $thumbnail->save(storage_path("app/public/images/thumb/$file"));
 
-        Image::make($source)
-            ->resize(1800,1800)
-            ->save(storage_path("app/public/images/screen/$file"));
+        $screen = $this->resizeImage($source, 900);
+        $screen->save(storage_path("app/public/images/screen/$file"));
+
 
         $post = Post::create([
             'parent_id' => Hashids::decode($request->input('channel_id'))[0],
@@ -71,9 +69,26 @@ class ImageCreationController extends Controller {
             'subtype' => 'image',
             'title' => $validated['title'],
             'content' => $validated['content']
-
         ]);
 
         return redirect('/' . $post->hashId() )->with('success', 'Your post is created');
     }
+
+    private function resizeImage($source_file, $width = null, $height = null)
+    {
+        // Resize an image and constrain its aspect ration by providing only a height argument or only a width argument
+        // to this function
+
+        $image = Image::make($source_file);
+
+        $image->height() > $image->width() ? $width=null : $height=null;
+
+        $image->resize($width, $height, function ($constraint) {
+            $constraint->upsize();
+            $constraint->aspectRatio();
+        });
+
+        return $image;
+    }
+
 }

@@ -53,6 +53,7 @@ Route::get('/images/screen/{filename}', function ($filename)
     return $response;
 });
 
+
 Route::get('/images/source/{filename}', function ($filename)
 {
     $path = storage_path('app/public/images/source/' . $filename);

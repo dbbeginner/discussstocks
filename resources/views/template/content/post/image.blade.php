@@ -13,7 +13,9 @@
         @include('template.content.post.components.by-line')
 
         <p>
-            <img src="/images/screen/{{ $post->content }}" style="width:100%">
+            <a href="/images/source/{{ $post->content }}">
+                <img src="/images/screen/{{ $post->content }}" style="width: 100%; max-width: 600px;">
+            </a>
         </p>
 
         @include('template.content.post.components.post-meta')
