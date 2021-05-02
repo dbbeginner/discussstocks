@@ -31,8 +31,9 @@ class ImageCreationController extends Controller {
             'channel_id' =>     [ new isUserSubscribedToChannel ],
         ]);
 
-        $image_name = \Str::uuid(4) . '.' . $request->content->getClientOriginalExtension();
-        $request->content->storeAs('public/images/tmp', $image_name);
+        $image_name = \Str::uuid(4) . '.' . $request->file('content')->getClientOriginalExtension();
+        $request->file('content')->storeAs('public/images/tmp', $image_name);
+
         $data = $request->only(['title', 'content', 'channel_id']);
         $data['channel_title'] = Channel::where('id', '=', Hashids::decode($data['channel_id']))->first()['title'];
 
