@@ -32,6 +32,7 @@ class ReplyChildSeeder extends Seeder
                 $r->title = $faker->catchPhrase();
                 $r->content = $faker->paragraphs(5, true);
                 $r->user_id = random_int(1, $userCount);
+                $r->published_at = now();
                 $r->save();
                 $i++;
 

@@ -35,8 +35,15 @@ class ContentTable extends Migration
                 ->default(0);
             $table->integer('total_upvotes')
                 ->default('0');
+            $table->timestamp('published_at')
+                ->nullable()
+                ->default(null)
+                ->index();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index(['type', 'published_at']);
+            $table->index(['parent_id', 'type', 'published_at']);
             $table->index('parent_id');
             $table->index('type');
             $table->index('slug');

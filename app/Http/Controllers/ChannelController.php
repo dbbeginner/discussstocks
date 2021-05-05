@@ -43,9 +43,10 @@ class ChannelController extends Controller
         return view ('channels', [
             'title' => 'Channels (newest to oldest)',
             'channels' =>  Channel::where('type', '=', 'channel')
-            ->withCount('posts')
-            ->orderByDesc('created_at')
-            ->simplePaginate( preference('pagination', 10))
+                ->whereNotNull('published_at')
+                ->withCount('posts')
+                ->orderByDesc('created_at')
+                ->simplePaginate( preference('pagination', 10))
         ]);
     }
 
@@ -54,6 +55,7 @@ class ChannelController extends Controller
         return view ('channels', [
             'title' => 'Channels (oldest to newest)',
             'channels' =>  Channel::where('type', '=', 'channel')
+                ->whereNotNull('published_at')
                 ->withCount('posts')
                 ->orderBy('created_at')
                 ->simplePaginate( preference('pagination', 10))
@@ -65,6 +67,7 @@ class ChannelController extends Controller
         return view ('channels', [
             'title' => 'Channels (most posts)',
             'channels' =>  Channel::where('type', '=', 'channel')
+                ->whereNotNull('published_at')
                 ->withCount('posts')
                 ->orderByDesc('posts_count')
                 ->simplePaginate( preference('pagination', 10))
@@ -76,6 +79,7 @@ class ChannelController extends Controller
         return view ('channels', [
             'title' => 'Channels (lowest number of posts)',
             'channels' =>  Channel::where('type', '=', 'channel')
+                ->whereNotNull('published_at')
                 ->withCount('posts')
                 ->orderBy('posts_count')
                 ->simplePaginate( preference('pagination', 10))
@@ -87,6 +91,7 @@ class ChannelController extends Controller
         return view ('channels', [
             'title' => 'Channels (most recent activity)',
             'channels' =>  Channel::where('type', '=', 'channel')
+                ->whereNotNull('published_at')
                 ->withCount('posts')
                 ->orderByDesc('updated_at')
                 ->simplePaginate( preference('pagination', 10))
@@ -98,6 +103,7 @@ class ChannelController extends Controller
         return view ('channels', [
             'title' => 'Channels (least recent activity)',
             'channels' =>  Channel::where('type', '=', 'channel')
+                ->whereNotNull('published_at')
                 ->withCount('posts')
                 ->orderBy('updated_at')
                 ->simplePaginate( preference('pagination', 10))
@@ -106,16 +112,11 @@ class ChannelController extends Controller
 
     public function ascending()
     {
-//
-//        return Channel::where('type', '=', 'channel')
-//            ->withCount('posts')
-//            ->orderBy('title')
-//            ->get();
-
 
         return view ('channels', [
             'title' => 'Channels (alphabetical, A-Z)',
             'channels' =>  Channel::where('type', '=', 'channel')
+                ->whereNotNull('published_at')
                 ->withCount('posts')
                 ->orderBy('title')
                 ->simplePaginate( preference('pagination', 10))
@@ -127,6 +128,7 @@ class ChannelController extends Controller
         return view ('channels', [
             'title' => 'Channels (alphabetical, Z-A)',
             'channels' =>  Channel::where('type', '=', 'channel')
+                ->whereNotNull('published_at')
                 ->withCount('posts')
                 ->orderByDesc('title')
                 ->simplePaginate( preference('pagination', 10))
@@ -138,6 +140,7 @@ class ChannelController extends Controller
         return view ('channels', [
             'title' => 'Channels (random order)',
             'channels' =>  Channel::where('type', '=', 'channel')
+                ->whereNotNull('published_at')
                 ->withCount('posts')
                 ->inRandomOrder()
                 ->simplePaginate( preference('pagination', 10))
@@ -167,6 +170,7 @@ class ChannelController extends Controller
         $channel = Channel::create([
             'title' => $request->input('title'),
             'content' => $request->input('description'),
+            'published_at' => now(),
             'user_id' => Auth::user()->id]
         );
 

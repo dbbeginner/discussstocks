@@ -16,19 +16,19 @@ class PostController extends Controller
         return view('post.choose');
     }
 
-    public function recentPosts(){
-
-        $data['posts'] = Post::where('type', '=', 'post')
-            ->with('user', 'votes')
-            ->withCount('votes')
-            ->withSum('votes', 'vote')
-            ->orderByDesc('updated_at')
-            ->simplePaginate( preference('pagination', 10) );
-
-        $data['title'] = 'Recent Posts';
-
-        return view('posts', $data);
-    }
+//    public function recentPosts(){
+//
+//        $data['posts'] = Post::where('type', '=', 'post')
+//            ->with('user', 'votes')
+//            ->withCount('votes')
+//            ->withSum('votes', 'vote')
+//            ->orderByDesc('updated_at')
+//            ->simplePaginate( preference('pagination', 10) );
+//
+//        $data['title'] = 'Recent Posts';
+//
+//        return view('posts', $data);
+//    }
 
     public function viewPost(Request $request, $channelSlug, $channelHashId, $postSlug, $hashId){
 

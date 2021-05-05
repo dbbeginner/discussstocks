@@ -43,6 +43,7 @@ class ChannelSeeder extends Seeder
             $category->title = $title;
             $category->user_id = random_int(1, $userCount);
             $category->content = $data;
+            $category->published_at = now();
             $category->save();
         }
     }

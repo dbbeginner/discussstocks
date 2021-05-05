@@ -29,6 +29,7 @@ class ReplyController extends Controller
             'parent_id' => $request->input('content_id'),
             'user_id' => $request->input('user_id'),
             'content' => $request->input('content'),
+            'published_at' => now(),
         ]);
 
         return json_encode(['html' => \View('template.content.reply-body', ['reply' => $reply])->render() ]);

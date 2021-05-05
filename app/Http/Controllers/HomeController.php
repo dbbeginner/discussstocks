@@ -23,7 +23,8 @@ class HomeController extends Controller
 
     public function allPosts()
     {
-        $query = Post::where('type', '=', 'post');
+        $query = Post::where('type', '=', 'post')
+            ->whereNotNull('published_at');
 
         $title = 'All Recently Posted';
 
@@ -50,7 +51,8 @@ class HomeController extends Controller
     public function postsInChannel(Request $request, $slug, $hashId)
     {
         $channel = Channel::where('id', '=', Hashids::decode($hashId))->first();
-        $query = Post::where('parent_id', '=', $channel->id);
+        $query = Post::where('parent_id', '=', $channel->id)
+            ->whereNotNull('published_at');
 
         $title = 'Posts in ' . $channel->title;
 

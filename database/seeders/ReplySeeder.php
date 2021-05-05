@@ -33,6 +33,7 @@ class ReplySeeder extends Seeder
                 $comment->title = $faker->catchPhrase();
                 $comment->content = $faker->paragraphs(5, true);
                 $comment->user_id = random_int(1, $userCount);
+                $comment->published_at = now();
                 $comment->save();
                 $i++;
 
